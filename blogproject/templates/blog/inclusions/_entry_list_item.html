@@ -1,0 +1,30 @@
+<article class="blog-entry" id="blog-entry-{{ entry.id }}">
+
+  {% if entry.type == 'p' %}
+    <h3 class="blog-entry-title"><a class="" href="{% url 'blog:detail' entry.id %}">{% if entry.pinned %}
+      [置顶]{% endif %} {{ entry.title }}</a></h3>
+  {% elif entry.type == 'm' %}
+    <h3 class="blog-entry-title"><a class=""
+                                    href="{% url 'courses:material_detail' entry.course__slug entry.id %}">{{ entry.title }}</a>
+    </h3>
+  {% endif %}
+  <div class="blog-entry-meta">
+    {% if entry.type == 'p' %}
+      {% url 'blog:detail' entry.id as entry_url %}
+    {% elif entry.type == 'm' %}
+      {% url 'courses:material_detail' entry.course__slug entry.id as entry_url %}
+    {% endif %}
+
+    <time class="text-muted text-small meta-item" title="{{ entry.timestamp|date }}"><i
+            class="remixicon-time-line"></i> {{ entry.timestamp|date:"Y-m-d" }}</time>
+    <a class="text-muted text-small meta-item" href="{{ entry_url }}#comment-area"><i
+            class="remixicon-chat-2-line"></i> {{ entry.comment_count }}</a>
+    <a class="text-muted text-small meta-item" href="{{ entry_url }}"><i
+            class="remixicon-eye-line"></i> {{ entry.views }}</a>
+    {% if entry.type == 'm' %}
+      <a href="{% url 'courses:course_detail' entry.course__slug %}" class="meta-item blog-badge">系列教程</a>
+    {% endif %}
+  </div>
+  {% if entry.brief %}<p class="blog-post-brief">{{ entry.brief }}</p>{% endif %}
+  <div class="top-gap bfc"></div>
+</article>

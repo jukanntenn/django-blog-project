@@ -1,0 +1,73 @@
+{% load static %}
+{% load blog_extras %}
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="baidu-site-verification" content="GOgEP8c1pN"/>
+
+  <!-- 站点描述，主要用于 SEO -->
+  {% block description %}{% endblock description %}
+
+  <title>{% block title %}{{ headline }}_追梦人物的博客{% endblock title %}</title>
+
+  <link href="https://cdn.remixicon.com/releases/v1.3.1/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>
+  {% render_bundle 'main' 'css' %}
+  {% block extra_links %}{% endblock extra_links %}
+  {% block extra_styles %}{% endblock extra_styles %}
+
+  {% baidu_scripts %}
+</head>
+
+<body>
+{% block header %}{% include 'inclusions/_header.html' %}{% endblock header %}
+{% block content %}
+  <div class="flex-center blog-content-wrapper">
+    <div class="container-wider">
+      <div class="flex-left flex-wrap units-gap-big">
+        <div class="unit-3-4 unit-1-on-mobile">
+          {% block main %}{% endblock main %}
+        </div>
+        <aside class="unit-1-4 unit-1-on-mobile">
+          {% block side %}
+            {% show_mediums %}
+            {% show_recommendations %}
+            {% show_ads %}
+            {% show_friend_links 10 %}
+          {% endblock side %}
+        </aside>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+<span class="back-top"><i class="remixicon-arrow-up-line"></i></span>
+{% block sidebar_mobile %}{% endblock sidebar_mobile %}
+{% include 'inclusions/_footer.html' %}
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+
+    $(function () {
+        $('table').addClass('table')
+    })
+</script>
+{% render_bundle 'main' 'js' %}
+{% block extra_scripts %}{% endblock extra_scripts %}
+</body>
+</html>

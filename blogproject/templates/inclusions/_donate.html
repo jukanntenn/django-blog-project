@@ -1,0 +1,63 @@
+{% load static %}
+
+<div class="donate-wrapper">
+  <div class="flex-center donate-panel">
+    <div class="donate">
+      <ul class="flex-center text-small donate__provider-tabs">
+        <li data-provider="wechatpay" class="provider-tabs_item_active">微信</li>
+        <li data-provider="alipay">支付宝</li>
+      </ul>
+      <ul class="flex-center donate__qrcode">
+        <li><img data-provider="alipay" data-level="0" id="alipay0"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/alipay0.jpg' %}" alt=""></li>
+        <li><img data-provider="alipay" data-level="99" id="alipay99"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/alipay99.jpg' %}" alt="">
+        </li>
+        <li><img data-provider="alipay" data-level="199" id="alipay199"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/alipay199.jpg' %}" alt="">
+        </li>
+        <li><img data-provider="alipay" data-level="299" id="alipay299"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/alipay299.jpg' %}" alt="">
+        </li>
+        <li><img data-provider="alipay" data-level="599" id="alipay599"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/alipay599.jpg' %}" alt="">
+        </li>
+        <li><img data-provider="wechatpay" data-level="0" id="wechatpay0"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/wechatpay0.png' %}" alt="">
+        </li>
+        <li><img data-provider="wechatpay" data-level="99" id="wechatpay99"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/wechatpay99.png' %}" alt="">
+        </li>
+        <li><img data-provider="wechatpay" data-level="199" id="wechatpay199"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/wechatpay199.png' %}" alt="">
+        </li>
+        <li><img data-provider="wechatpay" data-level="299" id="wechatpay299"
+                 class="qrcode__img qrcode__img_show"
+                 src="{% static 'courses/images/pay/wechatpay299.png' %}"
+                 alt=""></li>
+        <li><img data-provider="wechatpay" data-level="599" id="wechatpay599"
+                 class="qrcode__img"
+                 src="{% static 'courses/images/pay/wechatpay599.png' %}" alt="">
+        </li>
+      </ul>
+      <ul class="flex-center text-small text-muted donate__amount-tabs">
+        <li data-level="99">9.9</li>
+        <li data-level="199">19.9</li>
+        <li data-level="299" class="amount-tabs_item_active">29.9</li>
+        <li data-level="599">59.9</li>
+        <li data-level="0">任意</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flex-center donate-btn-wrapper">
+    <button class="btn btn-danger text-small donate__btn">赞赏</button>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{% load courses_tags %}
+<ul>
+  {% for material in material_list %}
+    <li class="toc-mobile-item material-title {% if material.id == current.id %}active{% endif %}">
+      {% if material.toc %}
+        <span class="toc-item-icon"><i class="remixicon-arrow-right-s-line"></i></span>
+      {% else %}
+        <span class="toc-item-icon"><i class="toc-item-icon"></i></span>
+      {% endif %}
+      <a href="{% url 'courses:material_detail' course.slug material.id %}">{{ material.title }}</a>
+      {% if material.toc %}
+        <ul class="text-muted material-toc {% if material.id == current.id %}show{% endif %}">
+          {{ material.toc|safe }}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

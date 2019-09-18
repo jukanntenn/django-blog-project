@@ -1,0 +1,24 @@
+{% load static %}
+
+<div>
+  <button class="btn btn-primary" id="js-reward"><i class="fa fa-jpy"
+                                                    aria-hidden="true"></i>
+    如果觉得文章对你有帮助，请随意打赏
+    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+  </button>
+  <div class="flex-left flex-wrap units-gap-big mt-4" style="display: none">
+    <div class="unit unit-1-on-mobile flex-center">
+      <figure>
+        <img src="{% static 'blog/images/weixinpay.jpg' %}" alt="微信支付收款二维码"
+             style="width: 250px">
+        <figcaption class="text-center fs-6 mt-2" style="color: green">微信</figcaption>
+      </figure>
+    </div>
+    <div class="unit unit-1-on-mobile flex-center">
+      <figure>
+        <img src="{% static 'blog/images/alipay.jpg' %}" alt="支付宝收款二维码" style="width: 250px">
+        <figcaption class="text-center fs-6 mt-2 text-primary">支付宝</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>

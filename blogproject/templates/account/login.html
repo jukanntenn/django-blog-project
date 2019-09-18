@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load blog_extras comments %}
+{% block title %}登录{% endblock title %}
+{% block main %}
+  <main class="unit-3-4 unit-1-on-mobile top-gap">
+    <div class="bg-white card">
+      <h2 class="text-center top-gap">使用第三方账户账户登录</h2>
+      {% include 'account/inclusions/_login.html' %}
+    </div>
+  </main>
+{% endblock main %}

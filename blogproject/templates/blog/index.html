@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{ headline }}_追梦人物的博客{% endblock title %}
+{% block main %}
+  <main>
+    {% for entry in entry_list %}
+      <div class="blog-post-list">
+        {% include 'blog/inclusions/_entry_list_item.html' %}
+      </div>
+    {% empty %}
+      <p>暂无文章</p>
+    {% endfor %}
+    {% if is_paginated %}
+      {{ page_obj.render }}
+    {% endif %}
+  </main>
+{% endblock %}

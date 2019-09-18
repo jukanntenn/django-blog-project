@@ -1,0 +1,11 @@
+{% extends 'sidebar_mobile_base.html' %}
+
+{% block sidebar_header %}
+  <span class="sidebar-title">目录</span>
+{% endblock sidebar_header %}
+
+{% block sidebar_body %}
+  <div class="toc-mobile">
+    {% include 'blog/inclusions/_toc_content.html' %}
+  </div>
+{% endblock sidebar_body %}

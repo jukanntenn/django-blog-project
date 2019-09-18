@@ -1,0 +1,15 @@
+{% load socialaccount %}
+
+<script>
+    const jscontext = {
+        contentType: '{{ content_type }}',
+        objectPk: '{{ object_pk }}',
+        token: '{{ token }}',
+        weiboLoginUrl: '',
+        githubLoginUrl: '',
+        numComments: {{ num_comments }},
+        numCommentParticipants: {{ num_comment_participants }},
+    }
+</script>
+<!-- render by vue.js -->
+<div id="comments_app"></div>

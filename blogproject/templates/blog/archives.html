@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block main %}
+  <div class="unit-3-4 unit-1-on-mobile top-gap">
+    <div class="bg-white card px-7 py-5">
+      {% regroup post_list by pub_date.year as year_post_group %}
+      <ul class="top-gap-0">
+        {% for year in year_post_group %}
+          <li>{{ year.grouper }} 年
+            {% regroup year.list by pub_date.month as month_post_group %}
+            <ul class="mt-3">
+              {% for month in month_post_group %}
+                <li class="mt-3">{{ month.grouper }} 月 （{{ month.list|length }} 篇）
+                  <ul>
+                    {% for post in month.list %}
+                      <li class="mt-3"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock main %}

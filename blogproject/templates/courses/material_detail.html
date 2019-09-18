@@ -1,0 +1,34 @@
+{% extends 'courses/base.html' %}
+{% load static %}
+{% load courses_extras %}
+{% load comments_extras %}
+
+{% block sidebar_mobile %}
+  {% include 'courses/inclusions/_sidebar_mobile.html' %}
+{% endblock sidebar_mobile %}
+
+{% block article %}
+  <article class="">
+    <h1 class="top-gap-0">{{ material.title }}</h1>
+    {% include 'courses/inclusions/_material_meta.html' %}
+    <div class="top-gap-big">
+      {{ material.body_html|safe }}
+      <p class="text-center">
+        -- EOF --
+      </p>
+
+      <div class="text-small text-muted top-gap material__last-modified">
+        最后更新：{{ material.modified }}
+      </div>
+    </div>
+  </article>
+{% endblock article %}
+<br>
+{% block comment %}
+  <section class="comment-area top-gap-big" id="comment-area">
+    {% if user.is_anonymous %}
+      {% include 'account/inclusions/_login.html' %}
+    {% endif %}
+    {% show_comment_app material %}
+  </section>
+{% endblock comment %}

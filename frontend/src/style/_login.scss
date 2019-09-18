@@ -1,0 +1,19 @@
+@import "variables";
+
+.login-panel {
+  a:hover {
+    text-decoration: none;
+  }
+
+  .social-icons {
+    margin-left: $width-gap-half;
+  }
+
+  .social-icons-weibo {
+    color: #ff763b;
+  }
+
+  .social-icons-github {
+    color: #2680d9;
+  }
+}

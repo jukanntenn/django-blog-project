@@ -1,0 +1,12 @@
+<article class="material">
+  <h1 class="top-gap-0 text-center">{{ course.title }}</h1>
+  {% if course.description %}
+    <div>
+      {{ course.rich_content.content|safe }}
+    </div>
+  {% else %}
+    <div class="flex-center">
+      <a class="btn btn-primary" href="{{ next.url }}">立即学习 >></a>
+    </div>
+  {% endif %}
+</article>

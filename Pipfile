@@ -1,0 +1,39 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.douban.com/simple/"
+verify_ssl = true
+
+[dev-packages]
+django-debug-toolbar = "*"
+flake8 = "*"
+factory-boy = "*"
+django-test-plus = "*"
+selenium = "*"
+fabric = "*"
+
+[packages]
+django = "*"
+django-allauth = "*"
+django-contrib-comments = "*"
+django-mptt = "*"
+django-notifications-hq = "*"
+django-haystack = "*"
+django-model-utils = "*"
+django-braces = "*"
+django-imagekit = "*"
+django-anymail = "*"
+django-environ = "*"
+django-extensions = "*"
+django-webpack-loader = "*"
+djangorestframework = "*"
+django-pure-pagination = "*"
+pytz = "*"
+markdown = "*"
+beautifulsoup4 = "*"
+pillow = "*"
+whoosh = "*"
+jieba = "*"
+gunicorn = "*"
+
+[requires]
+python_version = "3.6"

@@ -1,0 +1,14 @@
+<div class="top-gap flex-left">
+  {% if prev %}
+    <a href="{{ prev.url }}">
+      <i class="remixicon-arrow-left-s-line" aria-hidden="true"></i>
+      {{ prev.title }}
+    </a>
+  {% endif %}
+  {% if next %}
+    <a class="ml-auto" href="{{ next.url }}">
+      {{ next.title }}
+      <i class="remixicon-arrow-right-s-line" aria-hidden="true"></i>
+    </a>
+  {% endif %}
+</div>

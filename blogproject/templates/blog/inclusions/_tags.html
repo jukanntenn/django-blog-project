@@ -1,0 +1,7 @@
+<div class="post-tags">
+  <ul class="list-inline">
+    {% for tag in post.tags.all %}
+      <li class="list-inline-item"><a class="text-small" href="javascript:">{{ tag }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

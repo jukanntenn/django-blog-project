@@ -1,0 +1,7 @@
+{{ commenter_name }} 回复了你在文章 {{ post_title }} 中的评论
+
+回复内容:
+{{ comment_comment|safe }}
+
+请点击以下链接查看该回复:
+<a href="{{ protocol }}://{{ site }}{{ post_url }}#c{{ comment_pk }}">{{ protocol }}://{{ site }}{{ post_url }}#c{{ comment_pk }}</a>

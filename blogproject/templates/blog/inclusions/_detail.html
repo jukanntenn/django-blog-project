@@ -1,0 +1,31 @@
+{% load comments_extras %}
+
+<div class="top-gap-big">
+  <article class="blog-post">
+    <h1 class="top-gap-0">{{ post.title }}</h1>
+    <div class="blog-entry-meta">
+      <time title="{{ post.created|date:'Y-m-d H:i:s' }}"
+            class="text-small text-muted meta-item">{{ post.created|date:'Y-m-d' }}</time>
+      <span class="text-small text-muted meta-item">{{ post.num_words }}字</span>
+      <span class="text-small text-muted meta-item">{{ post.views }}阅读</span>
+      <a href="#comment-area" class="text-small text-muted meta-item">{{ post.num_comments }}评论</a>
+    </div>
+    <div class="top-gap-big post-body">
+      {{ post.body_html|safe }}
+      <p class="text-center">
+        -- EOF --
+      </p>
+      {% include 'inclusions/_donate.html' %}
+      {% include 'blog/inclusions/_tags.html' %}
+
+      {% block related_posts %}{% endblock related_posts %}
+    </div>
+  </article>
+</div>
+<br>
+<section class="comment-area top-gap-big" id="comment-area">
+  {% if user.is_anonymous %}
+    {% include 'account/inclusions/_login.html' %}
+  {% endif %}
+  {% show_comment_app post %}
+</section>

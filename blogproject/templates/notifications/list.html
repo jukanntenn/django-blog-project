@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load notify_tags %}
+{% block main %}
+  <div class="top-gap-big notification-list">
+    <div class="flex-left notification-list-header">
+      <a class="text-muted text-small notification-func-btn"
+         href="{% url 'notify:notification_all' %}">全部 {{ num_all }}</a>
+      <a class="text-muted text-small notification-func-btn" href="{% url 'notify:notification_unread' %}">未读 {{num_unread}}</a>
+      <a class="text-muted text-small text-danger ml-auto notification-func-btn"
+         href="{% url 'notifications:mark_all_as_read' %}">全部标为已读</a>
+    </div>
+    {% for notification in notifications %}
+      <div class="notification {% if notification.unread %}unread-bg{% endif %}">
+        {% include notification|frag with target=notification.target actor=notification.actor %}
+      </div>
+    {% empty %}
+      <div class="flex-center">
+        暂无通知
+      </div>
+    {% endfor %}
+    {% if is_paginated %}
+      {{ page_obj.render }}
+    {% endif %}
+  </div>
+{% endblock main %}

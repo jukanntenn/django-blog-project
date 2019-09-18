@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load blog_extras %}
+
+{% block header %}
+  {% with show_trigger=True %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock header %}
+
+{% block main %}
+  {% include 'blog/inclusions/_detail.html' %}
+{% endblock main %}
+
+{% block side %}
+  {% include 'blog/inclusions/_toc.html' %}
+  {{ block.super }}
+{% endblock side %}
+
+{% block sidebar_mobile %}
+  {% include 'blog/inclusions/_sidebar_mobile.html' %}
+{% endblock sidebar_mobile %}

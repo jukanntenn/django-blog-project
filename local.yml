@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  blogproject_local:
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    image: blogproject_local
+    container_name: blogproject_local
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    command: /start.sh

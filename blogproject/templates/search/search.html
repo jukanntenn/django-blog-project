@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load highlight %}
+{% load comments %}
+
+{% block extra_styles %}
+  {{ block.super }}
+  <style>
+    .highlighted {
+      color: red;
+    }
+  </style>
+{% endblock extra_styles %}
+{% block title %}搜索结果_追梦人物的博客{% endblock title %}
+
+{% block main %}
+  <main>
+    {% if query %}
+      {% for result in page.object_list %}
+        <div class="blog-post-list">
+          {% include 'search/_search_entry_list_item.html' with entry=result.object %}
+          {% empty %}
+        </div>
+        <div class="list-group-item no-post text-center">没有搜索到你想要的结果！</div>
+      {% endfor %}
+      {% if page.has_other_pages %}
+        {% include 'pure_pagination/pagination.html' with page_obj=page query=query %}
+      {% endif %}
+    {% else %}
+      <div class="list-group-item no-post text-center">请输入搜索关键词，例如 django</div>
+    {% endif %}
+  </main>
+{% endblock main %}

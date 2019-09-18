@@ -1,0 +1,22 @@
+<div class="flex-left">
+  <div class="unit-0">
+    <img class="notification-avatar" src="{{ actor.social_avatar }}" alt="">
+  </div>
+  <div class="unit notification-main">
+    {% block header %}{% endblock %}
+    <div class="text-small notification-meta">
+      <div class="text-muted">
+        {% block type %}{% endblock %}
+        <time>{{ notification.timestamp|date:'Y-m-d H:i:s' }}</time>
+        {% if notification.unread %}
+          <a class="text-small text-primary"
+             href="{% url 'notifications:mark_as_read' notification.slug %}?next={{ request.path }}?{{ request.META.QUERY_STRING }}">
+            标为已读</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-small top-gap">
+  {{ target.comment_html|safe }}
+</div>

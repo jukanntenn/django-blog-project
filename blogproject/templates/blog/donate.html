@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+  <div class="unit-3-4 unit-1-on-mobile top-gap">
+    <div class="bg-white card px-7 py-5">
+      <h5 class="top-gap-0">如果觉得本博客的教程对你有帮助，不妨小额赞助博主一下，鼓励博主继续写出更多高质量的教程。</h5>
+      <div>
+        <div class="flex-left flex-wrap units-gap-big mt-7">
+          <div class="unit unit-1-on-mobile flex-center">
+            <figure>
+              <img src="{% static 'blog/images/weixinpay.jpg' %}" alt="微信支付收款二维码"
+                   style="width: 250px">
+              <figcaption class="text-center fs-6 mt-2" style="color: green">微信</figcaption>
+            </figure>
+          </div>
+          <div class="unit unit-1-on-mobile flex-center">
+            <figure>
+              <img src="{% static 'blog/images/alipay.jpg' %}" alt="支付宝收款二维码" style="width: 250px">
+              <figcaption class="text-center fs-6 mt-2 text-primary">支付宝</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock main %}

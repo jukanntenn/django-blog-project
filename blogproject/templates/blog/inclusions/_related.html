@@ -1,0 +1,17 @@
+{% load more_like_this %}
+
+<div class="top-gap-big card">
+  <div class="card-header">相关文章</div>
+  <div class="card-body">
+    {% more_like_this obj as related_objects limit 5 %}
+    <ul class="mt-0">
+      {% for related_obj in related_objects %}
+        <li class="mt-1">
+          <a class="text-small" href="{{ related_obj.object.get_absolute_url }}">{{ related_obj.object.title }}</a>
+        </li>
+      {% empty %}
+        没有相关文章
+      {% endfor %}
+    </ul>
+  </div>
+</div>

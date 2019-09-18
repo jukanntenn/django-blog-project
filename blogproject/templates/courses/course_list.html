@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <main class="top-gap-big">
+    {% regroup course_list by category as category_groups %}
+    {% for group in category_groups %}
+      <!-- category courses -->
+      <div class="text-center category">
+        <img class="category__logo" src="{{ group.grouper.logo_thumbnail.url }}" alt="">
+        {{ group.grouper.name }}
+      </div>
+
+      <div class="flex-left flex-wrap units-gap-big">
+        {% for course in group.list %}
+          <!-- course -->
+          <div class="unit-1-4 unit-1-on-mobile course">
+            <figure class="course__cover">
+              <a href="{{ course.get_absolute_url }}">
+                <img class="course__img" src="{{ course.cover_thumbnail.url }}" alt="">
+              </a>
+            </figure>
+            <div class="flex-left course__title">
+              <div class="unit-0"><a class="" href="{{ course.get_absolute_url }}">{{ course.title }}</a></div>
+              {#            <div class="unit course__progress#}
+              {#                course__progress_writing">{{ course.progress }}#}
+              {#            </div>#}
+            </div>
+            <div class="course__meta">
+              <span class="blog-badge">{{ course.get_level_display }}</span>
+              <span class="course__views"><i class="remixicon-eye-line"></i> {{ course.total_views }}</span>
+            </div>
+            <div class="text-muted course__brief">
+              {{ course.brief }}
+            </div>
+          </div>
+          <!-- course end -->
+        {% empty %}
+          This is no course!
+        {% endfor %}
+      </div>
+      <!-- category courses end -->
+    {% empty %}
+      There is no category!
+    {% endfor %}
+  </main>
+{% endblock main %}

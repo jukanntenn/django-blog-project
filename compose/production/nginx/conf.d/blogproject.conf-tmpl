@@ -1,0 +1,33 @@
+upstream blogproject  {
+    server blogproject:8000;
+}
+
+server {
+    if ($host = xxx.com) {
+        return 301 https://www.$host$request_uri;
+    }
+    server_name www.xxx.com xxx.com;
+
+    location /static {
+        alias /apps/blogproject/static;
+    }
+
+    location /media {
+        alias /apps/blogproject/media;
+    }
+
+    location / {
+        include /etc/nginx/includes/proxy.conf;
+        proxy_pass http://blogproject;
+    }
+
+    listen 80;
+}
+
+server {
+    if ($host = xxx.com) {
+        return 301 https://www.$host$request_uri;
+    }
+    server_name www.xxx.com xxx.com;
+    listen 443;
+}

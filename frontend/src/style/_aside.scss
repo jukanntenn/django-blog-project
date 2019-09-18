@@ -1,0 +1,19 @@
+@import "variables";
+
+.blog-aside-desk-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-top: $size-base * 5; // 一定要使用 padding，否则底部部分内容无法显示
+}
+
+
+.blog-post-wrapper {
+  height: 100%;
+}
+
+.blog-post-wrapper main {
+  z-index: 1;
+}

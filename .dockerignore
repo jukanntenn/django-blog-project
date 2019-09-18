@@ -1,0 +1,5 @@
+.*
+_credentials.py
+fabfile.py
+*.sqlite3
+frontend/node_modules/*

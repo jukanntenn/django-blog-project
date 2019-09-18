@@ -1,0 +1,14 @@
+{% if friend_link_list %}
+  <section class="top-gap-big widget widget-friend-link ">
+    <h4 class="widget-title">友情链接</h4>
+    <div class="widget-body">
+      <ul>
+        {% for link in friend_link_list %}
+          <li>
+            <a class="text-small text-muted" target="_blank" href="{{ link.site_domain }}">{{ link.site_name }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+{% endif %}

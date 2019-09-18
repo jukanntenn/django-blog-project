@@ -1,0 +1,20 @@
+{% if recommendation_list %}
+  <section class="top-gap-big widget widget-recommendation">
+    <h4 class="widget-title">最新福利</h4>
+    <div class="widget-body">
+      {% for rec in recommendation_list %}
+        <div class="flex-left flex-middle">
+          <div class="unit-1-4">
+            <a href="{{ rec.url }}" target="_blank"><img src="{{ rec.pic_thumbnail.url }}" alt=""></a>
+          </div>
+          <div class="unit-1-2 flex-vertical">
+            <div>
+              <a class="text-small text-muted" target="_blank"
+                 href="{{ rec.url }}">{{ rec.description|safe|linebreaksbr }}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

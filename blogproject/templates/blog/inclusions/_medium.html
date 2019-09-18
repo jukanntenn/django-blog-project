@@ -1,0 +1,21 @@
+{% if medium_list %}
+  <section class="top-gap-big widget widget-medium">
+    <h4 class="widget-title">交流学习</h4>
+    <div class="widget-body">
+      {% regroup medium_list by get_flag_display as grouped_medium_list %}
+      <dl class="">
+        {% for medium in grouped_medium_list %}
+          <dt>{{ medium.grouper }}</dt>
+          {% for m in medium.list %}
+            {# TODO: 消除魔法字符串 #}
+            {% if m.flag == 0 %}
+              <dd class="text-muted text-small">{{ m.identifier }}</dd>
+            {% elif m.flag == 1 %}
+              <dd><a class="text-muted text-small" target="_blank" href="{{ m.identifier }}">{{ m.name }}</a></dd>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </dl>
+    </div>
+  </section>
+{% endif %}

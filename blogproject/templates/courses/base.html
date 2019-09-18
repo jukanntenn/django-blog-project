@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+  {% with show_trigger=True %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock header %}
+
+{% block content %}
+  {% include 'courses/inclusions/_sidebar_desk.html' %}
+  <div class="blog-post-wrapper">
+    <div class="flex-center">
+      <div class="container-wider">
+        <div class="flex-left">
+          <div class="unit-1-4 hide-on-mobile"></div>
+          <main class="unit-3-4 unit-1-on-mobile">
+            {% block alerts %}
+              <div class="top-gap">
+                {% for alert in course.alert_set.all %}
+                  <div class="blog-alert blog-alert-warning">{{ alert.text|safe }}</div>
+                {% endfor %}
+              </div>
+            {% endblock alerts %}
+            {% block main %}
+              {% block article %}{% endblock article %}
+              {% include 'inclusions/_donate.html' %}
+              {% include 'courses/inclusions/_prev_next.html' %}
+              <br>
+              {% block comment %}{% endblock comment %}
+            {% endblock main %}
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+
+{% block sidebar_mobile %}
+  {% include 'courses/inclusions/_sidebar_mobile.html' %}
+{% endblock sidebar_mobile %}

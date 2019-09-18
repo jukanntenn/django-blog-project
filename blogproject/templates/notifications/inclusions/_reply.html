@@ -1,0 +1,10 @@
+{% extends 'notifications/base.html' %}
+{% block header %}
+  <div class="">
+    <span class="text-muted">{{ actor.name }}</span>
+    在文章
+    <a class="" target="_blank"
+       href="{{ target.content_object.get_absolute_url }}#c{{ target.pk }}">{{ target.content_object.title }}</a>
+    中回复了你
+  </div>
+{% endblock header %}

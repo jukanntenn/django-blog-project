@@ -1,0 +1,7 @@
+{% extends 'blog/index.html' %}
+
+{% block description %}
+  {% if category.description %}
+    <meta name="description" content="{{ category.description }}">
+  {% endif %}
+{% endblock description %}

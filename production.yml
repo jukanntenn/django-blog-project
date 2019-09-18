@@ -1,0 +1,40 @@
+version: '3'
+
+volumes:
+  static:
+  media:
+  letsencrypt:
+
+services:
+  blogproject:
+    build:
+      context: .
+      dockerfile: compose/production/django/Dockerfile
+    image: blogproject
+    container_name: blogproject
+    working_dir: /app
+    volumes:
+      - ./blogproject/database/:/app/blogproject/database/
+      - ./blogproject/index/:/app/blogproject/index/
+      - static:/app/static
+      - media:/app/blogproject/media
+    env_file:
+      - .envs/.production
+    expose:
+      - "8000"
+    command: /start.sh
+
+  nginx:
+    build:
+      context: .
+      dockerfile: compose/production/nginx/Dockerfile
+    image: blogproject_nginx
+    container_name: blogproject_nginx
+    volumes:
+      - ./compose/production/nginx/conf.d/blogproject.conf:/etc/nginx/conf.d/blogproject.conf
+      - static:/apps/blogproject/static
+      - media:/apps/blogproject/media
+      - letsencrypt:/etc/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"

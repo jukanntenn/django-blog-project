@@ -1,0 +1,12 @@
+{% extends 'sidebar_mobile_base.html' %}
+{% load courses_extras %}
+
+{% block sidebar_header %}
+  <a href="{{ course.get_absolute_url }}" class="sidebar-title">{{ course.title }}</a>
+{% endblock sidebar_header %}
+
+{% block sidebar_body %}
+  <div class="toc-mobile">
+    {% show_course_toc course current %}
+  </div>
+{% endblock sidebar_body %}
