@@ -30,6 +30,8 @@
    SECRET_KEY=your-own-secret-key
    DJANGO_SETTINGS_MODULE=config.settings.production
    DJANGO_SENDGRID_API_KEY=your-own-sendgrid-api-key
+   # 设置允许访问的 HOSTS，逗号分隔
+   DJANGO_ALLOWED_HOSTS=your-domain.com,www.yourdomain.com
    ```
 
    `SECRET_KEY`：项目密钥，推荐使用 [Django Secret Key Generator](https://www.miniwebtool.com/django-secret-key-generator/) 自动生成。

@@ -99,3 +99,4 @@ node_modules/
 !frontend/dist
 /static/
 _credentials.py
+.envs/
