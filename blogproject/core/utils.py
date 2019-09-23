@@ -10,7 +10,13 @@ def generate_rich_content(value, *, toc_depth=2, toc_url=''):
     md = markdown.Markdown(extensions=[
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',
+        'markdown.extensions.admonition',
+        'markdown.extensions.nl2br',
         TocExtension(slugify=slugify, toc_depth=toc_depth),
+        'pymdownx.magiclink',
+        'pymdownx.tasklist',
+        'pymdownx.tilde',
+        'pymdownx.caret',
     ])
     content = md.convert(value)
     toc = md.toc
