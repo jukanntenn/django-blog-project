@@ -6,10 +6,11 @@ verify_ssl = true
 [dev-packages]
 django-debug-toolbar = "*"
 flake8 = "*"
-factory-boy = "*"
-django-test-plus = "*"
 selenium = "*"
 fabric = "*"
+pytest = "*"
+pytest-django = "*"
+django-dynamic-fixture = "*"
 
 [packages]
 django = "*"

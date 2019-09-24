@@ -28,7 +28,7 @@ def generate_rich_content(value, *, toc_depth=2, toc_url=''):
 
     if toc_url:
         def absolutify(matchobj):
-            return 'href=' + toc_url + matchobj.group(1)
+            return 'href="{toc_url}{frag}"'.format(toc_url=toc_url, frag=matchobj.group(1))
 
         toc = re.sub('href="(.+)"', absolutify, toc)
     return {
