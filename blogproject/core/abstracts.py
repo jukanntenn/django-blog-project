@@ -1,5 +1,4 @@
 from comments.models import BlogComment
-from core.utils import generate_rich_content
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
@@ -8,6 +7,8 @@ from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 from django.utils.translation import gettext_lazy as _
 from model_utils.models import TimeStampedModel
+
+from .utils import compensate, generate_rich_content
 
 
 class AbstractEntry(TimeStampedModel):
@@ -62,6 +63,7 @@ class AbstractEntry(TimeStampedModel):
     def get_next_or_previous(self, is_next, ordering=None, value_fields=None, **kwargs):
         if not self.pk:
             raise ValueError(_("get_next/get_previous cannot be used on unsaved objects."))
+
         op = 'gt' if is_next else 'lt'
         order = '' if is_next else '-'
 
@@ -69,17 +71,23 @@ class AbstractEntry(TimeStampedModel):
             ordering = self._meta.ordering
 
         if not ordering:
-            ordering = ['pk']
+            ordering = [self._meta.pk.name]
 
-        param_field = ordering[0]
+        param_field = ordering[0].lstrip('-')
         param_value = getattr(self, param_field)
 
+        if ordering[0].startswith('-'):
+            op = 'lt' if is_next else 'gt'
+
         q = Q(**{'%s__%s' % (param_field, op): param_value})
+
         if not self._meta.get_field(param_field).unique:
+            op = 'gt' if is_next else 'lt'
             q = q | Q(**{param_field: param_value, 'pk__%s' % op: self.pk})
+            ordering.append('pk')
 
         qs = self.__class__._default_manager.filter(**kwargs).filter(q).order_by(
-            *['%s%s' % (order, field) for field in ordering])
+            *[compensate('%s%s' % (order, field)) for field in ordering])
 
         if value_fields is not None:
             qs = qs.values(*value_fields)

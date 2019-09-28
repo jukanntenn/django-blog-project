@@ -1,4 +1,4 @@
-from core.utils import generate_rich_content
+from core.utils import compensate, generate_rich_content
 
 
 def test_generate_rich_content():
@@ -15,3 +15,9 @@ def test_generate_rich_content():
     value = "# header"
     result = generate_rich_content(value, toc_url='/absolute/')
     assert result['toc'] == '<li><a href="/absolute/#header">header</a></li>'
+
+
+def test_compensate():
+    assert compensate('-field') == '-field'
+    assert compensate('--field') == 'field'
+    assert compensate('field') == 'field'

@@ -35,3 +35,9 @@ def generate_rich_content(value, *, toc_depth=2, toc_url=''):
         'content': content,
         'toc': toc
     }
+
+
+def compensate(value):
+    if value.startswith('--'):
+        return value.lstrip('--')
+    return value
