@@ -87,7 +87,7 @@ class Post(AbstractEntry):
     class Meta:
         verbose_name = _('Posts')
         verbose_name_plural = _('Posts')
-        ordering = ['-created']
+        ordering = ['-pub_date', '-created']
 
     def __str__(self):
         return self.title
