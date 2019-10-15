@@ -10,8 +10,7 @@ class Highlighter(HaystackHighlighter):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        token_texts = set([token.text for token in ChineseTokenizer()(self.query)])
-        self.query_words = token_texts
+        self.query_words = set([token.text for token in ChineseTokenizer()(self.query)])
 
     def highlight(self, text_block):
         self.text_block = strip_tags(text_block)

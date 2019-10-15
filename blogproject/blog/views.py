@@ -12,6 +12,7 @@ from pure_pagination.mixins import PaginationMixin
 from pure_pagination.paginator import Paginator
 
 from .models import Category, Post
+from core.utils import get_index_entry_queryset
 
 
 class IndexView(SetHeadlineMixin, PaginationMixin, ListView):
@@ -21,20 +22,7 @@ class IndexView(SetHeadlineMixin, PaginationMixin, ListView):
     context_object_name = 'entry_list'
 
     def get_queryset(self):
-        post_qs = Post.index.annotate(comment_count=Count('comments'), timestamp=F('pub_date'),
-                                      type=Value('p', CharField(max_length=1)))
-        post_qs = post_qs.order_by()
-        post_qs = post_qs.values('id', 'title', 'brief', 'views', 'comment_count', 'timestamp', 'pinned', 'type')
-
-        material_qs = Material.index.annotate(comment_count=Count('comments'), timestamp=F('pub_date'),
-                                              type=Value('m', CharField(max_length=1)))
-        material_qs = material_qs.order_by()
-        material_qs = material_qs.values('id', 'title', 'brief', 'views', 'course__slug', 'comment_count', 'timestamp',
-                                         'type')
-        pinned_posts = sorted(filter(lambda p: p['pinned'], post_qs), key=itemgetter('timestamp'), reverse=True)
-        normal_posts = itertools.filterfalse(lambda p: p['pinned'], post_qs)
-        entries = sorted(itertools.chain(normal_posts, material_qs), key=itemgetter('timestamp'), reverse=True)
-        return list(itertools.chain(pinned_posts, entries))
+        return get_index_entry_queryset()
 
 
 class PostDetailView(SetHeadlineMixin, DetailView):

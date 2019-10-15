@@ -15,8 +15,8 @@
       {% url 'courses:material_detail' entry.course__slug entry.id as entry_url %}
     {% endif %}
 
-    <time class="text-muted text-small meta-item" title="{{ entry.timestamp|date }}"><i
-            class="remixicon-time-line"></i> {{ entry.timestamp|date:"Y-m-d" }}</time>
+    <time class="text-muted text-small meta-item" title="{{ entry.pub_date|date }}"><i
+            class="remixicon-time-line"></i> {{ entry.pub_date|date:"Y-m-d" }}</time>
     <a class="text-muted text-small meta-item" href="{{ entry_url }}#comment-area"><i
             class="remixicon-chat-2-line"></i> {{ entry.comment_count }}</a>
     <a class="text-muted text-small meta-item" href="{{ entry_url }}"><i
