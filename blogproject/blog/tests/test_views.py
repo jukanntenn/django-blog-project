@@ -40,3 +40,43 @@ class IndexViewTestCase(TestCase):
 
         self.assertContains(response, material.title)
         self.assertContains(response, '系列教程')
+
+
+class PostDetailViewTestCase(TestCase):
+    def setUp(self):
+        self.index_post = G(Post, show_on_index=True, status=Post.STATUS_CHOICES.published)
+        self.not_index_post = G(Post, show_on_index=False, status=Post.STATUS_CHOICES.published, category=None)
+        self.draft_post = G(Post, show_on_index=True, status=Post.STATUS_CHOICES.draft)
+
+    def test_good_view(self):
+        url = self.index_post.get_absolute_url()
+
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'blog/detail.html')
+        self.assertIn('num_comments', response.context_data)
+        self.assertIn('num_comment_participants', response.context_data)
+
+    def test_only_public_posts_are_available(self):
+        available_url1 = self.index_post.get_absolute_url()
+        available_url2 = self.not_index_post.get_absolute_url()
+        unavailable_url = self.draft_post.get_absolute_url()
+
+        response = self.client.get(available_url1)
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(available_url2)
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.get(unavailable_url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_headline(self):
+        category_post_url = self.index_post.get_absolute_url()
+        no_category_post_url = self.not_index_post.get_absolute_url()
+
+        response = self.client.get(category_post_url)
+        self.assertContains(response, '%s_%s' % (self.index_post.title, self.index_post.category))
+
+        response = self.client.get(no_category_post_url)
+        self.assertContains(response, '%s' % (self.index_post.title,))

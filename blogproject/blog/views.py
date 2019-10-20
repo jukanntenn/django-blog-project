@@ -46,6 +46,9 @@ class PostDetailView(SetHeadlineMixin, DetailView):
         context['num_comment_participants'] = post.num_comment_participants
         return context
 
+    def get_queryset(self):
+        return super().get_queryset().searchable()
+
 
 class CategoryView(SetHeadlineMixin, DetailView):
     template_name = 'blog/category.html'
