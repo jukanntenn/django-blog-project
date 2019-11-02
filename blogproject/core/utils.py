@@ -68,24 +68,3 @@ def get_index_entry_queryset():
     # In sqlite3, `False` takes first, but not sure in MySQL...
     entry_qs = entry_qs.order_by(F('pinned').desc(), '-pub_date')
     return entry_qs
-
-
-def get_index_entry_simple_queryset():
-    from blog.models import Post
-    from courses.models import Material
-    post_qs = Post.objects.all().order_by().annotate(
-        type=Value('p', output_field=CharField(max_length=1)))
-    post_qs = post_qs.values_list(
-        'title', 'pub_date', 'pinned', 'type'
-    )
-
-    material_qs = Material.objects.all().order_by().annotate(
-        pinned=Value(False, BooleanField())).annotate(type=Value('m', output_field=CharField(max_length=1)))
-    material_qs = material_qs.values_list(
-        'title', 'pub_date', 'pinned', 'type'
-    )
-
-    entry_qs = post_qs.union(material_qs)
-    entry_qs = entry_qs.order_by(F('title'), '-pub_date')
-    print(entry_qs.query)
-    return entry_qs

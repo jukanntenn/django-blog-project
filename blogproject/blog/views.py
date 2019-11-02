@@ -1,8 +1,5 @@
-import itertools
-from operator import itemgetter
-
 from braces.views import SetHeadlineMixin
-from courses.models import Material
+from core.utils import get_index_entry_queryset
 from django.core.paginator import InvalidPage, Paginator
 from django.db.models import CharField, Count, F, Value
 from django.http import Http404
@@ -12,7 +9,6 @@ from pure_pagination.mixins import PaginationMixin
 from pure_pagination.paginator import Paginator
 
 from .models import Category, Post
-from core.utils import get_index_entry_queryset
 
 
 class IndexView(SetHeadlineMixin, PaginationMixin, ListView):
@@ -59,9 +55,9 @@ class CategoryView(SetHeadlineMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs = Post.index.filter(category=self.object).annotate(comment_count=Count('comments'), timestamp=F('pub_date'),
+        qs = Post.index.filter(category=self.object).annotate(comment_count=Count('comments'),
                                                               type=Value('p', CharField(max_length=1)))
-        qs = qs.values('id', 'title', 'brief', 'views', 'comment_count', 'timestamp', 'pinned', 'type')
+        qs = qs.values('id', 'title', 'brief', 'views', 'comment_count', 'pub_date', 'pinned', 'type')
         context['entry_list'] = qs
         return context
 

@@ -1,8 +1,11 @@
-from blog.models import Post
+import pytest
+from blog.models import Category, Post
+from blog.views import BlogSearchView
 from courses.models import Material
 from django.test import TestCase
 from django.urls import reverse
 from django_dynamic_fixture import G
+from pure_pagination.paginator import Paginator
 
 
 def test_auto_set_admin_as_post_author(admin_client, admin_user):
@@ -79,4 +82,85 @@ class PostDetailViewTestCase(TestCase):
         self.assertContains(response, '%s_%s' % (self.index_post.title, self.index_post.category))
 
         response = self.client.get(no_category_post_url)
-        self.assertContains(response, '%s' % (self.index_post.title,))
+        self.assertContains(response, '%s' % (self.not_index_post.title,))
+
+
+class CategoryViewTestCase(TestCase):
+    def setUp(self):
+        self.category = G(Category)
+        self.category_post1 = G(Post, title='Category Post1', show_on_index=True, status=Post.STATUS_CHOICES.published,
+                                category=self.category)
+        self.category_post2 = G(Post, title='Category Post2', show_on_index=True, status=Post.STATUS_CHOICES.published,
+                                category=self.category)
+        self.no_category_post = G(Post, title='No Category Post', show_on_index=False,
+                                  status=Post.STATUS_CHOICES.published, category=None)
+
+    def test_good_view(self):
+        url = self.category.get_absolute_url()
+
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'blog/category.html')
+        self.assertIn('entry_list', response.context_data)
+
+    def test_category_posts(self):
+        url = self.category.get_absolute_url()
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertContains(response, self.category_post1.title)
+        self.assertContains(response, self.category_post2.title)
+        self.assertNotContains(response, self.no_category_post.title)
+
+    def test_headline(self):
+        url = self.category.get_absolute_url()
+        response = self.client.get(url)
+        self.assertContains(response, '%s' % (self.category,))
+
+
+class CategoryListViewTestCase(TestCase):
+    def setUp(self):
+        self.category1 = G(Category, name='cate1')
+        self.category2 = G(Category, name='cate2')
+        self.post = G(Post, title='Post', show_on_index=True, status=Post.STATUS_CHOICES.published,
+                      category=self.category1)
+
+    def test_good_view(self):
+        url = reverse('blog:categories')
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'blog/category_list.html')
+
+    def test_categories(self):
+        url = reverse('blog:categories')
+        response = self.client.get(url)
+
+        self.assertContains(response, self.category1)
+        self.assertContains(response, self.category2)
+        self.assertContains(response, f'{self.category1}（1）')
+        self.assertContains(response, f'{self.category2}（0）')
+
+
+class PostArchivesViewTestCase(TestCase):
+    def test_good_view(self):
+        url = reverse('blog:archives')
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'blog/archives.html')
+
+
+class DonateViewTestCase(TestCase):
+    def test_good_view(self):
+        url = reverse('blog:donate')
+        response = self.client.get(url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'blog/donate.html')
+
+
+@pytest.mark.django_db
+def test_blog_search_view_paginator(rf):
+    url = reverse('blog:search')
+    request = rf.get(url)
+    view = BlogSearchView()
+    view.request = request
+    paginator, page = view.build_page()
+    assert isinstance(paginator, Paginator)
