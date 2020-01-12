@@ -48,8 +48,9 @@
     "markdown-it": "^9.0.1",
     "mavon-editor": "^2.7.5",
     "mobi.css": "^3.1.1",
+    "sass-loader": "^7.1.0",
     "url-loader": "^2.1.0",
     "vue": "^2.6.10",
-    "sass-loader": "^7.1.0"
+    "webpack-dev-server": "^3.10.1"
   }
 }

@@ -1,6 +1,6 @@
 [[source]]
 name = "pypi"
-url = "https://pypi.douban.com/simple/"
+url = "https://pypi.org/simple/"
 verify_ssl = true
 
 [dev-packages]
@@ -11,9 +11,15 @@ fabric = "*"
 pytest = "*"
 pytest-django = "*"
 django-dynamic-fixture = "*"
+pytest-cov = "*"
+freezegun = "*"
+django-silk = "*"
+factory-boy = "*"
+django-test-plus = "*"
+pytest-sugar = "*"
 
 [packages]
-django = "*"
+django = "~=2.2"
 django-allauth = "*"
 django-contrib-comments = "*"
 django-mptt = "*"
@@ -38,4 +44,4 @@ gunicorn = "*"
 pymdown-extensions = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3"
