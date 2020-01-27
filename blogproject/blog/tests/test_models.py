@@ -4,7 +4,7 @@ import pytest
 from django.utils import timezone
 from django_dynamic_fixture import G
 
-from blog.models import Post
+from blog.models import Category, Post
 from users.models import User
 
 
@@ -133,3 +133,10 @@ class TestPostQuerySetAndIndexManager:
         posts = Post.index.all()
         assert posts.count() == 1
         assert list(posts) == [self.published_post]
+
+
+@pytest.mark.django_db
+class TestCategoryModel:
+    def test_populate_title_from_name(self):
+        category = G(Category, title="", name="Test")
+        assert category.title == category.name

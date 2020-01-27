@@ -1,4 +1,5 @@
 import pytest
+from django.http.response import Http404
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -221,3 +222,26 @@ def test_blog_search_view_paginator(rf):
     view.request = request
     paginator, page = view.build_page()
     assert isinstance(paginator, Paginator)
+
+
+@pytest.mark.django_db
+def test_blog_search_view_invalid_page_number(rf):
+    url = reverse("blog:search")
+    request = rf.get(url, data={"page": "a"})
+    view = BlogSearchView()
+    view.request = request
+    with pytest.raises(Http404):
+        assert view.build_page()
+
+    request = rf.get(url, data={"page": -1})
+    view = BlogSearchView()
+    view.request = request
+    with pytest.raises(Http404):
+        assert view.build_page()
+
+    # Always redirect to page 1
+    request = rf.get(url, data={"page": 99999})
+    view = BlogSearchView()
+    view.request = request
+    paginator, page = view.build_page()
+    assert page.number == 1
