@@ -5,17 +5,7 @@ from django.utils import timezone
 from django_dynamic_fixture import G
 
 from blog.models import Category, Post
-from users.models import User
 
-
-@pytest.fixture
-def user():
-    return G(User)
-
-
-@pytest.fixture
-def post(user):
-    return G(Post, author=user, body="正文")
 
 
 @pytest.mark.django_db

@@ -22,17 +22,23 @@ class BlogCommentManager(TreeManager, CommentManager):
 
 
 class BlogComment(MPTTModel, CommentAbstractModel):
-    parent = TreeForeignKey('self', verbose_name=_('parent comment'), on_delete=models.CASCADE, blank=True, null=True,
-                            related_name='children')
+    parent = TreeForeignKey(
+        "self",
+        verbose_name=_("parent comment"),
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="children",
+    )
     objects = BlogCommentManager.from_queryset(BlogCommentQuerySet)()
 
     class Meta(CommentAbstractModel.Meta):
         pass
 
     class MPTTMeta:
-        order_insertion_by = ['-submit_date']
+        order_insertion_by = ["-submit_date"]
 
     @cached_property
     def comment_html(self):
         rich_content = generate_rich_content(self.comment)
-        return rich_content.get('content', '')
+        return rich_content.get("content", "")
