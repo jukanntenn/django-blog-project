@@ -6,13 +6,12 @@
             :key="comment.id"
             :comment="comment"
             :content-type="contentType"
-            :token="token"
-            :object-pk="objectPk"/>
+            :object-pk="objectPk"
+            :token="token"/>
   </div>
 </template>
 
 <script>
-    import {getCommentList} from '../api.js'
     import CommentItem from "./CommentItem.vue";
 
     export default {

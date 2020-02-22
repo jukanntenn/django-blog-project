@@ -25,18 +25,23 @@ from rest_framework.routers import DefaultRouter
 from comments import views
 
 router = DefaultRouter()
-router.register(r'comments', views.CommentViewSet, basename='comments')
+router.register(r"comments", views.CommentViewSet, basename="comments")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
-    path('courses/', include('courses.urls')),
-    path('comments/', include('django_comments.urls')),
-    path('notifications/', include('notify.urls')),
-    path('notifications/', include('notifications.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('all/rss/', AllPostsRssFeed()),
+    path("admin/", admin.site.urls),
+    path("", include("blog.urls")),
+    path("courses/", include("courses.urls")),
+    path("comments/", include("django_comments.urls")),
+    path("notifications/", include("notify.urls")),
+    path("notifications/", include("notifications.urls")),
+    path("accounts/", include("allauth.urls")),
+    path(
+        "sitemap.xml",
+        sitemap,
+        {"sitemaps": sitemaps},
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
+    path("all/rss/", AllPostsRssFeed()),
 ]
 
 urlpatterns += router.urls
@@ -46,5 +51,5 @@ if settings.DEBUG:
 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
-        path('__debug__', include(debug_toolbar.urls)),
+        path("__debug__", include(debug_toolbar.urls)),
     ]

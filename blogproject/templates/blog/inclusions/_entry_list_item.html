@@ -16,11 +16,11 @@
     {% endif %}
 
     <time class="text-muted text-small meta-item" title="{{ entry.pub_date|date }}"><i
-            class="remixicon-time-line"></i> {{ entry.pub_date|date:"Y-m-d" }}</time>
+            class="ri-time-line"></i> {{ entry.pub_date|date:"Y-m-d" }}</time>
     <a class="text-muted text-small meta-item" href="{{ entry_url }}#comment-area"><i
-            class="remixicon-chat-2-line"></i> {{ entry.comment_count }}</a>
+            class="ri-chat-2-line"></i> {{ entry.comment_count }}</a>
     <a class="text-muted text-small meta-item" href="{{ entry_url }}"><i
-            class="remixicon-eye-line"></i> {{ entry.views }}</a>
+            class="ri-eye-line"></i> {{ entry.views }}</a>
     {% if entry.type == 'm' %}
       <a href="{% url 'courses:course_detail' entry.course__slug %}" class="meta-item blog-badge">系列教程</a>
     {% endif %}

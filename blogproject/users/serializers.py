@@ -2,16 +2,22 @@ from rest_framework import serializers
 from .models import User
 
 
-class UserDetailSerializer(serializers.ModelSerializer):
-    mugshot = serializers.SerializerMethodField()
+class UserSerializer(serializers.ModelSerializer):
+    avatar_url = serializers.SerializerMethodField()
 
     class Meta:
         model = User
         fields = [
-            'id',
-            'name',
-            'mugshot',
+            "id",
+            "name",
+            "avatar_url",
         ]
 
-    def get_mugshot(self, obj):
-        return obj.social_avatar()
+    def get_avatar_url(self, obj):
+        try:
+            socialaccount = obj.socialaccounts[0]
+        except AttributeError:
+            socialaccount = obj.socialaccount_set.first()
+        except IndexError:
+            return ""
+        return socialaccount.get_avatar_url()

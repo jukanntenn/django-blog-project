@@ -36,7 +36,10 @@ class BlogComment(MPTTModel, CommentAbstractModel):
         pass
 
     class MPTTMeta:
-        order_insertion_by = ["-submit_date"]
+        # 必须加入 user_id，否则在调用 mptt 的 get_queryset_descendants 时，
+        # 确保 select_related user 时 user_id 字段已经 load，否则会报错：
+        # Field %s.%s cannot be both deferred and traversed using select_related at the same time.
+        order_insertion_by = ["-submit_date", "user_id"]
 
     @cached_property
     def comment_html(self):

@@ -8,30 +8,30 @@
       <a href="{% url 'blog:index' %}" class="unit-0 hide-on-mobile navbar-logo" id="navbar-logo">追梦人物的博客</a>
 
       {% if show_trigger %}
-        <span class="show-on-mobile blog-aside-trigger"><i class="remixicon-arrow-right-s-line"></i></span>
+        <span class="show-on-mobile blog-aside-trigger"><i class="ri-arrow-right-s-line"></i></span>
       {% endif %}
 
       <a href="{% url 'blog:index' %}" class="unit-0 show-on-mobile text-muted"><i
-              class="remixicon-home-2-line"></i></a>
+              class="ri-home-2-line"></i></a>
       <a class="navbar-item" href="{% url 'courses:course_list' %}">教程</a>
       <div class="navbar-item">
         <input type="checkbox" id="menu-toggle-checkbox" class="menu-toggle-checkbox show-on-mobile hide-on-mobile">
         <label class="menu-toggle--button" for="menu-toggle-checkbox">
-          <i class="remixicon-more-fill"></i>
+          <i class="ri-more-fill"></i>
         </label>
         <nav class="menu" data-menu data-menu-toggle="#menu-toggle">
           <a class="text-muted text-small" href="{% url 'blog:categories' %}"><i
-                  class="remixicon-folder-line"></i> 分类</a>
+                  class="ri-folder-line"></i> 分类</a>
           <a class="text-muted text-small" href="{% url 'blog:archives' %}"><i
-                  class="remixicon-calendar-line"></i> 归档</a>
-          <a class="text-muted text-small" href="{% url 'blog:donate' %}"><i class="remixicon-money-cny-box-line"></i>
+                  class="ri-calendar-line"></i> 归档</a>
+          <a class="text-muted text-small" href="{% url 'blog:donate' %}"><i class="ri-money-cny-box-line"></i>
             赞助</a>
           <div class="divider" href=""></div>
           {% if user.is_authenticated %}
             <a class="text-muted text-small" href="{% url 'account_logout' %}" onclick="confirm('确定登出吗？')"><i
-                    class="remixicon-logout-box-line"></i> 登出</a>
+                    class="ri-logout-box-line"></i> 登出</a>
           {% else %}
-            <a class="text-muted text-small" href="{% url 'account_login' %}"><i class="remixicon-login-box-line"></i>
+            <a class="text-muted text-small" href="{% url 'account_login' %}"><i class="ri-login-box-line"></i>
               登录</a>
           {% endif %}
         </nav>
@@ -40,16 +40,16 @@
       <div class="navbar-item ml-auto">
         <form action="{% url 'blog:search' %}" class="hide-on-mobile search-form">
           <input name="q" type="search" placeholder="搜索..." required/>
-          <button type="submit"><i class="remixicon-search-line"></i></button>
+          <button type="submit"><i class="ri-search-line"></i></button>
         </form>
       </div>
 
-      <a href="" class="show-on-mobile navbar-item search-button-mobile"><i class="remixicon-search-line"></i></a>
+      <a href="" class="show-on-mobile navbar-item search-button-mobile"><i class="ri-search-line"></i></a>
       <div class="flex-center search-form-mobile-wrapper show-on-mobile">
         <div class="container">
           <form action="{% url 'blog:search' %}" class="flex-left units-gap show-on-mobile search-form-mobile">
             <div class="unit-0"><a class="search-button-mobile-cancel" href=""><i
-                    class="remixicon-arrow-left-s-line"></i></a>
+                    class="ri-arrow-left-s-line"></i></a>
             </div>
             <div class="unit"><input name="q" type="search" placeholder="搜索..." required/></div>
           </form>
@@ -60,10 +60,10 @@
         {% notifications_unread as num_unread %}
         <a href="{% url 'notify:notification_all' %}"
            class="navbar-item">
-          <i class="remixicon-notification-3-line {% if num_unread != 0 %}text-danger{% endif %}"></i>
+          <i class="ri-notification-3-line {% if num_unread != 0 %}text-danger{% endif %}"></i>
         </a>
       {% else %}
-        <a class="navbar-item" href="{% url 'account_login' %}"><i class="remixicon-login-box-line"></i></a>
+        <a class="navbar-item" href="{% url 'account_login' %}"><i class="ri-login-box-line"></i></a>
       {% endif %}
     </nav>
   </div>

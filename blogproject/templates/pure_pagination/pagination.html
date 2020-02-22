@@ -2,9 +2,9 @@
   <ul class="pagination">
     {% if page_obj.has_previous %}
       <li class="pagination-item"><a href="?{{ page_obj.previous_page_number.querystring }}"
-                                     class="previous"><i class="remixicon-arrow-left-s-line"></i></a></li>
+                                     class="previous"><i class="ri-arrow-left-s-line"></i></a></li>
     {% else %}
-      <li class="pagination-item"><span class="disabled previous"><i class="remixicon-arrow-left-s-line"></i></span>
+      <li class="pagination-item"><span class="disabled previous"><i class="ri-arrow-left-s-line"></i></span>
       </li>
     {% endif %}
 
@@ -22,10 +22,10 @@
 
     {% if page_obj.has_next %}
       <li class="pagination-item"><a href="?{{ page_obj.next_page_number.querystring }}" class="next"><i
-              class="remixicon-arrow-right-s-line"></i></a>
+              class="ri-arrow-right-s-line"></i></a>
       </li>
     {% else %}
-      <li class="pagination-item"><span class="disabled next"><i class="remixicon-arrow-right-s-line"></i></span></li>
+      <li class="pagination-item"><span class="disabled next"><i class="ri-arrow-right-s-line"></i></span></li>
     {% endif %}
   </ul>
 </div>

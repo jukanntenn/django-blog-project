@@ -6,4 +6,4 @@ from django_comments.admin import CommentsAdmin
 
 @admin.register(BlogComment)
 class BlogCommentAdmin(CommentsAdmin):
-    list_select_related = ['user']
+    list_select_related = ["user"]

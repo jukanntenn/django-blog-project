@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-left comment" :id="commentItemAnchor">
-    <div class="unit-0 comment-mugshot-box">
-      <img class="comment-mugshot" alt="" :src="comment.user.mugshot"/>
+  <div class="flex-left comment" :id="commentAnchor">
+    <div class="unit-0 comment-avatar-box">
+      <img class="comment-avatar" alt="" :src="comment.user.avatar_url"/>
     </div>
     <div class="unit root-comment">
       <header class="comment-user">
@@ -9,31 +9,30 @@
             <span class="master" v-if="comment.user.name==='追梦人物'">[博主]</span>
         </span>
         <template v-if="!isRoot">
-          <i class="remixicon-share-forward-fill"></i>
+          <i class="ri-share-forward-fill"></i>
           <span class="text-small text-muted comment-user-name">{{comment.parent_user.name}}
             <span class="master" v-if="comment.parent_user.name==='追梦人物'">[博主]</span>
           </span>
         </template>
       </header>
 
-      <div v-html="comment.comment" class="comment-body">
-        {{comment.comment}}
+      <div v-html="comment.comment_html" class="comment-body">
+        {{comment.comment_html}}
       </div>
 
       <footer class="comment-footer flex-left">
         <time class="text-small text-muted comment-date">{{comment.submit_date}}</time>
         <a href="#" class="text-small text-muted btn-reply" @click.prevent="replying=!replying" v-if="isAuthenticated">回复</a>
       </footer>
-      <comment-form @rootCommentSuccess="rootCommentSuccessed"
-                    @descendantCommentSuccess="descendantCommentSuccess"
+      <comment-form @descendantCommentSuccess="commentSuccess"
                     :flag="commentFormFlag"
                     v-if="replying"
                     :content-type="contentType"
                     :object-pk="objectPk"
                     :token="token"
                     :parent="comment.id"/>
-      <div class="comment-descendants" v-if="hasChildren">
-        <comment-item v-for="c in comment.descendants" @descendantCommentSuccess="descendantCommentSuccessed"
+      <div class="comment-descendants" v-if="hasDescendants">
+        <comment-item v-for="c in comment.descendants"
                       :content-type="contentType"
                       :object-pk="objectPk"
                       :token="token"
@@ -54,10 +53,6 @@
             comment: Object,
             contentType: String,
             objectPk: String,
-            descendants: {
-                type: Array,
-                required: false
-            },
             token: String
         },
         data() {
@@ -66,26 +61,25 @@
             }
         },
         methods: {
-            rootCommentSuccessed(payload) {
-                this.comment.descendants.push(payload)
+            commentSuccess(c) {
                 this.replying = !this.replying
+                if (this.isRoot) {
+                    this.comment.descendants.push(c)
+                    return
+                }
+                // Vue 不提倡子组件中修改父组件的状态，
+                // 但是为了简单起见，且在无副作用的情况下，这里直接修改父组件的状态
+                this.$parent.comment.descendants.push(c)
             },
-            descendantCommentSuccess(payload) {
-                this.replying = !this.replying
-                this.$emit('descendantCommentSuccess', payload)
-            },
-            descendantCommentSuccessed(payload) {
-                this.comment.descendants.push(payload)
-            }
         },
 
         computed: {
             commentFormFlag() {
-                return this.isRoot ? 'root' : 'descendant'
+                return 'descendant'
             },
 
-            hasChildren() {
-                return this.isRoot && this.comment.hasOwnProperty('descendants') && this.comment.descendants.length > 0
+            hasDescendants() {
+                return this.isRoot && this.comment.descendants.length > 0
             },
             isRoot() {
                 return this.comment.parent === null
@@ -93,7 +87,7 @@
             isAuthenticated() {
                 return this.token.length !== 0
             },
-            commentItemAnchor() {
+            commentAnchor() {
                 return 'c' + this.comment.id
             }
         },
@@ -109,11 +103,11 @@
     width: 0; /* 防止 flex 子元素宽度超出父元素 https://www.cnblogs.com/Red-ButterFly/p/8794286.html */
   }
 
-  .comment-mugshot-box {
+  .comment-avatar-box {
     flex-shrink: 0;
   }
 
-  .comment .comment-mugshot {
+  .comment .comment-avatar {
     width: 48px;
     border-radius: 3px;
     margin-right: 1rem;
@@ -123,7 +117,7 @@
     margin-top: 2rem;
   }
 
-  .comment-descendants .comment .comment-mugshot {
+  .comment-descendants .comment .comment-avatar {
     width: 32px;
   }
 
@@ -132,11 +126,11 @@
   }
 
   @media (max-width: 768px) {
-    .comment .comment-mugshot {
+    .comment .comment-avatar {
       width: 32px;
     }
 
-    .comment-descendants .comment .comment-mugshot {
+    .comment-descendants .comment .comment-avatar {
       width: 24px;
     }
   }

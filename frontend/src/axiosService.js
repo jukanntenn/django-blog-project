@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let apiTable = {
     production: 'https://www.zmrenwu.com',
-    development: 'http://127.0.0.1:8010'
+    development: 'http://127.0.0.1:8000'
 }
 
 const baseURL = apiTable[process.env.environ]

@@ -21,8 +21,6 @@ new Vue({
                 contentType: jscontext.contentType,
                 objectPk: jscontext.objectPk,
                 token: jscontext.token,
-                weiboLoginUrl: jscontext.weiboLoginUrl,
-                githubLoginUrl: jscontext.githubLoginUrl,
                 numComments: jscontext.numComments,
                 numCommentParticipants: jscontext.numCommentParticipants,
             }

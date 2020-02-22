@@ -6,9 +6,10 @@
                     :subfield="true"
                     placeholder="评论..."
                     :autofocus="false"
-                    :toolbars="this.toolbars"></mavon-editor>
+                    :toolbars="this.toolbars"
+      />
       <button class="btn btn-default float-right" @click="submitComment">
-        <i class="remixicon-send-plane-fill" aria-hidden="true"></i> 发布
+        <i class="ri-send-plane-fill" aria-hidden="true"></i> 发布
       </button>
     </div>
   </div>
@@ -58,14 +59,11 @@
                 }
                 let token = this.token
                 let data = {
-                    // 'content_type': this.contentType,
-                    // 'object_pk': this.objectPk,
                     'comment': this.value,
                     'parent': this.parent,
                     ...this.security_data
                 }
                 postComment(token, data).then(response => {
-                    console.log(response.data)
                     this.$emit(this.flag + 'CommentSuccess', response.data)
                     this.value = ''
                 }).catch(err => {

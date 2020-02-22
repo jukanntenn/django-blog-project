@@ -4,19 +4,18 @@
                   :content-type="contentType"
                   :object-pk="objectPk"
                   :token="token"
-                  flag="global"
-                  @globalCommentSuccess="commentSuccessed"/>
+                  flag="root"
+                  @rootCommentSuccess="commentSuccess"/>
     <comment-list
             :content-type="contentType"
             :object-pk="objectPk"
             :token="token"
             :comment-list="commentList"
             :num-comments="numComments"
-            :num-comment-participants="numCommentParticipants">
-    </comment-list>
+            :num-comment-participants="numCommentParticipants"/>
     <div class="flex-center top-gap-big" v-if="hasMore">
       <a class="text-small text-muted" href="" @click.prevent="loadMore" v-if="!loading">加载更多 <i
-              class="remixicon-arrow-down-s-line"></i></a>
+              class="ri-arrow-down-s-line"></i></a>
       <span class="text-small text-muted" v-else>加载中...</span>
     </div>
   </div>
@@ -25,18 +24,15 @@
 <script>
     import CommentForm from "./components/CommentForm.vue";
     import CommentList from "./components/CommentList.vue";
-    import LoginPanel from "./components/LoginPanel.vue";
     import {getCommentList} from './api.js'
     import axios from './axiosService'
 
     export default {
-        components: {CommentList, CommentForm, LoginPanel},
+        components: {CommentList, CommentForm},
         props: {
             contentType: String,
             objectPk: String,
             token: String,
-            weiboLoginUrl: String,
-            githubLoginUrl: String,
             numComments: Number,
             numCommentParticipants: Number,
         },
@@ -64,19 +60,19 @@
                     this.scrollToCommentByHash()
                 })
             }).catch(err => {
+                // Todo: handle errors
                 console.log(err.response)
             })
         },
         methods: {
-            commentSuccessed(payload) {
-                payload.descendants = []
-                this.commentList.unshift(payload)
+            commentSuccess(c) {
+                c.descendants = []
+                this.commentList.unshift(c)
                 this.value = ''
             },
             loadMore() {
                 this.loading = !this.loading
                 axios.get(this.next).then(response => {
-                    console.log(response.data);
                     this.commentList.push(...response.data.results)
                     this.next = response.data.next
                     this.loading = !this.loading
@@ -87,6 +83,9 @@
             },
             scrollToCommentByHash() {
                 let hash = window.location.hash
+                if (hash === '') {
+                    return
+                }
                 let eleId = hash.substring(1)
                 let ele = window.document.getElementById(eleId)
                 ele.scrollIntoView()
