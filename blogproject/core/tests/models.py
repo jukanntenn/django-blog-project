@@ -10,4 +10,4 @@ class RankableEntry(AbstractEntry):
     rank = models.SmallIntegerField(unique=True)
 
     class Meta:
-        ordering = ['rank']
+        ordering = ["rank"]

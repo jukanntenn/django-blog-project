@@ -6,23 +6,38 @@ from .models import Category, Course, Material
 
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
-    date_hierarchy = 'pub_date'
-    list_display = ['title', 'rank', 'pub_date', 'created', 'modified', 'course', 'views', 'status', 'show_on_index',
-                    'comment_enabled']
-    list_filter = ['status', 'course', 'pub_date', 'show_on_index', 'comment_enabled']
+    date_hierarchy = "pub_date"
+    list_display = [
+        "title",
+        "rank",
+        "pub_date",
+        "created",
+        "modified",
+        "course",
+        "views",
+        "status",
+        "show_on_index",
+        "comment_enabled",
+    ]
+    list_filter = ["status", "course", "pub_date", "show_on_index", "comment_enabled"]
 
     fieldsets = (
-        (None, {
-            'fields': ('title', 'body', 'brief', 'course')
-        }),
-        (_('Display control'), {
-            'fields': ('status', 'rank', 'pub_date', 'show_on_index', 'comment_enabled'),
-        }),
-        (_('SEO'), {
-            'fields': ('excerpt',),
-        }),
+        (None, {"fields": ("title", "body", "brief", "course")}),
+        (
+            _("Display control"),
+            {
+                "fields": (
+                    "status",
+                    "rank",
+                    "pub_date",
+                    "show_on_index",
+                    "comment_enabled",
+                ),
+            },
+        ),
+        (_("SEO"), {"fields": ("excerpt",),}),
     )
-    search_fields = ['title', 'body']
+    search_fields = ["title", "body"]
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user

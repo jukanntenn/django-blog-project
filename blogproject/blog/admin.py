@@ -6,24 +6,47 @@ from .models import Category, FriendLink, Medium, Post, Recommendation, Tag
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    date_hierarchy = 'pub_date'
-    list_display = ['title', 'pub_date', 'created', 'modified', 'category', 'views', 'status', 'show_on_index',
-                    'pinned', 'comment_enabled']
-    list_filter = ['status', 'category', 'tags', 'pub_date', 'show_on_index', 'comment_enabled', 'pinned']
+    date_hierarchy = "pub_date"
+    list_display = [
+        "title",
+        "pub_date",
+        "created",
+        "modified",
+        "category",
+        "views",
+        "status",
+        "show_on_index",
+        "pinned",
+        "comment_enabled",
+    ]
+    list_filter = [
+        "status",
+        "category",
+        "tags",
+        "pub_date",
+        "show_on_index",
+        "comment_enabled",
+        "pinned",
+    ]
 
     fieldsets = (
-        (None, {
-            'fields': ('title', 'body', 'brief', 'category', 'tags')
-        }),
-        (_('Display control'), {
-            'fields': ('status', 'pub_date', 'show_on_index', 'comment_enabled', 'pinned'),
-        }),
-        (_('SEO'), {
-            'fields': ('excerpt',),
-        }),
+        (None, {"fields": ("title", "body", "brief", "category", "tags")}),
+        (
+            _("Display control"),
+            {
+                "fields": (
+                    "status",
+                    "pub_date",
+                    "show_on_index",
+                    "comment_enabled",
+                    "pinned",
+                ),
+            },
+        ),
+        (_("SEO"), {"fields": ("excerpt",),}),
     )
-    filter_horizontal = ['tags']
-    search_fields = ['title', 'body']
+    filter_horizontal = ["tags"]
+    search_fields = ["title", "body"]
 
     def save_model(self, request, obj, form, change):
         obj.author = request.user
@@ -32,12 +55,12 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Medium)
 class MediumAdmin(admin.ModelAdmin):
-    list_display = ['flag', 'name', 'identifier']
+    list_display = ["flag", "name", "identifier"]
 
 
 @admin.register(FriendLink)
 class FriendLinkAdmin(admin.ModelAdmin):
-    list_display = ['site_name', 'site_domain']
+    list_display = ["site_name", "site_domain"]
 
 
 admin.site.register(Category)

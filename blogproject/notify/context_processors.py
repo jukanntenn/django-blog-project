@@ -6,6 +6,4 @@ def notification_count(request):
     else:
         unread_count = user.notifications.unread().count()
 
-    return {
-        'unread_count': unread_count
-    }
+    return {"unread_count": unread_count}

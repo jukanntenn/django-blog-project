@@ -10,38 +10,106 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('sites', '0002_alter_domain_unique'),
-        ('contenttypes', '0002_remove_content_type_name'),
+        ("sites", "0002_alter_domain_unique"),
+        ("contenttypes", "0002_remove_content_type_name"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BlogComment',
+            name="BlogComment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_pk', models.TextField(verbose_name='object ID')),
-                ('user_name', models.CharField(blank=True, max_length=50, verbose_name="user's name")),
-                ('user_email', models.EmailField(blank=True, max_length=254, verbose_name="user's email address")),
-                ('user_url', models.URLField(blank=True, verbose_name="user's URL")),
-                ('comment', models.TextField(max_length=3000, verbose_name='comment')),
-                ('submit_date', models.DateTimeField(db_index=True, default=None, verbose_name='date/time submitted')),
-                ('ip_address', models.GenericIPAddressField(blank=True, null=True, unpack_ipv4=True, verbose_name='IP address')),
-                ('is_public', models.BooleanField(default=True, help_text='Uncheck this box to make the comment effectively disappear from the site.', verbose_name='is public')),
-                ('is_removed', models.BooleanField(default=False, help_text='Check this box if the comment is inappropriate. A "This comment has been removed" message will be displayed instead.', verbose_name='is removed')),
-                ('lft', models.PositiveIntegerField(editable=False)),
-                ('rght', models.PositiveIntegerField(editable=False)),
-                ('tree_id', models.PositiveIntegerField(db_index=True, editable=False)),
-                ('level', models.PositiveIntegerField(editable=False)),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='content_type_set_for_blogcomment', to='contenttypes.ContentType', verbose_name='content type')),
-                ('parent', mptt.fields.TreeForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='comments.BlogComment', verbose_name='parent comment')),
-                ('site', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sites.Site')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("object_pk", models.TextField(verbose_name="object ID")),
+                (
+                    "user_name",
+                    models.CharField(
+                        blank=True, max_length=50, verbose_name="user's name"
+                    ),
+                ),
+                (
+                    "user_email",
+                    models.EmailField(
+                        blank=True, max_length=254, verbose_name="user's email address"
+                    ),
+                ),
+                ("user_url", models.URLField(blank=True, verbose_name="user's URL")),
+                ("comment", models.TextField(max_length=3000, verbose_name="comment")),
+                (
+                    "submit_date",
+                    models.DateTimeField(
+                        db_index=True, default=None, verbose_name="date/time submitted"
+                    ),
+                ),
+                (
+                    "ip_address",
+                    models.GenericIPAddressField(
+                        blank=True,
+                        null=True,
+                        unpack_ipv4=True,
+                        verbose_name="IP address",
+                    ),
+                ),
+                (
+                    "is_public",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Uncheck this box to make the comment effectively disappear from the site.",
+                        verbose_name="is public",
+                    ),
+                ),
+                (
+                    "is_removed",
+                    models.BooleanField(
+                        default=False,
+                        help_text='Check this box if the comment is inappropriate. A "This comment has been removed" message will be displayed instead.',
+                        verbose_name="is removed",
+                    ),
+                ),
+                ("lft", models.PositiveIntegerField(editable=False)),
+                ("rght", models.PositiveIntegerField(editable=False)),
+                ("tree_id", models.PositiveIntegerField(db_index=True, editable=False)),
+                ("level", models.PositiveIntegerField(editable=False)),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="content_type_set_for_blogcomment",
+                        to="contenttypes.ContentType",
+                        verbose_name="content type",
+                    ),
+                ),
+                (
+                    "parent",
+                    mptt.fields.TreeForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="children",
+                        to="comments.BlogComment",
+                        verbose_name="parent comment",
+                    ),
+                ),
+                (
+                    "site",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="sites.Site"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'comment',
-                'verbose_name_plural': 'comments',
-                'ordering': ('submit_date',),
-                'permissions': [('can_moderate', 'Can moderate comments')],
-                'abstract': False,
+                "verbose_name": "comment",
+                "verbose_name_plural": "comments",
+                "ordering": ("submit_date",),
+                "permissions": [("can_moderate", "Can moderate comments")],
+                "abstract": False,
             },
         ),
     ]

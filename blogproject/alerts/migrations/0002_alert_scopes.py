@@ -8,14 +8,14 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('alerts', '0001_initial'),
-        ('courses', '0001_initial'),
+        ("alerts", "0001_initial"),
+        ("courses", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='alert',
-            name='scopes',
-            field=models.ManyToManyField(to='courses.Course', verbose_name='scopes'),
+            model_name="alert",
+            name="scopes",
+            field=models.ManyToManyField(to="courses.Course", verbose_name="scopes"),
         ),
     ]

@@ -11,4 +11,4 @@ class NotificationFactory(DjangoModelFactory):
 
     recipient = factory.SubFactory(UserFactory)
     actor = factory.SubFactory(UserFactory)
-    verb = 'notify'
+    verb = "notify"

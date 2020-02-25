@@ -7,16 +7,16 @@ register = template.Library()
 
 @register.simple_tag
 def display(obj, request=None):
-    tpl = getattr(settings, 'NOTIFICATION_TEMPLATES').get(obj.verb)
+    tpl = getattr(settings, "NOTIFICATION_TEMPLATES").get(obj.verb)
 
     if not tpl:
-        return ''
+        return ""
 
     context = {
-        'notification': obj,
-        'actor': obj.actor,
-        'target': obj.target,
-        'request': request,
+        "notification": obj,
+        "actor": obj.actor,
+        "target": obj.target,
+        "request": request,
     }
     return render_to_string(tpl, context=context)
 
@@ -24,4 +24,4 @@ def display(obj, request=None):
 @register.filter
 def frag(notification):
     verb = notification.verb
-    return 'notifications/inclusions/_{verb}.html'.format(verb=verb)
+    return "notifications/inclusions/_{verb}.html".format(verb=verb)

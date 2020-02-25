@@ -9,102 +9,269 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('name', models.CharField(max_length=100, verbose_name='name')),
-                ('title', models.CharField(blank=True, max_length=255, verbose_name='title')),
-                ('slug', models.SlugField(unique=True, verbose_name='slug')),
-                ('description', models.TextField(blank=True, verbose_name='description')),
-                ('cover', models.ImageField(blank=True, upload_to='covers/categories/%Y/%m/%d/', verbose_name='cover')),
-                ('cover_caption', models.CharField(blank=True, max_length=255, verbose_name='cover caption')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="name")),
+                (
+                    "title",
+                    models.CharField(blank=True, max_length=255, verbose_name="title"),
+                ),
+                ("slug", models.SlugField(unique=True, verbose_name="slug")),
+                (
+                    "description",
+                    models.TextField(blank=True, verbose_name="description"),
+                ),
+                (
+                    "cover",
+                    models.ImageField(
+                        blank=True,
+                        upload_to="covers/categories/%Y/%m/%d/",
+                        verbose_name="cover",
+                    ),
+                ),
+                (
+                    "cover_caption",
+                    models.CharField(
+                        blank=True, max_length=255, verbose_name="cover caption"
+                    ),
+                ),
+            ],
+            options={"verbose_name": "category", "verbose_name_plural": "categories",},
+        ),
+        migrations.CreateModel(
+            name="FriendLink",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                (
+                    "site_name",
+                    models.CharField(max_length=100, verbose_name="site_name"),
+                ),
+                ("site_domain", models.URLField(verbose_name="site_domain")),
+            ],
+            options={"abstract": False,},
+        ),
+        migrations.CreateModel(
+            name="Medium",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                (
+                    "flag",
+                    models.SmallIntegerField(
+                        choices=[(0, "QQ 群"), (1, "知乎专栏")], verbose_name="flag"
+                    ),
+                ),
+                ("name", models.CharField(max_length=200, verbose_name="name")),
+                (
+                    "identifier",
+                    models.CharField(max_length=300, verbose_name="identifier"),
+                ),
+            ],
+            options={"ordering": ["flag", "name"],},
+        ),
+        migrations.CreateModel(
+            name="Post",
+            fields=[
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255, verbose_name="title")),
+                ("body", models.TextField(verbose_name="body")),
+                ("brief", models.TextField(blank=True, verbose_name="brief")),
+                ("excerpt", models.TextField(blank=True, verbose_name="excerpt")),
+                (
+                    "views",
+                    models.PositiveIntegerField(
+                        default=0, editable=False, verbose_name="views"
+                    ),
+                ),
+                (
+                    "pub_date",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="publication datetime"
+                    ),
+                ),
+                (
+                    "show_on_index",
+                    models.BooleanField(default=True, verbose_name="show on index"),
+                ),
+                (
+                    "comment_enabled",
+                    models.BooleanField(default=True, verbose_name="comment enabled"),
+                ),
+                (
+                    "status",
+                    models.PositiveSmallIntegerField(
+                        choices=[(1, "published"), (2, "draft"), (3, "hidden")],
+                        default=2,
+                        verbose_name="status",
+                    ),
+                ),
+                ("pinned", models.BooleanField(default=False, verbose_name="pinned")),
+                (
+                    "cover",
+                    models.ImageField(
+                        blank=True, upload_to="covers/posts/", verbose_name="cover"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'category',
-                'verbose_name_plural': 'categories',
+                "verbose_name": "Posts",
+                "verbose_name_plural": "Posts",
+                "ordering": ["-created"],
             },
         ),
         migrations.CreateModel(
-            name='FriendLink',
+            name="Recommendation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('site_name', models.CharField(max_length=100, verbose_name='site_name')),
-                ('site_domain', models.URLField(verbose_name='site_domain')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                (
+                    "pic",
+                    models.ImageField(
+                        blank=True, upload_to="recommendation/", verbose_name="picture"
+                    ),
+                ),
+                ("url", models.URLField(blank=True, verbose_name="url")),
+                ("description", models.TextField(verbose_name="description")),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False,},
         ),
         migrations.CreateModel(
-            name='Medium',
+            name="Tag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('flag', models.SmallIntegerField(choices=[(0, 'QQ 群'), (1, '知乎专栏')], verbose_name='flag')),
-                ('name', models.CharField(max_length=200, verbose_name='name')),
-                ('identifier', models.CharField(max_length=300, verbose_name='identifier')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="name")),
             ],
-            options={
-                'ordering': ['flag', 'name'],
-            },
-        ),
-        migrations.CreateModel(
-            name='Post',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('title', models.CharField(max_length=255, verbose_name='title')),
-                ('body', models.TextField(verbose_name='body')),
-                ('brief', models.TextField(blank=True, verbose_name='brief')),
-                ('excerpt', models.TextField(blank=True, verbose_name='excerpt')),
-                ('views', models.PositiveIntegerField(default=0, editable=False, verbose_name='views')),
-                ('pub_date', models.DateTimeField(blank=True, null=True, verbose_name='publication datetime')),
-                ('show_on_index', models.BooleanField(default=True, verbose_name='show on index')),
-                ('comment_enabled', models.BooleanField(default=True, verbose_name='comment enabled')),
-                ('status', models.PositiveSmallIntegerField(choices=[(1, 'published'), (2, 'draft'), (3, 'hidden')], default=2, verbose_name='status')),
-                ('pinned', models.BooleanField(default=False, verbose_name='pinned')),
-                ('cover', models.ImageField(blank=True, upload_to='covers/posts/', verbose_name='cover')),
-            ],
-            options={
-                'verbose_name': 'Posts',
-                'verbose_name_plural': 'Posts',
-                'ordering': ['-created'],
-            },
-        ),
-        migrations.CreateModel(
-            name='Recommendation',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('pic', models.ImageField(blank=True, upload_to='recommendation/', verbose_name='picture')),
-                ('url', models.URLField(blank=True, verbose_name='url')),
-                ('description', models.TextField(verbose_name='description')),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.CreateModel(
-            name='Tag',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='name')),
-            ],
-            options={
-                'verbose_name': 'tag',
-                'verbose_name_plural': 'tags',
-            },
+            options={"verbose_name": "tag", "verbose_name_plural": "tags",},
         ),
     ]

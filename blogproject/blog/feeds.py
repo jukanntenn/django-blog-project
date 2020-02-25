@@ -13,7 +13,7 @@ class AllPostsRssFeed(Feed):
         return Post.objects.all()
 
     def item_title(self, item):
-        return '[%s] %s' % (item.category, item.title)
+        return "[%s] %s" % (item.category, item.title)
 
     def item_description(self, item):
         return item.body

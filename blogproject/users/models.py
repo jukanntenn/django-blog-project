@@ -8,13 +8,13 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    name = models.CharField(_('name'), blank=True, max_length=255)
-    email_bound = models.BooleanField(_('email bound'), default=False)
+    name = models.CharField(_("name"), blank=True, max_length=255)
+    email_bound = models.BooleanField(_("email bound"), default=False)
 
     def social_avatar(self):
         if self.socialaccount_set.exists():
             return self.socialaccount_set.first().get_avatar_url()
-        return ''
+        return ""
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

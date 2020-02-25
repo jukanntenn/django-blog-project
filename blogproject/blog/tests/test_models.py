@@ -7,7 +7,6 @@ from django_dynamic_fixture import G
 from blog.models import Category, Post
 
 
-
 @pytest.mark.django_db
 class TestPost:
     def test_populate_excerpt(self, user):
