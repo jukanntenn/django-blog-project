@@ -74,7 +74,7 @@ def inject_comment_target(func):
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        except ValueError as e:
+        except (ValueError, LookupError, ValidationError) as e:
             return Response(
                 {
                     "detail": _(
@@ -95,7 +95,6 @@ class CommentViewSet(
 ):
     serializer_class = TreeCommentSerializer
     pagination_class = LimitOffsetPagination
-    authentication_classes = [TokenAuthentication]
     permission_classes = [AllowAny]
 
     @method_decorator(csrf_exempt)
@@ -119,7 +118,6 @@ class CommentViewSet(
     def filter_queryset(self, queryset):
         root_comments = super().filter_queryset(queryset)
         qs = (
-            # root_comments.get_descendants(include_self=True)
             BlogComment.objects.get_queryset_descendants(
                 queryset=root_comments.select_related("user"), include_self=True
             )
