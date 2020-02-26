@@ -13,7 +13,7 @@ class BlogCommentForm(CommentForm):
         self.parent = parent
         if initial is None:
             initial = {}
-        initial.update({"parent": self.parent})
+        initial.update({"parent": self.parent.pk})
         super().__init__(target_object, data=data, initial=initial, **kwargs)
         self.fields["email"].required = False
         self.fields["name"].required = False
