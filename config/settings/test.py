@@ -8,3 +8,9 @@ INSTALLED_APPS += [
     "core.tests",
 ]
 DDF_NUMBER_OF_LAPS = 1
+
+# Email configuration
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+ADMINS = [("admin", "admin@example.com")]
+MANAGERS = ADMINS

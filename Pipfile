@@ -17,6 +17,7 @@ django-silk = "*"
 factory-boy = "*"
 django-test-plus = "*"
 pytest-sugar = "*"
+"tl.testing" = "*"
 
 [packages]
 django = "~=2.2"
@@ -42,6 +43,7 @@ whoosh = "*"
 jieba = "*"
 gunicorn = "*"
 pymdown-extensions = "*"
+django-constance = {extras = ["database"],version = "*"}
 
 [requires]
 python_version = "3"

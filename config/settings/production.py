@@ -1,6 +1,6 @@
 from .common import *  # noqa
+from .common import env
 
-env = environ.Env()
 
 SECRET_KEY = env("SECRET_KEY")
 

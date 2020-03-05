@@ -1,6 +1,23 @@
 @import "variables";
 
+.toc-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.toc-wrapper:hover::-webkit-scrollbar {
+  display: initial;
+  width: 4px;
+  transition: background .2s linear;
+}
+
+.toc-wrapper:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .16);
+  border-radius: 2px;
+}
+
 .toc {
+  padding-right: $width-gap;
+
   > ul {
     list-style: none;
     padding: 0;

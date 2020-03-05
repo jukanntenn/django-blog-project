@@ -20,7 +20,6 @@ class TestBlogCommentForm:
             is_public=True, is_removed=False, site=site, content_object=post
         )
         form = BlogCommentForm(target_object=post, parent=self.comment)
-        print(form.initial)
         self.bound_form = BlogCommentForm(
             target_object=post,
             parent=self.comment,

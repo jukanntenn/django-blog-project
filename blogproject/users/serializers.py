@@ -15,7 +15,6 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_avatar_url(self, obj):
         try:
-            print(obj.socialaccounts)
             socialaccount = obj.socialaccounts[0]
         except AttributeError:
             socialaccount = obj.socialaccount_set.first()

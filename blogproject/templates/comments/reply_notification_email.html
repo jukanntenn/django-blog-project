@@ -1,0 +1,6 @@
+{{ comment.user.name }} 在文章 {{ content_object.title }} 中回复了你:
+{{ comment.comment_html | safe }}
+
+<a href="{{ link }}">查看</a>
+
+发自: <a href="{{ site.domain }}">{{ site.name }}</a>

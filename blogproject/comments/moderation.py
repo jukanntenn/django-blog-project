@@ -1,7 +1,10 @@
 import threading
 
+from constance import config
+from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.template import loader
+
 from django_comments.moderation import CommentModerator, Moderator
 from notifications.signals import notify
 
@@ -11,63 +14,63 @@ class BlogModerator(Moderator):
         model = comment.content_type.model_class()
         if model not in self._registry:
             return
-        self._registry[model].reply(comment, comment.content_object, request)
+        self._registry[model].notify(comment, comment.content_object, request)
 
 
 class BlogCommentModerator(CommentModerator):
-    def reply(self, comment, content_object, request):
-        post_author = content_object.author
+    email_notification = True
+    enable_field = "comment_enabled"
+
+    def notify(self, comment, content_object, request):
+        author = content_object.author
+        notification_data = []
+        if comment.user != author:
+            # 博主接收的通知
+            notification_data.append(
+                {"recipient": author, "verb": "comment", "target": comment}
+            )
 
         if comment.parent:
             parent_user = comment.parent.user
-            # 通知被评论的人，自己回复自己无需通知
-            if parent_user != comment.user:
-                reply_data = {
-                    "recipient": parent_user,
-                    "verb": "reply",
-                    "target": comment,
-                }
-                notify.send(sender=comment.user, **reply_data)
+            # 不是自己评论自己，通知被评论者
+            if comment.user != parent_user:
+                notification_data.append(
+                    {"recipient": parent_user, "verb": "reply", "target": comment}
+                )
 
-                if parent_user.email and parent_user.email_bound:
-                    t = loader.get_template("comments/email_reply_notification.txt")
-                    c = {
-                        "commenter_name": comment.user.name,
-                        "comment_comment": comment.comment,
-                        "post_title": content_object.title,
-                        "post_url": content_object.get_absolute_url,
-                        "site": get_current_site(request).domain,
-                        "comment_pk": comment.pk,
-                        "protocol": "http",
-                    }
-                    message = t.render(c)
-                    email_data = {
-                        "subject": "[追梦人物的博客]评论有了新回复",
-                        "message": message,
-                        "fail_silently": True,
-                        "html_message": message,
-                    }
-                    threading.Thread(
-                        target=parent_user.email_user, kwargs=email_data
-                    ).start()
+        if not notification_data:
+            return
 
-            if parent_user != content_object.author and post_author != comment.user:
-                # 如果被回复的人不是文章作者，且不是文章作者自己的回复，文章作者应该收到通知
-                comment_data = {
-                    "recipient": post_author,
-                    "verb": "comment",
-                    "target": comment,
-                }
-                notify.send(sender=comment.user, **comment_data)
-        else:
-            # 如果是直接评论，且不是文章作者自己评论，则通知文章作者
-            if post_author != comment.user:
-                comment_data = {
-                    "recipient": post_author,
-                    "verb": "comment",
-                    "target": comment,
-                }
-                notify.send(sender=comment.user, **comment_data)
+        for data in notification_data:
+            notify.send(sender=comment.user, **data)
+            if data["recipient"] == author or not data["recipient"].email_bound:
+                continue
+
+            t = loader.get_template("comments/reply_notification_email.html")
+            c = {
+                "comment": comment,
+                "content_object": content_object,
+                "site": get_current_site(request),
+                "link": request.build_absolute_uri(content_object.get_absolute_url())
+                + "#c"
+                + str(comment.pk),
+            }
+            message = t.render(c)
+            email_data = {
+                "subject": config.REPLY_EMAIL_SUBJECT,
+                "message": message,
+                "from_email": settings.DEFAULT_FROM_EMAIL,
+                "fail_silently": True,
+                "html_message": message,
+            }
+            threading.Thread(
+                target=data["recipient"].email_user, kwargs=email_data
+            ).start()
+
+        if comment.user != author:
+            threading.Thread(
+                target=self.email, args=[comment, content_object, request]
+            ).start()
 
 
 moderator = BlogModerator()

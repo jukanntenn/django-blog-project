@@ -1,6 +1,9 @@
-from braces.views import SelectRelatedMixin, SetHeadlineMixin
+from django.db.models import Sum
+from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.views import generic
+
+from braces.views import SelectRelatedMixin, SetHeadlineMixin
 
 from .models import Course, Material
 
@@ -11,9 +14,13 @@ class CourseListView(SetHeadlineMixin, generic.ListView):
     headline = "教程"
 
     def get_queryset(self):
-        qs = super(CourseListView, self).get_queryset().select_related("category")
-        qs = qs.order_by("category", "rank", "-created")
-        return qs
+        return (
+            super()
+            .get_queryset()
+            .annotate(total_views=Coalesce(Sum("material__views"), 0))
+            .select_related("category")
+            .order_by("category", "rank", "-created")
+        )
 
 
 class CourseDetailView(SetHeadlineMixin, generic.DetailView):

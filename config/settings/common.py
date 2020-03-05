@@ -12,7 +12,9 @@ import os
 import sys
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
+env = environ.Env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = str(environ.Path(__file__) - 3)  # str for python < 3.5
 
@@ -23,7 +25,7 @@ sys.path.append(os.path.join(BASE_DIR, "blogproject"))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 SITE_ID = 1
-
+SECRET_KEY = env("SECRET_KEY", default="fake-secret-key")
 # Application definition
 DJANGO_APPS = [
     "django.contrib.admin",
@@ -51,6 +53,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "pure_pagination",
+    "constance.backends.database",
 ]
 
 LOCAL_APPS = [
@@ -166,6 +169,7 @@ HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
 HAYSTACK_CUSTOM_HIGHLIGHTER = "blog.utils.Highlighter"
 
 ADMINS = [("zmrenwu", "zmrenwu@163.com")]
+MANAGERS = ADMINS
 SERVER_EMAIL = "localhost@zmrenwu.com"
 
 WEBPACK_LOADER = {
@@ -205,4 +209,15 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "blogproject", "database", "db.sqlite3"),
     }
+}
+
+CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
+CONSTANCE_DATABASE_PREFIX = "constance:djangoblogproject:"
+
+CONSTANCE_CONFIG = {
+    "COMMENT_EMAIL_SUBJECT": ("", str),
+    "REPLY_EMAIL_SUBJECT": ("评论有了新回复", str),
+}
+CONSTANCE_CONFIG_FIELDSETS = {
+    "Comment Notification Email": ("COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"),
 }

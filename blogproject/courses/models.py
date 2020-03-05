@@ -85,16 +85,7 @@ class Course(TimeStampedModel):
 
     @cached_property
     def first_material(self):
-        return self.material_set.first()
-
-    @property
-    def total_views(self):
-        return (
-            self.material_set.aggregate(total_views=models.Sum("views")).get(
-                "total_views"
-            )
-            or 0
-        )
+        return self.material_set.order_by("rank", "created").first()
 
     @cached_property
     def rich_content(self):
