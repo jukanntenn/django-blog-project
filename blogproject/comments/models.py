@@ -33,7 +33,8 @@ class BlogComment(MPTTModel, CommentAbstractModel):
     objects = BlogCommentManager.from_queryset(BlogCommentQuerySet)()
 
     class Meta(CommentAbstractModel.Meta):
-        pass
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
 
     class MPTTMeta:
         # 必须加入 user_id，否则在调用 mptt 的 get_queryset_descendants 时，

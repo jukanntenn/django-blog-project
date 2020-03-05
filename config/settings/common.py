@@ -72,6 +72,7 @@ COMMENTS_APP = "comments"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -221,3 +222,5 @@ CONSTANCE_CONFIG = {
 CONSTANCE_CONFIG_FIELDSETS = {
     "Comment Notification Email": ("COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"),
 }
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]

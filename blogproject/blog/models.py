@@ -135,6 +135,8 @@ class Medium(TimeStampedModel):
     identifier = models.CharField(_("identifier"), max_length=300)
 
     class Meta:
+        verbose_name = _("medium")
+        verbose_name_plural = _("mediums")
         ordering = ["flag", "name"]
 
     def __str__(self):
@@ -144,6 +146,10 @@ class Medium(TimeStampedModel):
 class FriendLink(TimeStampedModel):
     site_name = models.CharField(_("site_name"), max_length=100)
     site_domain = models.URLField(_("site_domain"))
+
+    class Meta:
+        verbose_name = _("friend link")
+        verbose_name_plural = _("friend links")
 
     def __str__(self):
         return self.site_name
@@ -159,6 +165,10 @@ class Recommendation(TimeStampedModel):
     )
     url = models.URLField(_("url"), blank=True)
     description = models.TextField(_("description"))
+
+    class Meta:
+        verbose_name = _("recommendation")
+        verbose_name_plural = _("recommendations")
 
     def __str__(self):
         return self.description[:50]

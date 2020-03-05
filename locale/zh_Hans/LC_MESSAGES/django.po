@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-05 20:04+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\blogproject\alerts\apps.py:7 .\blogproject\alerts\models.py:13
+msgid "alerts"
+msgstr "提醒"
+
+#: .\blogproject\alerts\models.py:8
+msgid "text"
+msgstr "内容"
+
+#: .\blogproject\alerts\models.py:9
+msgid "scopes"
+msgstr "范围"
+
+#: .\blogproject\alerts\models.py:12
+msgid "alert"
+msgstr "提醒"
+
+#: .\blogproject\blog\admin.py:35 .\blogproject\courses\admin.py:27
+msgid "Display control"
+msgstr "显示控制"
+
+#: .\blogproject\blog\admin.py:46 .\blogproject\courses\admin.py:38
+msgid "SEO"
+msgstr "搜索引擎优化"
+
+#: .\blogproject\blog\apps.py:7
+msgid "blog"
+msgstr "博客"
+
+#: .\blogproject\blog\models.py:17 .\blogproject\blog\models.py:28
+#: .\blogproject\blog\models.py:134 .\blogproject\courses\models.py:28
+#: .\blogproject\users\models.py:11
+msgid "name"
+msgstr "名称"
+
+#: .\blogproject\blog\models.py:20
+msgid "tag"
+msgstr "标签"
+
+#: .\blogproject\blog\models.py:21 .\blogproject\blog\models.py:97
+msgid "tags"
+msgstr "标签"
+
+#: .\blogproject\blog\models.py:29 .\blogproject\core\abstracts.py:15
+#: .\blogproject\courses\models.py:46
+msgid "title"
+msgstr "标题"
+
+#: .\blogproject\blog\models.py:30 .\blogproject\courses\models.py:47
+msgid "slug"
+msgstr "slug"
+
+#: .\blogproject\blog\models.py:31 .\blogproject\blog\models.py:167
+#: .\blogproject\courses\models.py:48
+msgid "description"
+msgstr "描述"
+
+#: .\blogproject\blog\models.py:33 .\blogproject\blog\models.py:82
+#: .\blogproject\courses\models.py:50 .\blogproject\courses\models.py:105
+msgid "cover"
+msgstr "封面"
+
+#: .\blogproject\blog\models.py:41
+msgid "cover caption"
+msgstr "封面标题"
+
+#: .\blogproject\blog\models.py:43 .\blogproject\courses\models.py:65
+msgid "creator"
+msgstr "创建者"
+
+#: .\blogproject\blog\models.py:47 .\blogproject\blog\models.py:93
+#: .\blogproject\courses\models.py:33 .\blogproject\courses\models.py:69
+msgid "category"
+msgstr "分类"
+
+#: .\blogproject\blog\models.py:48 .\blogproject\courses\models.py:34
+msgid "categories"
+msgstr "分类"
+
+#: .\blogproject\blog\models.py:71
+msgid "published"
+msgstr "发布"
+
+#: .\blogproject\blog\models.py:72
+msgid "draft"
+msgstr "草稿"
+
+#: .\blogproject\blog\models.py:73
+msgid "hidden"
+msgstr "隐藏"
+
+#: .\blogproject\blog\models.py:77 .\blogproject\courses\models.py:58
+#: .\blogproject\courses\models.py:103
+msgid "status"
+msgstr "状态"
+
+#: .\blogproject\blog\models.py:79
+msgid "pinned"
+msgstr "置顶"
+
+#: .\blogproject\blog\models.py:104 .\blogproject\blog\models.py:105
+msgid "Posts"
+msgstr "文章"
+
+#: .\blogproject\blog\models.py:133
+msgid "flag"
+msgstr "标志"
+
+#: .\blogproject\blog\models.py:135
+msgid "identifier"
+msgstr "标识"
+
+#: .\blogproject\blog\models.py:138
+msgid "medium"
+msgstr "社交媒体"
+
+#: .\blogproject\blog\models.py:139
+msgid "mediums"
+msgstr "社交媒体"
+
+#: .\blogproject\blog\models.py:147
+msgid "site_name"
+msgstr "网站名称"
+
+#: .\blogproject\blog\models.py:148
+msgid "site_domain"
+msgstr "网站域名"
+
+#: .\blogproject\blog\models.py:151
+msgid "friend link"
+msgstr "友情链接"
+
+#: .\blogproject\blog\models.py:152
+msgid "friend links"
+msgstr "友情链接"
+
+#: .\blogproject\blog\models.py:159
+msgid "picture"
+msgstr "图片"
+
+#: .\blogproject\blog\models.py:166
+msgid "url"
+msgstr "网址"
+
+#: .\blogproject\blog\models.py:170
+msgid "recommendation"
+msgstr "推荐"
+
+#: .\blogproject\blog\models.py:171
+msgid "recommendations"
+msgstr "推荐"
+
+#: .\blogproject\comments\apps.py:7 .\blogproject\comments\models.py:37
+msgid "comments"
+msgstr "评论"
+
+#: .\blogproject\comments\forms.py:10
+msgid "Comment"
+msgstr "评论"
+
+#: .\blogproject\comments\models.py:27
+msgid "parent comment"
+msgstr "父评论"
+
+#: .\blogproject\comments\models.py:36
+msgid "comment"
+msgstr "评论"
+
+#: .\blogproject\comments\views.py:42
+msgid "Missing content_type or object_pk field."
+msgstr ""
+
+#: .\blogproject\comments\views.py:54
+#, python-format
+msgid "Invalid content_type value: %r"
+msgstr ""
+
+#: .\blogproject\comments\views.py:61
+#, python-format
+msgid "The given content-type %r does not resolve to a valid model."
+msgstr ""
+
+#: .\blogproject\comments\views.py:71
+#, python-format
+msgid "No object matching content-type %r and object PK %r exists."
+msgstr ""
+
+#: .\blogproject\comments\views.py:81
+#, python-format
+msgid "Attempting go get content-type %r and object PK %r exists raised %s"
+msgstr ""
+
+#: .\blogproject\comments\views.py:187
+#, python-format
+msgid "The comment form failed security verification: %s"
+msgstr "评论表单安全性校验失败：%s"
+
+#: .\blogproject\comments\views.py:210
+#, python-format
+msgid "comment_will_be_posted receiver %r killed the comment"
+msgstr ""
+
+#: .\blogproject\core\abstracts.py:16
+msgid "body"
+msgstr "正文"
+
+#: .\blogproject\core\abstracts.py:17 .\blogproject\courses\models.py:49
+msgid "brief"
+msgstr "简介"
+
+#: .\blogproject\core\abstracts.py:18
+msgid "excerpt"
+msgstr "摘要"
+
+#: .\blogproject\core\abstracts.py:19
+msgid "views"
+msgstr "浏览量"
+
+#: .\blogproject\core\abstracts.py:20
+msgid "publication datetime"
+msgstr "发布时间"
+
+#: .\blogproject\core\abstracts.py:21
+msgid "show on index"
+msgstr "在首页显示"
+
+#: .\blogproject\core\abstracts.py:23
+msgid "author"
+msgstr "作者"
+
+#: .\blogproject\core\abstracts.py:25
+msgid "comment enabled"
+msgstr "启用评论"
+
+#: .\blogproject\core\abstracts.py:70
+msgid "get_next/get_previous cannot be used on unsaved objects."
+msgstr ""
+
+#: .\blogproject\courses\apps.py:7 .\blogproject\courses\models.py:78
+msgid "courses"
+msgstr "教程"
+
+#: .\blogproject\courses\models.py:20
+msgid "logo"
+msgstr "logo"
+
+#: .\blogproject\courses\models.py:29 .\blogproject\courses\models.py:62
+#: .\blogproject\courses\models.py:113
+msgid "rank"
+msgstr "序号"
+
+#: .\blogproject\courses\models.py:57 .\blogproject\courses\models.py:112
+msgid "cover_caption"
+msgstr "封面标题"
+
+#: .\blogproject\courses\models.py:59 .\blogproject\courses\models.py:104
+msgid "status_changed"
+msgstr "状态变更于"
+
+#: .\blogproject\courses\models.py:60
+msgid "level"
+msgstr "级别"
+
+#: .\blogproject\courses\models.py:61
+msgid "level_changed"
+msgstr "级别变更于"
+
+#: .\blogproject\courses\models.py:77 .\blogproject\courses\models.py:115
+msgid "course"
+msgstr "教程"
+
+#: .\blogproject\courses\models.py:123
+msgid "material"
+msgstr "资料"
+
+#: .\blogproject\courses\models.py:124
+msgid "materials"
+msgstr "资料"
+
+#: .\blogproject\users\admin.py:15
+msgid "Personal info"
+msgstr "个人信息"
+
+#: .\blogproject\users\admin.py:19
+msgid "Permissions"
+msgstr "权限"
+
+#: .\blogproject\users\admin.py:30
+msgid "Important dates"
+msgstr "重要日期"
+
+#: .\blogproject\users\models.py:12
+msgid "email bound"
+msgstr "邮箱已绑定"
