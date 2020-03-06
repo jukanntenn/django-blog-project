@@ -5,7 +5,7 @@
 <header class="flex-center blog-header">
   <div class="container-wider flex-middle blog-header-container">
     <nav class="flex-middle navbar">
-      <a href="{% url 'blog:index' %}" class="unit-0 hide-on-mobile navbar-logo" id="navbar-logo">追梦人物的博客</a>
+      <a href="{% url 'blog:index' %}" class="unit-0 hide-on-mobile navbar-logo" id="navbar-logo">{{ config.LOGO }}</a>
 
       {% if show_trigger %}
         <span class="show-on-mobile blog-aside-trigger"><i class="ri-arrow-right-s-line"></i></span>

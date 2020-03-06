@@ -53,6 +53,7 @@ THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "pure_pagination",
+    "constance",
     "constance.backends.database",
 ]
 
@@ -95,6 +96,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "notify.context_processors.notification_count",  # notification
+                "constance.context_processors.config",
             ],
         },
     },
@@ -216,11 +218,15 @@ CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_DATABASE_PREFIX = "constance:djangoblogproject:"
 
 CONSTANCE_CONFIG = {
-    "COMMENT_EMAIL_SUBJECT": ("", str),
-    "REPLY_EMAIL_SUBJECT": ("评论有了新回复", str),
+    "COMMENT_EMAIL_SUBJECT": ("", "", str),
+    "REPLY_EMAIL_SUBJECT": ("评论有了新回复", "", str),
+    "LOGO": ("追梦人物的博客", "博客 Logo", str),
+    "BAIDU_SCRIPT": ("", "百度统计 JavaScript 脚本", str),
 }
 CONSTANCE_CONFIG_FIELDSETS = {
-    "Comment Notification Email": ("COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"),
+    "Blog Settings": ["LOGO"],
+    "Comment Notification Email": ["COMMENT_EMAIL_SUBJECT", "REPLY_EMAIL_SUBJECT"],
+    "SEO": ["BAIDU_SCRIPT"],
 }
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]

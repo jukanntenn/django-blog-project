@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{{ headline }}_追梦人物的博客{% endblock title %}
+{% block title %}{{ headline }}_{{ config.LOGO }}{% endblock title %}
 {% block main %}
   <main>
     {% for entry in entry_list %}

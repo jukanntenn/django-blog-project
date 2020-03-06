@@ -15,7 +15,7 @@
   <!-- 站点描述，主要用于 SEO -->
   {% block description %}{% endblock description %}
 
-  <title>{% block title %}{{ headline }}_追梦人物的博客{% endblock title %}</title>
+  <title>{% block title %}{{ headline }}_{{ config.LOGO }}{% endblock title %}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">
@@ -24,7 +24,9 @@
   {% render_bundle 'main' 'css' %}
   {% block extra_links %}{% endblock extra_links %}
   {% block extra_styles %}{% endblock extra_styles %}
-  {% baidu_scripts %}
+  <script>
+      {{ config.BAIDU_SCRIPT|safe }}
+  </script>
 </head>
 
 <body>

@@ -1,13 +1,13 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-
+from constance import config
 from .models import Post
 
 
 class AllPostsRssFeed(Feed):
-    title = "追梦人物的博客"
+    title = config.LOGO
     link = "/"
-    description = "追梦人物的博客最新文章"
+    description = "{}最新文章".format(config.LOGO)
 
     def items(self):
         return Post.objects.all()

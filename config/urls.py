@@ -42,9 +42,8 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("all/rss/", AllPostsRssFeed()),
+    path("api/v1/", include(router.urls)),
 ]
-
-urlpatterns += router.urls
 
 if settings.DEBUG:
     import debug_toolbar
