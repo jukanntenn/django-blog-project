@@ -18,6 +18,7 @@ factory-boy = "*"
 django-test-plus = "*"
 pytest-sugar = "*"
 "tl.testing" = "*"
+mkdocs = "*"
 
 [packages]
 django = "~=2.2"

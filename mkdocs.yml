@@ -1,0 +1,30 @@
+site_name: Django 博客用户使用手册
+site_description: Django 博客用户使用手册
+
+theme:
+  name: 'readthedocs'
+  language: 'zh'
+
+repo_name: zmrenwu/django-blog-project
+repo_url: https://github.com/zmrenwu/django-blog-project
+edit_uri: ""
+
+nav:
+  - 博客后台概览: 'overview.md'
+  - 个性化配置: 'configuration.md'
+  - 发表博客文章: 'post.md'
+  - 添加文章分类: 'category.md'
+  - 标签: 'tag.md'
+  - 友情链接: 'friendlink.md'
+  - 教程系统: 'course.md'
+
+
+markdown_extensions:
+  - markdown.extensions.codehilite:
+      guess_lang: false
+  - toc:
+      baselevel: 2
+      permalink: "#"
+  - admonition
+  - codehilite
+  - extra

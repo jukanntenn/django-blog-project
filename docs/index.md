@@ -1,0 +1,1 @@
+本文档为 [django-blog-project](https://github.com/zmrenwu/django-blog-project) 用户使用手册，主要以图文的方式讲解如何使用博客的各项功能。

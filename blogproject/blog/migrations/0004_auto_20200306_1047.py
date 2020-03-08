@@ -6,20 +6,30 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0003_post_meta_ordering'),
+        ("blog", "0003_post_meta_ordering"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='friendlink',
-            options={'verbose_name': 'friend link', 'verbose_name_plural': 'friend links'},
+            name="friendlink",
+            options={
+                "verbose_name": "friend link",
+                "verbose_name_plural": "friend links",
+            },
         ),
         migrations.AlterModelOptions(
-            name='medium',
-            options={'ordering': ['flag', 'name'], 'verbose_name': 'medium', 'verbose_name_plural': 'mediums'},
+            name="medium",
+            options={
+                "ordering": ["flag", "name"],
+                "verbose_name": "medium",
+                "verbose_name_plural": "mediums",
+            },
         ),
         migrations.AlterModelOptions(
-            name='recommendation',
-            options={'verbose_name': 'recommendation', 'verbose_name_plural': 'recommendations'},
+            name="recommendation",
+            options={
+                "verbose_name": "recommendation",
+                "verbose_name_plural": "recommendations",
+            },
         ),
     ]
