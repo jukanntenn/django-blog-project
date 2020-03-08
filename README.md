@@ -1,6 +1,12 @@
 # Django blog project
 
-基于 Python 3.6 和 django 2.2 的个人博客。
+![django blog screenshot](./screenshot.png)
+
+## 相关资源
+
+[在线预览](https://www.zmrenwu.com/)
+
+[用户使用手册](https://django-blog-project.readthedocs.io/zh/latest/)
 
 ## 特性一览
 
@@ -32,6 +38,9 @@
    DJANGO_SENDGRID_API_KEY=your-own-sendgrid-api-key
    # 设置允许访问的 HOSTS，逗号分隔
    DJANGO_ALLOWED_HOSTS=your-domain.com,www.yourdomain.com
+   # 设置管理员邮箱，用于接收邮件通知提醒
+   DJANGO_ADMINS=zmrenwu <zmrenwu@163.com>
+   SERVER_EMAIL=noreply@djangoblogproject.com
    ```
 
    `SECRET_KEY`：项目密钥，推荐使用 [Django Secret Key Generator](https://www.miniwebtool.com/django-secret-key-generator/) 自动生成。

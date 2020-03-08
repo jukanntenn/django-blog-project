@@ -12,6 +12,7 @@ import os
 import sys
 
 import environ
+from email.utils import getaddresses
 from django.utils.translation import gettext_lazy as _
 
 env = environ.Env()
@@ -171,9 +172,9 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
 HAYSTACK_SIGNAL_PROCESSOR = "haystack.signals.RealtimeSignalProcessor"
 HAYSTACK_CUSTOM_HIGHLIGHTER = "blog.utils.Highlighter"
 
-ADMINS = [("zmrenwu", "zmrenwu@163.com")]
+ADMINS = getaddresses([env("DJANGO_ADMINS", default="zmrenwu <zmrenwu@163.com>")])
 MANAGERS = ADMINS
-SERVER_EMAIL = "localhost@zmrenwu.com"
+SERVER_EMAIL = env.str("SERVER_EMAIL", default="noreply@djangoblogproject.com")
 
 WEBPACK_LOADER = {
     "DEFAULT": {
