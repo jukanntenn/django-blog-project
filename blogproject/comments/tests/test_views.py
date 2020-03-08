@@ -155,7 +155,7 @@ class TestCommentViewSet:
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
         response = self.client.post(url, data=data)
         assert response.status_code == 400
-        assert "评论表单安全性校验失败" in response.json()["detail"]
+        assert "failed security verification" in response.json()["detail"]
 
     def test_post_comment_with_invalid_data(self):
         url = reverse("comment-list")

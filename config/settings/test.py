@@ -14,3 +14,4 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ADMINS = [("admin", "admin@example.com")]
 MANAGERS = ADMINS
+LANGUAGE_CODE = "en-us"
