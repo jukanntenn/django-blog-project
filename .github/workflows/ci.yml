@@ -21,8 +21,5 @@ jobs:
       - name: Install Dependencies
         run: pipenv install --system --dev
 
-      - name: Code Quality
-        run: poetry run black . --check
-
       - name: Test with pytest
         run: pipenv run pytest
