@@ -44,7 +44,7 @@
     "axios": "^0.19.0",
     "bourbon": "^6.0.0",
     "file-loader": "^4.1.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "markdown-it": "^9.0.1",
     "mavon-editor": "^2.7.5",
     "mobi.css": "^3.1.1",
