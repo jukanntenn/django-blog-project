@@ -1,0 +1,10 @@
+<div class="top-gap flex-left">
+  {% if page_obj.has_previous %}
+    <a href="?{{ page_query_name }}={{ page_obj.previous_page_number }}"
+       class="btn">上一页</a>
+  {% endif %}
+  {% if page_obj.has_next %}
+    <a href="?{{ page_query_name }}={{ page_obj.next_page_number }}"
+       class="ml-auto btn">下一页</a>
+  {% endif %}
+</div>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="flex-center blog-content-wrapper">
+    <div class="container-wider">
+      <div class="flex-left flex-wrap units-gap-big">
+        <aside class="unit-1-4 unit-1-on-mobile">
+          {% block side %}
+            <section class="issue top-gap-big">
+              <h5>
+                <span class="issue-date">{{ issue.pub_date|date:"Y/m/d" }}</span>
+                <span class="issue-number">第 {{ issue.number }} 周</span>
+              </h5>
+              <p class="issue-description text-muted text-small">{{ issue.description|linebreaksbr }}</p>
+              {% for tag in issue.tags.all %}
+                <span class="tag"><i class="ri-price-tag-3-line"></i> {{ tag.name }}</span>
+              {% endfor %}
+            </section>
+            <section class="top-gap-big">
+              <h5>每周精选收藏</h5>
+              <p class="text-small text-muted">我的知乎、掘金、开发者头条等收藏夹精选优质文章。每周一个主题，学习他人的经验，让自己成为更优秀的开发者。</p>
+            </section>
+            <section>
+              <form class="form" method="post" action="{% url "newsletters:subscription" %}">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="订阅邮箱"/>
+                <button class="btn btn-block btn-primary">立即订阅</button>
+              </form>
+            </section>
+          {% endblock side %}
+        </aside>
+        <div class="unit-3-4 unit-1-on-mobile">
+          {% block main %}
+            {% for favorite in favorite_list %}
+              <div class="favorite">
+                <h5 class="favorite-title">
+                  <a href="{{ favorite.url }}" target="_blank">{{ favorite.title }}</a>
+                </h5>
+                <p class="favorite-description text-muted text-small">{{ favorite.description|linebreaksbr }}</p>
+                {% for tag in favorite.tags.all %}
+                  <span class="tag"><i class="ri-price-tag-3-line"></i> {{ tag.name }}</span>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          {% endblock main %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

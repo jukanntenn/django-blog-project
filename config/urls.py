@@ -35,6 +35,8 @@ urlpatterns = [
     path("notifications/", include("notify.urls")),
     path("notifications/", include("notifications.urls")),
     path("accounts/", include("allauth.urls")),
+    path("favorites/weekly/", include("favorites.urls")),
+    path("newsletters/", include("newsletters.urls")),
     path(
         "sitemap.xml",
         sitemap,

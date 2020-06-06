@@ -2,7 +2,14 @@ import re
 
 import markdown
 from bs4 import BeautifulSoup
+from constance import config
+from django.apps import apps
+from django.contrib.contenttypes.models import ContentType
+from django.core import signing
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import send_mail
 from django.db.models import BooleanField, CharField, Count, F, Value
+from django.template import loader
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 
@@ -94,3 +101,39 @@ def get_index_entry_queryset():
     # In sqlite3, `False` takes first, but not sure in MySQL...
     entry_qs = entry_qs.order_by(F("pinned").desc(), "-pub_date")
     return entry_qs
+
+
+class EmailConfirmation:
+    salt = "django-blog-project"
+
+    def __init__(self, instance):
+        self.instance = instance
+
+    def make_key(self):
+        model_cls = self.instance.__class__
+        app_label = model_cls._meta.app_label
+        model_name = model_cls._meta.model_name
+        return signing.dumps(
+            obj={
+                "app_label": app_label,
+                "model_name": model_name,
+                "pk": self.instance.pk,
+            },
+            salt=self.salt,
+        )
+
+    @classmethod
+    def from_key(cls, key):
+        try:
+            max_age = 60 * 60 * 24 * config.EMAIL_CONFIRMATION_EXPIRE_DAYS
+            data = signing.loads(key, max_age=max_age, salt=cls.salt)
+            model_cls = apps.get_model(data["app_label"], data["model_name"])
+            return EmailConfirmation(
+                instance=model_cls._default_manager.get(pk=data["pk"])
+            )
+        except (
+            signing.SignatureExpired,
+            signing.BadSignature,
+            ObjectDoesNotExist,
+        ):
+            return

@@ -1,0 +1,12 @@
+@import "variables";
+
+.issue {
+  .issue-date {
+    margin-right: $width-gap-half;
+  }
+}
+
+.tag {
+  font-size: $font-size-small;
+  margin-right: $width-gap-half;
+}

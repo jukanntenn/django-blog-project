@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="flex-center blog-content-wrapper">
+    <div class="container-wider">
+      <div class="flex-center">
+        <div class="unit-1-2 unit-1-on-mobile flex-center flex-vertical">
+          {% if messages %}
+            <div class="w-100 top-gap">
+              <div class="messages">
+                {% for message in messages %}
+                  <div class="blog-alert blog-alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+          <h3 class="top-gap">每周精选收藏</h3>
+          <p class="text-small text-muted">我的知乎、掘金、开发者头条等收藏夹精选优质文章。每周一个主题，学习他人的经验，让自己成为更优秀的开发者。</p>
+          <form class="form" action="{% url "newsletters:subscription" %}" method="post">
+            {% csrf_token %}
+            <div class="flex-left">
+              <div class="unit">{{ form.email }}
+                {{ form.email.errors }}</div>
+              <div class="unit-0">
+                <button class="btn btn-primary">立即订阅</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% if issue %}
+        <div class="flex-center">
+          <div class="unit-1-2 unit-1-on-mobile flex-vertical">
+            <hr>
+            <div class="issue">
+              <h5 class="issue-title">
+                <span class="issue-date">{{ issue.pub_date|date:"Y/m/d" }}</span>
+                <span class="issue-number">第 {{ issue.number }} 周</span>
+              </h5>
+              <p class="issue-description text-muted text-small">{{ issue.description|linebreaksbr }}</p>
+              {% for tag in issue.tags.all %}
+                <span class="tag"><i class="ri-price-tag-3-line"></i> {{ tag.name }}</span>
+              {% endfor %}
+            </div>
+            {% for favorite in favorite_list %}
+              <div class="favorite">
+                <h5 class="favorite-title">
+                  <a href="">{{ favorite.title }}</a>
+                </h5>
+                <p class="favorite-description text-muted text-small">{{ favorite.description|linebreaksbr }}</p>
+                <div class="text-small text-muted"><a href="">zmrenwu.com <i class="ri-links-fill"></i></a></div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}
