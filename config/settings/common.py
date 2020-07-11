@@ -68,6 +68,7 @@ LOCAL_APPS = [
     "alerts.apps.AlertsConfig",
     "favorites.apps.FavoritesConfig",
     "newsletters.apps.NewslettersConfig",
+    "webtools.apps.WebtoolsConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

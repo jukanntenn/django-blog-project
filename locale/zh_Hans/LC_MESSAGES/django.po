@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-05 20:04+0900\n"
+"POT-Creation-Date: 2020-07-11 20:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,11 +57,12 @@ msgid "tag"
 msgstr "标签"
 
 #: .\blogproject\blog\models.py:21 .\blogproject\blog\models.py:97
+#: .\blogproject\favorites\models.py:13 .\blogproject\favorites\models.py:44
 msgid "tags"
 msgstr "标签"
 
 #: .\blogproject\blog\models.py:29 .\blogproject\core\abstracts.py:15
-#: .\blogproject\courses\models.py:46
+#: .\blogproject\courses\models.py:46 .\blogproject\favorites\models.py:41
 msgid "title"
 msgstr "标题"
 
@@ -70,7 +71,8 @@ msgid "slug"
 msgstr "slug"
 
 #: .\blogproject\blog\models.py:31 .\blogproject\blog\models.py:167
-#: .\blogproject\courses\models.py:48
+#: .\blogproject\courses\models.py:48 .\blogproject\favorites\models.py:12
+#: .\blogproject\favorites\models.py:42
 msgid "description"
 msgstr "描述"
 
@@ -84,6 +86,7 @@ msgid "cover caption"
 msgstr "封面标题"
 
 #: .\blogproject\blog\models.py:43 .\blogproject\courses\models.py:65
+#: .\blogproject\favorites\models.py:16
 msgid "creator"
 msgstr "创建者"
 
@@ -157,7 +160,7 @@ msgstr "友情链接"
 msgid "picture"
 msgstr "图片"
 
-#: .\blogproject\blog\models.py:166
+#: .\blogproject\blog\models.py:166 .\blogproject\favorites\models.py:43
 msgid "url"
 msgstr "网址"
 
@@ -235,7 +238,7 @@ msgstr "摘要"
 msgid "views"
 msgstr "浏览量"
 
-#: .\blogproject\core\abstracts.py:20
+#: .\blogproject\core\abstracts.py:20 .\blogproject\favorites\models.py:11
 msgid "publication datetime"
 msgstr "发布时间"
 
@@ -255,6 +258,14 @@ msgstr "启用评论"
 msgid "get_next/get_previous cannot be used on unsaved objects."
 msgstr ""
 
+#: .\blogproject\core\models.py:7
+msgid "created at"
+msgstr ""
+
+#: .\blogproject\core\models.py:8
+msgid "modified at"
+msgstr ""
+
 #: .\blogproject\courses\apps.py:7 .\blogproject\courses\models.py:78
 msgid "courses"
 msgstr "教程"
@@ -264,7 +275,7 @@ msgid "logo"
 msgstr "logo"
 
 #: .\blogproject\courses\models.py:29 .\blogproject\courses\models.py:62
-#: .\blogproject\courses\models.py:113
+#: .\blogproject\courses\models.py:113 .\blogproject\favorites\models.py:45
 msgid "rank"
 msgstr "序号"
 
@@ -296,6 +307,54 @@ msgstr "资料"
 msgid "materials"
 msgstr "资料"
 
+#: .\blogproject\favorites\models.py:10
+msgid "number"
+msgstr ""
+
+#: .\blogproject\favorites\models.py:23 .\blogproject\favorites\models.py:36
+msgid "issue"
+msgstr ""
+
+#: .\blogproject\favorites\models.py:24
+msgid "issues"
+msgstr ""
+
+#: .\blogproject\favorites\models.py:49
+msgid "favorite"
+msgstr ""
+
+#: .\blogproject\favorites\models.py:50
+msgid "favorites"
+msgstr ""
+
+#: .\blogproject\newsletters\forms.py:21
+msgid "Already subscribed!"
+msgstr ""
+
+#: .\blogproject\newsletters\models.py:9
+msgid "email"
+msgstr "邮箱"
+
+#: .\blogproject\newsletters\models.py:12
+msgid "user"
+msgstr ""
+
+#: .\blogproject\newsletters\models.py:16
+msgid "confirmed"
+msgstr ""
+
+#: .\blogproject\newsletters\models.py:17
+msgid "active"
+msgstr ""
+
+#: .\blogproject\newsletters\models.py:20
+msgid "subscription"
+msgstr "订阅"
+
+#: .\blogproject\newsletters\models.py:21
+msgid "subscriptions"
+msgstr "订阅"
+
 #: .\blogproject\users\admin.py:15
 msgid "Personal info"
 msgstr "个人信息"
@@ -311,3 +370,11 @@ msgstr "重要日期"
 #: .\blogproject\users\models.py:12
 msgid "email bound"
 msgstr "邮箱已绑定"
+
+#: .\blogproject\webtools\forms.py:9
+msgid "prefix"
+msgstr "前缀"
+
+#: .\blogproject\webtools\forms.py:10
+msgid "suffix"
+msgstr "后缀"
