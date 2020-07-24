@@ -4,12 +4,9 @@ import markdown
 from bs4 import BeautifulSoup
 from constance import config
 from django.apps import apps
-from django.contrib.contenttypes.models import ContentType
 from django.core import signing
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.mail import send_mail
 from django.db.models import BooleanField, CharField, Count, F, Value
-from django.template import loader
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 
