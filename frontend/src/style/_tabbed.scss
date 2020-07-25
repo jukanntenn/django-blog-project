@@ -1,0 +1,36 @@
+@import "variables";
+
+.tabbed-set {
+  margin-top: $width-gap;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+
+  .tabbed-content {
+    display: none;
+    order: 99;
+    width: 100%;
+    text-align: left;
+  }
+
+  > input {
+    display: none;
+
+    &:checked + label {
+      color: $color-text;
+    }
+  }
+
+  > label {
+    display: inline-block;
+    padding: 4px 8px;
+    font-weight: normal;
+    font-size: $font-size-small;
+    text-align: center;
+    color: $color-text-muted;
+  }
+}
+
+.tabbed-set input:nth-child(n+1):checked + label + .tabbed-content {
+  display: block;
+}

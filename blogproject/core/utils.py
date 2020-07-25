@@ -1,4 +1,5 @@
 import re
+from functools import wraps
 
 import markdown
 from bs4 import BeautifulSoup
@@ -10,20 +11,66 @@ from django.db.models import BooleanField, CharField, Count, F, Value
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 
+import pymdownx.superfences
+from pymdownx.superfences import SuperFencesBlockPreprocessor, highlight_validator
+
+
+def _highlight_validator(language, options):
+    filename = options.pop("filename", "")
+    okay = highlight_validator(language, options)
+    if filename != "":
+        options["filename"] = filename
+    return okay
+
+
+def _highlight(method):
+    @wraps(method)
+    def wrapper(self, src, language, options, md, classes=None, id_value="", **kwargs):
+        filename = options.get("filename", "")
+        code = method(
+            self,
+            src,
+            language,
+            options,
+            md,
+            classes=classes,
+            id_value=id_value,
+            **kwargs
+        )
+        if filename == "":
+            return code
+        return '<div class="literal-block"><div class="code-block-caption">{}</div>{}</div>'.format(
+            filename, code
+        )
+
+    return wrapper
+
+
+# Monkey patch pymdownx.superfences for code block caption purpose
+pymdownx.superfences.highlight_validator = _highlight_validator
+
+SuperFencesBlockPreprocessor.highlight = _highlight(
+    SuperFencesBlockPreprocessor.highlight
+)
+
 
 def generate_rich_content(value, *, toc_depth=2, toc_url=""):
     md = markdown.Markdown(
         extensions=[
-            "markdown.extensions.extra",
-            "markdown.extensions.codehilite",
             "markdown.extensions.admonition",
             "markdown.extensions.nl2br",
             TocExtension(slugify=slugify, toc_depth=toc_depth),
+            "pymdownx.extra",
             "pymdownx.magiclink",
             "pymdownx.tasklist",
             "pymdownx.tilde",
             "pymdownx.caret",
-        ]
+            "pymdownx.superfences",
+            "pymdownx.tabbed",
+            "pymdownx.highlight",
+            "pymdownx.inlinehilite",
+        ],
+        extension_configs={"pymdownx.highlight": {"linenums_style": "pymdownx-inline"}},
     )
     content = md.convert(value)
     toc = md.toc
