@@ -48,6 +48,7 @@ django-constance = {extras = ["database"],version = "*"}
 django-admin-sortable2 = "*"
 django-celery-email = "*"
 django-ratelimit = "*"
+pygments = "*"
 
 [requires]
 python_version = "3"
