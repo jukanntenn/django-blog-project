@@ -10,5 +10,24 @@
     }
     console.log(jscontext)
 </script>
+<div class="flex-left">
+  <span>35评论</span>
+  {% if user.is_authenticated %}
+    <div class="dropdown ml-auto">
+      <a href="#" class="dropdown-toggle">追梦人物</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">登出</a>
+      </div>
+    </div>
+  {% else %}
+    <div class="dropdown ml-auto">
+      <a href="#" class="dropdown-toggle">登录</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">GitHub</a>
+        <a class="dropdown-item" href="#">新浪微博</a>
+      </div>
+    </div>
+  {% endif %}
+</div>
 <!-- render by vue.js -->
 <div id="comments_app"></div>

@@ -25,4 +25,6 @@ def show_comment_app(context, target):
         "token": token,
         "num_comments": num_comments,
         "num_comment_participants": num_comment_participants,
+        # Todo: 为什么 inclusion_tag 没有包含 context
+        "user": user,
     }

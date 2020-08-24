@@ -25,14 +25,23 @@
   {% render_bundle 'main' 'css' %}
   {% block extra_links %}{% endblock extra_links %}
   <style>
-    [data-linenos]:before {
-      content: attr(data-linenos);
-    }
+      [data-linenos]:before {
+          content: attr(data-linenos);
+      }
   </style>
   {% block extra_styles %}{% endblock extra_styles %}
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
   <script>
       {{ config.BAIDU_SCRIPT|safe }}
   </script>
+  <script>
+      $(function () {
+          $('table').addClass('table')
+      })
+  </script>
+  {% block extra_scripts %}{% endblock extra_scripts %}
 </head>
 
 <body>
@@ -60,21 +69,11 @@
 <span class="back-top"><i class="ri-arrow-up-line"></i></span>
 {% block sidebar_mobile %}{% endblock sidebar_mobile %}
 {% include 'inclusions/_footer.html' %}
-
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
-<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
-{#<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>#}
-{#<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>#}
+{% render_bundle 'main' 'js' %}
 <script>
-    {#hljs.initHighlightingOnLoad();#}
-    {#hljs.initLineNumbersOnLoad();#}
-
     $(function () {
-        $('table').addClass('table')
+        $(".dropdown-toggle").dropdown()
     })
 </script>
-{% render_bundle 'main' 'js' %}
-{% block extra_scripts %}{% endblock extra_scripts %}
 </body>
 </html>

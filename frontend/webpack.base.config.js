@@ -9,6 +9,7 @@ module.exports = {
     externals: {
         vue: 'Vue',
         axios: 'axios',
+        jquery: true
     },
     context: path.resolve(__dirname, '.'),
     entry: './src/index.js',
@@ -23,7 +24,9 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
         }),
         new VueLoaderPlugin()
     ],

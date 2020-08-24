@@ -6,12 +6,14 @@ import './script/backtop.js'
 import './script/donate.js'
 import './script/search.js'
 import './script/sidebar.js'
+import './script/dropdown.js'
 
 import "bourbon";
 import Vue from 'vue'
 import App from './App.vue'
 import mavonEditor from 'mavon-editor'
 
+window.$ = window.jQuery = $
 Vue.use(mavonEditor)
 
 new Vue({
