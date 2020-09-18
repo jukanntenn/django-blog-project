@@ -1,20 +1,20 @@
 import pytest
-from django.contrib.sites.models import Site
-from django_dynamic_fixture import G
-
-from blog.models import Post
-from users.models import User
+from blog.tests.factories import PostFactory
 from courses.tests.factories import CourseFactory, MaterialFactory
+from django.contrib.sites.models import Site
+from users.models import User
 
 
 @pytest.fixture
 def user():
-    return G(User)
+    return User.objects.create_user(
+        username="user", password="password", email="user@zmrenwu.com"
+    )
 
 
 @pytest.fixture
 def post(user):
-    return G(Post, author=user, body="正文")
+    return PostFactory(author=user, body="正文")
 
 
 @pytest.fixture

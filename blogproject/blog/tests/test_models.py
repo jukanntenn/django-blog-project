@@ -1,44 +1,20 @@
 from datetime import timedelta
 
 import pytest
+from blog.models import Post
+from blog.tests.factories import CategoryFactory, PostFactory
 from django.utils import timezone
-from django_dynamic_fixture import G
-
-from blog.models import Category, Post
 
 
 @pytest.mark.django_db
 class TestPost:
-    def test_populate_excerpt(self, user):
-        post = G(Post, author=user, body="正文" * 100, ignore_fields=["excerpt"])
+    def test_auto_populate_excerpt_from_body(self):
+        post = PostFactory(body="正文" * 100)
         assert len(post.excerpt) == 150
 
-        post = G(Post, author=user, body="正文" * 100, excerpt="摘要")
-        assert post.excerpt == "摘要"
-
-    def test_populate_pub_date(self, user):
-        post = G(
-            Post,
-            author=user,
-            status=Post.STATUS_CHOICES.draft,
-            fill_nullable_fields=False,
-        )
-        assert post.pub_date is None
-
-        after_3_days = timezone.now() + timedelta(days=3)
-        post = G(
-            Post,
-            author=user,
+    def test_auto_set_pub_date_for_published_post(self):
+        post = PostFactory(
             status=Post.STATUS_CHOICES.published,
-            pub_date=after_3_days,
-        )
-        assert post.pub_date == after_3_days
-
-        post = G(
-            Post,
-            author=user,
-            status=Post.STATUS_CHOICES.published,
-            fill_nullable_fields=False,
         )
         assert post.pub_date == post.created
 
@@ -54,41 +30,31 @@ class TestPostQuerySetAndIndexManager:
     def setup_method(self):
         after_3_days = timezone.now() + timedelta(days=3)
 
-        self.published_post = G(
-            Post,
+        self.published_post = PostFactory(
             status=Post.STATUS_CHOICES.published,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.draft_post = G(
-            Post,
+        self.draft_post = PostFactory(
             status=Post.STATUS_CHOICES.draft,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.hidden_post = G(
-            Post,
+        self.hidden_post = PostFactory(
             status=Post.STATUS_CHOICES.hidden,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.future_publishing_post = G(
-            Post,
+        self.future_publishing_post = PostFactory(
             status=Post.STATUS_CHOICES.published,
             show_on_index=True,
             pub_date=after_3_days,
         )
-        self.future_draft_post = G(
-            Post,
+        self.future_draft_post = PostFactory(
             status=Post.STATUS_CHOICES.draft,
             show_on_index=True,
             pub_date=after_3_days,
         )
-        self.hide_on_index_published_post = G(
-            Post,
+        self.hide_on_index_published_post = PostFactory(
             status=Post.STATUS_CHOICES.published,
             show_on_index=False,
-            ignore_fields=["pub_date"],
         )
 
     def test_published(self):
@@ -126,6 +92,6 @@ class TestPostQuerySetAndIndexManager:
 
 @pytest.mark.django_db
 class TestCategoryModel:
-    def test_populate_title_from_name(self):
-        category = G(Category, title="", name="Test")
+    def test_auto_populate_title_from_name(self):
+        category = CategoryFactory(title="", name="Test")
         assert category.title == category.name

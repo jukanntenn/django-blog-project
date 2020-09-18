@@ -1,11 +1,9 @@
 from datetime import timedelta
 
 import pytest
+from courses.models import Material
+from courses.tests.factories import MaterialFactory
 from django.utils import timezone
-from django_dynamic_fixture import G
-
-from courses.models import Category, Course, Material
-from courses.tests.factories import CategoryFactory, CourseFactory, MaterialFactory
 
 
 @pytest.mark.django_db
@@ -62,44 +60,34 @@ class TestMaterialQuerySetAndIndexManager:
     def setup_method(self):
         after_3_days = timezone.now() + timedelta(days=3)
 
-        self.published_material = G(
-            Material,
+        self.published_material = MaterialFactory(
             status=Material.STATUS.published,
             show_on_index=True,
             pub_date=timezone.now(),
         )
-        self.draft_material = G(
-            Material,
+        self.draft_material = MaterialFactory(
             status=Material.STATUS.draft,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.writing_material = G(
-            Material,
+        self.writing_material = MaterialFactory(
             status=Material.STATUS.writing,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.hidden_material = G(
-            Material,
+        self.hidden_material = MaterialFactory(
             status=Material.STATUS.hidden,
             show_on_index=True,
-            ignore_fields=["pub_date"],
         )
-        self.future_publishing_material = G(
-            Material,
+        self.future_publishing_material = MaterialFactory(
             status=Material.STATUS.published,
             show_on_index=True,
             pub_date=after_3_days,
         )
-        self.future_draft_material = G(
-            Material,
+        self.future_draft_material = MaterialFactory(
             status=Material.STATUS.draft,
             show_on_index=True,
             pub_date=after_3_days,
         )
-        self.hide_on_index_published_material = G(
-            Material,
+        self.hide_on_index_published_material = MaterialFactory(
             status=Material.STATUS.published,
             show_on_index=False,
             pub_date=timezone.now(),

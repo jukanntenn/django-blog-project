@@ -1,14 +1,12 @@
 import pytest
+from blog.tests.factories import PostFactory
 from constance import config
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django_dynamic_fixture import G
+from notifications.models import Notification
 from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
-
-from blog.models import Post
-from notifications.models import Notification
 from tl.testing.thread import ThreadJoiner
 from users.models import User
 
@@ -17,7 +15,7 @@ from .factories import BlogCommentFactory
 
 @pytest.mark.django_db
 class TestNotification:
-    def setup_method(self, method):
+    def setup_method(self):
         self.moderator = User.objects.create_superuser(
             username="moderator",
             email="moderator@blogproject.test",
@@ -36,7 +34,7 @@ class TestNotification:
             **{"email_bound": True},
         )
         site = Site.objects.get(name="example.com")
-        post = G(Post, author=self.moderator, body="正文")
+        post = PostFactory(author=self.moderator, body="正文")
         self.ct = str(post._meta)
         self.object_pk = post.pk
         self.client = APIClient()

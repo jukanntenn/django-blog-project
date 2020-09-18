@@ -58,7 +58,7 @@ class AbstractEntry(TimeStampedModel):
         self.__class__.objects.filter(pk=self.pk).update(views=F("views") + 1)
 
     def root_comments(self):
-        return self.comments.roots()
+        return self.comments.roots().order_by("submit_date")
 
     @cached_property
     def num_comments(self):

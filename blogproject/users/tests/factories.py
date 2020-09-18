@@ -1,6 +1,7 @@
 from typing import Any, Sequence
 
-from factory import DjangoModelFactory, Faker, post_generation
+from factory import Faker, post_generation
+from factory.django import DjangoModelFactory
 from users.models import User
 
 

@@ -1,9 +1,8 @@
+from courses.models import Material
+from courses.tests.factories import CourseFactory, MaterialFactory
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-
-from courses.models import Material
-from courses.tests.factories import CourseFactory, MaterialFactory
 
 
 def test_auto_set_admin_as_material_author(admin_client, admin_user, course):
