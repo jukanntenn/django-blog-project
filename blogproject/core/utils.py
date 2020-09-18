@@ -2,6 +2,7 @@ import re
 from functools import wraps
 
 import markdown
+import pymdownx.superfences
 from bs4 import BeautifulSoup
 from constance import config
 from django.apps import apps
@@ -10,8 +11,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import BooleanField, CharField, Count, F, Value
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
-
-import pymdownx.superfences
 from pymdownx.superfences import SuperFencesBlockPreprocessor, highlight_validator
 
 
@@ -35,7 +34,7 @@ def _highlight(method):
             md,
             classes=classes,
             id_value=id_value,
-            **kwargs
+            **kwargs,
         )
         if filename == "":
             return code

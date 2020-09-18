@@ -1,4 +1,3 @@
-from comments.models import BlogComment
 from core.abstracts import AbstractEntry
 from core.utils import generate_rich_content
 from django.conf import settings
@@ -38,9 +37,14 @@ class Category(TimeStampedModel):
 
 
 class Course(TimeStampedModel):
-    STATUS = Choices((0, "writing", "writing"), (1, "finished", "finished"),)
+    STATUS = Choices(
+        (0, "writing", "writing"),
+        (1, "finished", "finished"),
+    )
     LEVEL = Choices(
-        (0, "introductory", "入门"), (1, "intermediate", "进阶"), (2, "advanced", "高级"),
+        (0, "introductory", "入门"),
+        (1, "intermediate", "进阶"),
+        (2, "advanced", "高级"),
     )
 
     title = models.CharField(_("title"), max_length=150)

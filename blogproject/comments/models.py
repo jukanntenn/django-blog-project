@@ -1,4 +1,5 @@
 from core.utils import generate_rich_content
+from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 from django_comments.abstracts import CommentAbstractModel
@@ -6,7 +7,6 @@ from django_comments.managers import CommentManager
 from mptt.managers import TreeManager
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.querysets import TreeQuerySet
-from django.db import models
 
 
 class BlogCommentQuerySet(TreeQuerySet):

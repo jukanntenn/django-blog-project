@@ -4,7 +4,6 @@ from constance import config
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.template import loader
-
 from django_comments.moderation import CommentModerator, Moderator
 from notifications.signals import notify
 

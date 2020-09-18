@@ -1,7 +1,6 @@
 from braces.views import SetHeadlineMixin
 from notifications.views import AllNotificationsList, UnreadNotificationsList
 from pure_pagination.mixins import PaginationMixin
-from notifications.models import Notification
 
 
 class AllNotificationsListView(PaginationMixin, SetHeadlineMixin, AllNotificationsList):

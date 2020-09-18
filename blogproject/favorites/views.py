@@ -1,7 +1,7 @@
-from django.views.generic import ListView, DetailView
+from braces.views import SetHeadlineMixin
+from django.views.generic import DetailView, ListView
 
 from .models import Issue
-from braces.views import SetHeadlineMixin
 
 
 class IssueListView(SetHeadlineMixin, ListView):

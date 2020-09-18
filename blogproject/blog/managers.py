@@ -1,6 +1,5 @@
-from django.db.models import Manager
+from django.db.models import Manager, QuerySet
 from django.utils import timezone
-from django.db.models import QuerySet
 
 
 class PostQuerySet(QuerySet):

@@ -1,7 +1,7 @@
 from django.contrib import admin
+from django_comments.admin import CommentsAdmin
 
 from .models import BlogComment
-from django_comments.admin import CommentsAdmin
 
 
 @admin.register(BlogComment)

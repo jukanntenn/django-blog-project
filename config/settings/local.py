@@ -1,4 +1,5 @@
 from .common import *  # noqa
+from .common import env
 
 DEBUG = True
 SECRET_KEY = "fake-secret-key-for-development"
@@ -11,8 +12,8 @@ DEBUG_TOOLBAR_CONFIG = {
     "JQUERY_URL": "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js",
 }
 
-MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
-INSTALLED_APPS += [
+MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")  # noqa
+INSTALLED_APPS += [  # noqa
     "debug_toolbar",
 ]
 

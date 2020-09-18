@@ -1,5 +1,5 @@
-from haystack.backends.whoosh_backend import WhooshEngine
 from haystack.backends.whoosh_backend import (
+    WhooshEngine,
     WhooshHtmlFormatter,
     WhooshSearchBackend,
 )  # fixed
@@ -8,18 +8,9 @@ from haystack.exceptions import SearchBackendError
 from haystack.models import SearchResult
 from haystack.utils.app_loading import haystack_get_model
 from jieba.analyse import ChineseAnalyzer
-from whoosh.fields import (
-    BOOLEAN,
-    DATETIME,
-    IDLIST,
-    KEYWORD,
-    NGRAM,
-    NGRAMWORDS,
-    NUMERIC,
-    Schema,
-    TEXT,
-)
+from whoosh.fields import BOOLEAN, DATETIME
 from whoosh.fields import ID as WHOOSH_ID
+from whoosh.fields import IDLIST, KEYWORD, NGRAM, NGRAMWORDS, NUMERIC, TEXT, Schema
 from whoosh.highlight import ContextFragmenter
 from whoosh.highlight import highlight as whoosh_highlight
 
@@ -184,7 +175,7 @@ class WhooshJiebaearchBackend(WhooshSearchBackend):
                     model_name,
                     raw_result[DJANGO_ID],
                     score,
-                    **additional_fields
+                    **additional_fields,
                 )
                 results.append(result)
             else:

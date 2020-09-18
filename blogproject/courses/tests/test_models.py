@@ -13,7 +13,7 @@ class TestCourse:
 
     def test_first_material(self, course):
         material1 = MaterialFactory(course=course)
-        material2 = MaterialFactory(course=course)
+        MaterialFactory(course=course)
         assert course.first_material == material1
 
     def test_rich_content(self, course):

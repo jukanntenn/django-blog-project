@@ -3,6 +3,7 @@ from datetime import timedelta
 import pytest
 from comments.tests.factories import BlogCommentFactory
 from core.tests.factories import EntryFactory, RankableEntryFactory
+
 # relative import raise error, why?
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
@@ -33,7 +34,7 @@ class TestAbstractEntry:
         root_c1 = BlogCommentFactory(
             user=user1, content_type=ct, object_pk=entry.pk, site=site
         )
-        child_c1 = BlogCommentFactory(
+        BlogCommentFactory(
             user=user2, content_type=ct, object_pk=entry.pk, parent=root_c1, site=site
         )
         root_c2 = BlogCommentFactory(

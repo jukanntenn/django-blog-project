@@ -1,5 +1,4 @@
-from django.db.models import Manager, QuerySet, Sum
-from django.db.models.functions import Coalesce
+from django.db.models import Manager, QuerySet
 from django.utils import timezone
 
 

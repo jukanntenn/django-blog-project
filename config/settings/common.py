@@ -10,10 +10,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import sys
+from email.utils import getaddresses
 
 import environ
-from email.utils import getaddresses
-from django.utils.translation import gettext_lazy as _
 
 env = environ.Env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -116,9 +115,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 # Internationalization
