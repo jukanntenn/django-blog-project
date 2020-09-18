@@ -71,7 +71,7 @@ line_length = 88
 skip = ["migrations"]
 
 [tool.coverage.run]
-include = "blogproject/*"
+include = ["blogproject/*"]
 omit = ["*migrations*", "*tests*"]
 
 [tool.black]
