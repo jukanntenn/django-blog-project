@@ -149,7 +149,7 @@ class WhooshJiebaearchBackend(WhooshSearchBackend):
                     ):
                         # Special-cased due to the nature of KEYWORD fields.
                         if index.fields[string_key].is_multivalued:
-                            if value is None or len(value) is 0:
+                            if value is None or len(value) == 0:
                                 additional_fields[string_key] = []
                             else:
                                 additional_fields[string_key] = value.split(",")

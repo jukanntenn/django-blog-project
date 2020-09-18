@@ -1,8 +1,8 @@
 import factory
 from courses.models import Category, Course, Material
-from factory import DjangoModelFactory
-from users.tests.factories import UserFactory
 from django.utils import timezone
+from factory.django import DjangoModelFactory
+from users.tests.factories import UserFactory
 
 
 class CategoryFactory(DjangoModelFactory):
