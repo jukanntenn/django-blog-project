@@ -1,11 +1,8 @@
 import pytest
-from blog.models import Post
 from blog.tests.factories import PostFactory
 from courses.tests.factories import CourseFactory, MaterialFactory
 from django.contrib.sites.models import Site
-from django_dynamic_fixture import G
 from users.models import User
-from users.tests.factories import UserFactory
 
 
 @pytest.fixture

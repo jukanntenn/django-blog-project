@@ -1,11 +1,8 @@
 import pytest
-from blog.models import Post
 from blog.tests.factories import PostFactory
 from comments.forms import BlogCommentForm
 from comments.models import BlogComment
 from django.contrib.sites.models import Site
-from django_dynamic_fixture import G
-from users.models import User
 
 from .factories import BlogCommentFactory
 

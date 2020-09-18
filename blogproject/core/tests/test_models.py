@@ -1,19 +1,17 @@
 from datetime import timedelta
 
 import pytest
-from comments.models import BlogComment
-
+from comments.tests.factories import BlogCommentFactory
+from core.tests.factories import EntryFactory, RankableEntryFactory
 # relative import raise error, why?
-from core.tests.models import Entry, RankableEntry
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
-from django_dynamic_fixture import G
-from users.models import User
+from users.tests.factories import UserFactory
 
 
 @pytest.fixture
 def entry():
-    return G(Entry, body="# 标题内容")
+    return EntryFactory(body="# 标题内容")
 
 
 @pytest.mark.django_db
@@ -28,26 +26,18 @@ class TestAbstractEntry:
 
         assert entry.num_words == 4
 
-    def test_comment_properties_and_methods(self, entry):
-        user1 = G(User)
-        user2 = G(User)
+    def test_comment_properties_and_methods(self, entry, site):
+        user1 = UserFactory()
+        user2 = UserFactory()
         ct = ContentType.objects.get_for_model(entry)
-        root_c1 = G(
-            BlogComment,
-            user=user1,
-            content_type=ct,
-            object_pk=entry.pk,
-            fill_nullable_fields=False,
+        root_c1 = BlogCommentFactory(
+            user=user1, content_type=ct, object_pk=entry.pk, site=site
         )
-        child_c1 = G(
-            BlogComment, user=user2, content_type=ct, object_pk=entry.pk, parent=root_c1
+        child_c1 = BlogCommentFactory(
+            user=user2, content_type=ct, object_pk=entry.pk, parent=root_c1, site=site
         )
-        root_c2 = G(
-            BlogComment,
-            user=user1,
-            content_type=ct,
-            object_pk=entry.pk,
-            fill_nullable_fields=False,
+        root_c2 = BlogCommentFactory(
+            user=user1, content_type=ct, object_pk=entry.pk, site=site
         )
 
         assert entry.num_comments == 3
@@ -65,9 +55,9 @@ class TestAbstractEntry:
 
     def test_get_next_or_previous_without_default_ordering(self):
         now = timezone.now()
-        entry1 = G(Entry, created=now)
-        entry2 = G(Entry, created=now - timedelta(days=1))
-        entry3 = G(Entry, created=now)
+        entry1 = EntryFactory(created=now)
+        entry2 = EntryFactory(created=now - timedelta(days=1))
+        entry3 = EntryFactory(created=now)
 
         # 依据默认的 pk 排序
         assert entry1.get_next_or_previous(is_next=False) is None
@@ -98,9 +88,9 @@ class TestAbstractEntry:
         )
 
     def test_get_next_or_previous_with_default_ordering(self):
-        entry1 = G(RankableEntry, rank=3)
-        entry2 = G(RankableEntry, rank=2)
-        entry3 = G(RankableEntry, rank=1)
+        entry1 = RankableEntryFactory(rank=3)
+        entry2 = RankableEntryFactory(rank=2)
+        entry3 = RankableEntryFactory(rank=1)
 
         assert entry1.get_next_or_previous(is_next=False) == entry2
         assert entry1.get_next_or_previous(is_next=True) is None

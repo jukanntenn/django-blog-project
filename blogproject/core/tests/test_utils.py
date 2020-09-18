@@ -2,10 +2,11 @@ from datetime import timedelta
 
 import pytest
 from blog.models import Post
+from blog.tests.factories import PostFactory
 from core.utils import compensate, generate_rich_content, get_index_entry_queryset
 from courses.models import Material
+from courses.tests.factories import MaterialFactory
 from django.utils import timezone
-from django_dynamic_fixture import G
 
 
 def test_generate_rich_content():
@@ -34,25 +35,22 @@ def test_compensate():
 def test_get_index_entry_queryset():
     now = timezone.now()
 
-    pinned_post1 = G(
-        Post,
+    pinned_post1 = PostFactory(
         status=Post.STATUS_CHOICES.published,
         pinned=True,
         show_on_index=True,
         pub_date=now,
     )
-    pinned_post2 = G(
-        Post,
+    pinned_post2 = PostFactory(
         status=Post.STATUS_CHOICES.published,
         pinned=True,
         show_on_index=True,
         pub_date=now - timedelta(days=1),
     )
-    material = G(
-        Material, status=Material.STATUS.published, show_on_index=True, pub_date=now
+    material = MaterialFactory(
+        status=Material.STATUS.published, show_on_index=True, pub_date=now
     )
-    post = G(
-        Post,
+    post = PostFactory(
         status=Post.STATUS_CHOICES.published,
         pinned=False,
         show_on_index=True,

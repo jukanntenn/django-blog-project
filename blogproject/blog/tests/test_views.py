@@ -1,19 +1,15 @@
 import pytest
-from blog.models import Category, Post
+from blog.models import Post
 from blog.tests.factories import CategoryFactory as PostCategoryFactory
 from blog.tests.factories import PostFactory
 from blog.views import BlogSearchView
-from courses.models import Category as CourseCategory
-from courses.models import Course, Material
-from courses.tests.factories import CategoryFactory as CourseCategoryFactory
+from courses.models import Material
 from courses.tests.factories import CourseFactory, MaterialFactory
 from django.http.response import Http404
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-from django_dynamic_fixture import G
 from pure_pagination.paginator import Paginator
-from users.models import User
 
 
 def test_auto_set_admin_as_post_author(admin_client, admin_user):
