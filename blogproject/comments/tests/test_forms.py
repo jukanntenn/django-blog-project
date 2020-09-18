@@ -1,10 +1,10 @@
 import pytest
-from django.contrib.sites.models import Site
-from django_dynamic_fixture import G
-
 from blog.models import Post
+from blog.tests.factories import PostFactory
 from comments.forms import BlogCommentForm
 from comments.models import BlogComment
+from django.contrib.sites.models import Site
+from django_dynamic_fixture import G
 from users.models import User
 
 from .factories import BlogCommentFactory
@@ -12,10 +12,9 @@ from .factories import BlogCommentFactory
 
 @pytest.mark.django_db
 class TestBlogCommentForm:
-    def setup_method(self, method):
-        user = G(User)
+    def setup_method(self):
         site = Site.objects.get(name="example.com")
-        post = G(Post, author=user, body="正文")
+        post = PostFactory()
         self.comment = BlogCommentFactory(
             is_public=True, is_removed=False, site=site, content_object=post
         )
