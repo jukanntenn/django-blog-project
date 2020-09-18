@@ -38,8 +38,10 @@ def _highlight(method):
         )
         if filename == "":
             return code
-        return '<div class="literal-block"><div class="code-block-caption">{}</div>{}</div>'.format(
-            filename, code
+        return (
+            '<div class="literal-block">'
+            '<div class="code-block-caption">{}</div>{}'
+            "</div>".format(filename, code)
         )
 
     return wrapper

@@ -2,7 +2,7 @@ from haystack.backends.whoosh_backend import (
     WhooshEngine,
     WhooshHtmlFormatter,
     WhooshSearchBackend,
-)  # fixed
+)
 from haystack.constants import DJANGO_CT, DJANGO_ID, ID
 from haystack.exceptions import SearchBackendError
 from haystack.models import SearchResult
@@ -95,7 +95,8 @@ class WhooshJiebaearchBackend(WhooshSearchBackend):
         # are found.
         if len(schema_fields) <= initial_key_count:
             raise SearchBackendError(
-                "No fields were found in any search_indexes. Please correct this before attempting to search."
+                "No fields were found in any search_indexes. "
+                "Please correct this before attempting to search."
             )
 
         return (content_field_name, Schema(**schema_fields))

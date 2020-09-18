@@ -76,7 +76,8 @@ def inject_comment_target(func):
             return Response(
                 {
                     "detail": _(
-                        "Attempting go get content-type %r and object PK %r exists raised %s"
+                        "Attempting go get content-type %r and "
+                        "object PK %r exists raised %s"
                         % (escape(ctype), escape(object_pk), e.__class__.__name__)
                     )
                 },
