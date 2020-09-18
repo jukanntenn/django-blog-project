@@ -5,21 +5,19 @@ from allauth.socialaccount.models import SocialAccount
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Prefetch
 from django.utils.decorators import method_decorator
 from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
+from django_comments import get_form, signals
 from rest_framework import mixins, status, viewsets
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-
-from django_comments import get_form, signals
 
 from .models import BlogComment
 from .serializers import CommentSerializer, TreeCommentSerializer
@@ -78,7 +76,8 @@ def inject_comment_target(func):
             return Response(
                 {
                     "detail": _(
-                        "Attempting go get content-type %r and object PK %r exists raised %s"
+                        "Attempting go get content-type %r and "
+                        "object PK %r exists raised %s"
                         % (escape(ctype), escape(object_pk), e.__class__.__name__)
                     )
                 },
@@ -191,7 +190,8 @@ class CommentViewSet(
 
         if form.errors:
             return Response(
-                {"detail": form.errors}, status=status.HTTP_400_BAD_REQUEST,
+                {"detail": form.errors},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         site = get_current_site(request)

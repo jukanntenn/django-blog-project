@@ -13,16 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from blog.feeds import AllPostsRssFeed
+from blog.sitemaps import sitemaps
+from comments import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
-
-from blog.feeds import AllPostsRssFeed
-from blog.sitemaps import sitemaps
-from comments import views
 
 router = DefaultRouter()
 router.register("comments", views.CommentViewSet, basename="comment")

@@ -4,7 +4,7 @@ DEBUG = True
 SECRET_KEY = "fake-secret-key-for-test"
 ALLOWED_HOSTS = ["*"]
 
-INSTALLED_APPS += [
+INSTALLED_APPS += [  # noqa
     "core.tests",
 ]
 DDF_NUMBER_OF_LAPS = 1

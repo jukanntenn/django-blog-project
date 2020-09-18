@@ -1,12 +1,11 @@
+from braces.views import FormValidMessageMixin, MessageMixin, SetHeadlineMixin
 from constance import config
+from core.utils import EmailConfirmation
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.template import loader
 from django.urls import reverse
 from django.views.generic import CreateView, View
-
-from braces.views import FormValidMessageMixin, MessageMixin, SetHeadlineMixin
-from core.utils import EmailConfirmation
 from favorites.models import Issue
 from ratelimit.decorators import ratelimit
 

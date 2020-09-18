@@ -7,8 +7,7 @@ class BlogConfig(AppConfig):
     verbose_name = _("blog")
 
     def ready(self):
-        from comments.moderation import moderator
-        from comments.moderation import BlogCommentModerator
+        from comments.moderation import BlogCommentModerator, moderator
         from courses.models import Material
 
         moderator.register(self.get_model("Post"), BlogCommentModerator)

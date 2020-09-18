@@ -1,7 +1,7 @@
 from braces.views import SetHeadlineMixin
 from core.utils import get_index_entry_queryset
-from django.core.paginator import InvalidPage, Paginator
-from django.db.models import CharField, Count, F, Value
+from django.core.paginator import InvalidPage
+from django.db.models import CharField, Count, Value
 from django.http import Http404
 from django.views.generic import DetailView, ListView, TemplateView
 from haystack.views import SearchView

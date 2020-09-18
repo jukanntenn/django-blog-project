@@ -1,7 +1,7 @@
+from courses.models import Course, Material
 from django.contrib.sitemaps import GenericSitemap
 
 from .models import Category, Post
-from courses.models import Course, Material
 
 post_info_dict = {
     "queryset": Post.objects.all(),

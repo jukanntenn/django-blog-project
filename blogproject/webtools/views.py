@@ -1,7 +1,5 @@
-from django.shortcuts import render
+from braces.views import SetHeadlineMixin
 from django.views.generic import FormView
-
-from braces.views import FormValidMessageMixin, SetHeadlineMixin
 
 from .forms import DjangoSecretKeyCreateForm
 

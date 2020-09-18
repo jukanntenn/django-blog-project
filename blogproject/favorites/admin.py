@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Issue, Favorite
+
+from .models import Favorite, Issue
 
 
 @admin.register(Issue)

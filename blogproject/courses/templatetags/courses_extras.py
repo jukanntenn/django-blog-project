@@ -1,7 +1,6 @@
+from core.utils import generate_rich_content
 from django import template
 from django.urls import reverse
-
-from core.utils import generate_rich_content
 
 register = template.Library()
 

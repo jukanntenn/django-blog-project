@@ -1,8 +1,7 @@
-from django.contrib.contenttypes.models import ContentType
-from django.utils import timezone
-
 import factory
 from comments.models import BlogComment
+from django.contrib.contenttypes.models import ContentType
+from django.utils import timezone
 from factory.django import DjangoModelFactory
 from users.tests.factories import UserFactory
 

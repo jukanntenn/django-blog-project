@@ -35,7 +35,12 @@ class MaterialAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-        (_("SEO"), {"fields": ("excerpt",),}),
+        (
+            _("SEO"),
+            {
+                "fields": ("excerpt",),
+            },
+        ),
     )
     search_fields = ["title", "body"]
 

@@ -43,7 +43,12 @@ class PostAdmin(admin.ModelAdmin):
                 ),
             },
         ),
-        (_("SEO"), {"fields": ("excerpt",),}),
+        (
+            _("SEO"),
+            {
+                "fields": ("excerpt",),
+            },
+        ),
     )
     filter_horizontal = ["tags"]
     search_fields = ["title", "body"]

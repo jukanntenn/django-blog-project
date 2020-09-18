@@ -1,4 +1,3 @@
-from comments.models import BlogComment
 from core.abstracts import AbstractEntry
 from django.conf import settings
 from django.db import models

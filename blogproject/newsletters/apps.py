@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class NewslettersConfig(AppConfig):
-    name = 'newsletters'
+    name = "newsletters"
