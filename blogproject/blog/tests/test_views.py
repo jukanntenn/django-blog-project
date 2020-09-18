@@ -1,14 +1,17 @@
 import pytest
+from blog.models import Category, Post
+from blog.tests.factories import CategoryFactory as PostCategoryFactory
+from blog.tests.factories import PostFactory
+from blog.views import BlogSearchView
+from courses.models import Category as CourseCategory
+from courses.models import Course, Material
+from courses.tests.factories import CategoryFactory as CourseCategoryFactory
+from courses.tests.factories import CourseFactory, MaterialFactory
 from django.http.response import Http404
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 from django_dynamic_fixture import G
-
-from blog.models import Category, Post
-from blog.views import BlogSearchView
-from courses.models import Category as CourseCategory
-from courses.models import Course, Material
 from pure_pagination.paginator import Paginator
 from users.models import User
 
@@ -38,18 +41,13 @@ class IndexViewTestCase(TestCase):
         self.assertTemplateUsed(response, "blog/index.html")
 
     def test_entries_display(self):
-        user = G(User)
-        course = G(Course, creator=user, category=G(CourseCategory))
-        pinned_post = G(
-            Post,
-            author=user,
+        course = CourseFactory()
+        pinned_post = PostFactory(
             pinned=True,
             show_on_index=True,
             status=Post.STATUS_CHOICES.published,
         )
-        material = G(
-            Material,
-            author=user,
+        material = MaterialFactory(
             course=course,
             show_on_index=True,
             status=Material.STATUS.published,
@@ -67,24 +65,19 @@ class IndexViewTestCase(TestCase):
 
 class PostDetailViewTestCase(TestCase):
     def setUp(self):
-        user = G(User)
-        category = G(Category, creator=user)
-        self.index_post = G(
-            Post,
-            author=user,
+        category = PostCategoryFactory()
+        self.index_post = PostFactory(
             show_on_index=True,
             status=Post.STATUS_CHOICES.published,
             category=category,
         )
-        self.not_index_post = G(
-            Post,
-            author=user,
+        self.not_index_post = PostFactory(
             show_on_index=False,
             status=Post.STATUS_CHOICES.published,
             category=None,
         )
-        self.draft_post = G(
-            Post, author=user, show_on_index=True, status=Post.STATUS_CHOICES.draft
+        self.draft_post = PostFactory(
+            show_on_index=True, status=Post.STATUS_CHOICES.draft
         )
 
     def test_good_view(self):
@@ -125,23 +118,20 @@ class PostDetailViewTestCase(TestCase):
 
 class CategoryViewTestCase(TestCase):
     def setUp(self):
-        self.category = G(Category)
-        self.category_post1 = G(
-            Post,
+        self.category = PostCategoryFactory()
+        self.category_post1 = PostFactory(
             title="Category Post1",
             show_on_index=True,
             status=Post.STATUS_CHOICES.published,
             category=self.category,
         )
-        self.category_post2 = G(
-            Post,
+        self.category_post2 = PostFactory(
             title="Category Post2",
             show_on_index=True,
             status=Post.STATUS_CHOICES.published,
             category=self.category,
         )
-        self.no_category_post = G(
-            Post,
+        self.no_category_post = PostFactory(
             title="No Category Post",
             show_on_index=False,
             status=Post.STATUS_CHOICES.published,
@@ -172,10 +162,9 @@ class CategoryViewTestCase(TestCase):
 
 class CategoryListViewTestCase(TestCase):
     def setUp(self):
-        self.category1 = G(Category, name="cate1")
-        self.category2 = G(Category, name="cate2")
-        self.post = G(
-            Post,
+        self.category1 = PostCategoryFactory(name="cate1")
+        self.category2 = PostCategoryFactory(name="cate2")
+        self.post = PostFactory(
             title="Post",
             show_on_index=True,
             status=Post.STATUS_CHOICES.published,
