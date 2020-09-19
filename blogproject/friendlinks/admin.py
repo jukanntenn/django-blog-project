@@ -1,5 +1,6 @@
-from .models import FriendLink
 from django.contrib import admin
+
+from .models import FriendLink
 
 
 @admin.register(FriendLink)
