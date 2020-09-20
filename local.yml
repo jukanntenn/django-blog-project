@@ -1,15 +1,47 @@
 version: '3'
 
+volumes:
+  local_postgres_data: { }
+  local_postgres_data_backups: { }
+
 services:
-  blogproject_local:
+  django:
     build:
       context: .
       dockerfile: ./compose/local/Dockerfile
-    image: blogproject_local
-    container_name: blogproject_local
+    image: django_blog_project_local_django
+    container_name: django_blog_project_local_django
     working_dir: /app
+    depends_on:
+      - postgres
+      - mailhog
     volumes:
       - .:/app
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
     command: /start.sh
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: django_blog_project_production_postgres
+    container_name: django_blog_project_local_postgres
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: django_blog_project_local_mailhog
+    ports:
+      - "8025:8025"
+
+  redis:
+    image: redis:5.0
+    container_name: django_blog_project_local_redis

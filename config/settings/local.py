@@ -22,3 +22,21 @@ INSTALLED_APPS += [  # noqa
 EMAIL_HOST = env("EMAIL_HOST", default="localhost")
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = 1025
+
+# DATABASES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    "default": env.db("DATABASE_URL", "sqlite:///blogproject/database/db.sqlite3")
+}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+# CACHES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#caches
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "",
+    }
+}
