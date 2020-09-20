@@ -22,7 +22,6 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = [
         "status",
         "category",
-        "tags",
         "pub_date",
         "show_on_index",
         "comment_enabled",
@@ -30,7 +29,7 @@ class PostAdmin(admin.ModelAdmin):
     ]
 
     fieldsets = (
-        (None, {"fields": ("title", "body", "brief", "category", "tags")}),
+        (None, {"fields": ("title", "body", "brief", "category")}),
         (
             _("Display control"),
             {
@@ -50,7 +49,7 @@ class PostAdmin(admin.ModelAdmin):
             },
         ),
     )
-    filter_horizontal = ["tags"]
+    filter_horizontal = []
     search_fields = ["title", "body"]
 
     def save_model(self, request, obj, form, change):
