@@ -26,7 +26,8 @@ class BlogComment(MPTTModel, CommentAbstractModel):
     # https://stackoverflow.com/questions/16044754/heroku-postgresql-django-comments-tastypie-no-operator-matches-the-given-na
     # A possible solution that no need to override `object_pk` field
     # may be found at https://code.djangoproject.com/ticket/16055,
-    # but for this project changing `object_pk` from `TextField` to `IntegerField` solves the issue.
+    # but for this project changing `object_pk` from `TextField` to `IntegerField`
+    # solves the issue.
     object_pk = models.IntegerField(_("object ID"))
     parent = TreeForeignKey(
         "self",
