@@ -3,19 +3,21 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from taggit.managers import TaggableManager
+from tags.models import TaggedItem
 
 
 class Issue(TimeStampedModel):
     number = models.PositiveSmallIntegerField(_("number"), unique=True)
     pub_date = models.DateTimeField(_("publication datetime"))
     description = models.TextField(_("description"))
-    tags = models.ManyToManyField("blog.Tag", verbose_name=_("tags"))
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_("creator"),
         on_delete=models.SET_NULL,
         null=True,
     )
+    tags = TaggableManager(verbose_name=_("tags"), through=TaggedItem, blank=True)
 
     class Meta:
         ordering = ["-number"]
@@ -40,8 +42,8 @@ class Favorite(TimeStampedModel):
     title = models.CharField(_("title"), max_length=200)
     description = models.TextField(_("description"))
     url = models.URLField(_("url"))
-    tags = models.ManyToManyField("blog.Tag", verbose_name=_("tags"))
     rank = models.IntegerField(_("rank"), default=0)
+    tags = TaggableManager(verbose_name=_("tags"), through=TaggedItem, blank=True)
 
     class Meta:
         ordering = ["rank", "-created_at"]

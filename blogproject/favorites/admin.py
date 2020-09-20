@@ -10,9 +10,8 @@ class IssueAdmin(admin.ModelAdmin):
         "description",
         "pub_date",
         "number",
-        "tags",
     ]
-    filter_horizontal = ["tags"]
+    filter_horizontal = []
 
     def save_model(self, request, obj, form, change):
         obj.creator = request.user

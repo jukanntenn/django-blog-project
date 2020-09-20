@@ -8,6 +8,8 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
+from taggit.managers import TaggableManager
+from tags.models import TaggedItem
 
 from .managers import IndexPostManager, PostManager
 
@@ -93,7 +95,7 @@ class Post(AbstractEntry):
         null=True,
         blank=True,
     )
-    tags = models.ManyToManyField(Tag, verbose_name=_("tags"), blank=True)
+    tags = TaggableManager(verbose_name=_("tags"), through=TaggedItem, blank=True)
 
     # 模型管理器
     objects = PostManager()
