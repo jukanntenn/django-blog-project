@@ -4,14 +4,15 @@ volumes:
   static:
   media:
   letsencrypt:
+  production_postgres_data:
+  production_postgres_data_backups:
 
 services:
-  blogproject:
+  django:
     build:
       context: .
       dockerfile: compose/production/django/Dockerfile
-    image: blogproject
-    container_name: blogproject
+    image: django_blog_project_production_django
     working_dir: /app
     volumes:
       - ./blogproject/database/:/app/blogproject/database/
@@ -19,19 +20,32 @@ services:
       - static:/app/static
       - media:/app/blogproject/media
     env_file:
-      - .envs/.production
+      - .envs/.production/.django
+      - .envs/.production/.postgres
     expose:
       - "8000"
     command: /start.sh
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: django_blog_project_production_postgres
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+  redis:
+    image: redis:5.0
 
   nginx:
     build:
       context: .
       dockerfile: compose/production/nginx/Dockerfile
-    image: blogproject_nginx
-    container_name: blogproject_nginx
+    image: django_blog_project_production_nginx
     volumes:
-      - ./compose/production/nginx/conf.d/blogproject.conf:/etc/nginx/conf.d/blogproject.conf
       - static:/apps/blogproject/static
       - media:/apps/blogproject/media
       - letsencrypt:/etc/letsencrypt

@@ -5,8 +5,13 @@ DEBUG = True
 SECRET_KEY = "fake-secret-key-for-development"
 ALLOWED_HOSTS = ["*"]
 
-# debug toolbar
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "localhost"]
+if env("USE_DOCKER") == "yes":
+    import socket
+
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS += [".".join(ip.split(".")[:-1] + ["1"]) for ip in ips]
 
 DEBUG_TOOLBAR_CONFIG = {
     "JQUERY_URL": "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js",
@@ -22,3 +27,21 @@ INSTALLED_APPS += [  # noqa
 EMAIL_HOST = env("EMAIL_HOST", default="localhost")
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-port
 EMAIL_PORT = 1025
+
+# DATABASES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    "default": env.db("DATABASE_URL", "sqlite:///blogproject/database/db.sqlite3")
+}
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+# CACHES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#caches
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "",
+    }
+}

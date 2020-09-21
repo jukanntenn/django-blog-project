@@ -217,15 +217,6 @@ DJANGO_NOTIFICATIONS_CONFIG = {
     "SOFT_DELETE": True,
 }
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "blogproject", "database", "db.sqlite3"),
-    }
-}
-
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_DATABASE_PREFIX = "constance:djangoblogproject:"
 
@@ -248,4 +239,3 @@ CONSTANCE_CONFIG_FIELDSETS = {
 }
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
