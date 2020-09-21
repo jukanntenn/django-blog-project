@@ -8,7 +8,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./compose/local/Dockerfile
+      dockerfile: compose/local/django/Dockerfile
     image: django_blog_project_local_django
     container_name: django_blog_project_local_django
     working_dir: /app
