@@ -15,6 +15,7 @@ services:
     depends_on:
       - postgres
       - mailhog
+      - redis
     volumes:
       - .:/app
     env_file:
@@ -45,3 +46,17 @@ services:
   redis:
     image: redis:5.0
     container_name: django_blog_project_local_redis
+
+  node:
+    build:
+      context: .
+      dockerfile: ./compose/local/node/Dockerfile
+    image: django_blog_project_local_node
+    container_name: django_blog_project_local_node
+    volumes:
+      - ./frontend:/app
+      # http://jdlm.info/articles/2016/03/06/lessons-building-node-app-docker.html
+      - /app/node_modules
+    command: npm run dev
+    ports:
+      - "8080:8080"
