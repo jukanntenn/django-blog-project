@@ -1,7 +1,7 @@
 from .common import *  # noqa
 from .common import env, os
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 DEBUG = False
 
@@ -28,7 +28,7 @@ CACHES = {
 
 # django anymail
 ANYMAIL = {
-    "SENDGRID_API_KEY": os.environ.get("DJANGO_SENDGRID_API_KEY"),
+    "SENDGRID_API_KEY": os.environ.get("DJANGO_ANYMAIL_SENDGRID_API_KEY"),
 }
 EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 CELERY_EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
