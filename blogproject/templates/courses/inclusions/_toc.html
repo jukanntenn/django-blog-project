@@ -1,4 +1,4 @@
-%{% load cache %}
+{% load cache %}
 {% cache 300 course_toc course.pk %}
   <ul>
     {% for material in material_list %}
