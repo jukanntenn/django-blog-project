@@ -3,6 +3,8 @@ from datetime import timedelta
 import pytest
 from courses.models import Material
 from courses.tests.factories import MaterialFactory
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.utils import timezone
 
 
@@ -53,6 +55,13 @@ class TestMaterial:
             "id": next_material.pk,
             "title": next_material.title,
         }
+
+    def test_invalid_toc_cache_if_save(self, course):
+        key = make_template_fragment_key("course_toc", [course.pk])
+        cache.set(key, "cached toc", timeout=300)
+        assert cache.get(key) is not None
+        course.save()
+        assert cache.get(key) is None
 
 
 @pytest.mark.django_db
@@ -132,3 +141,10 @@ class TestMaterialQuerySetAndIndexManager:
         materials = Material.index.all()
         assert materials.count() == 1
         assert list(materials) == [self.published_material]
+
+    def test_invalid_toc_cache_if_save(self, material):
+        key = make_template_fragment_key("course_toc", [material.course_id])
+        cache.set(key, "cached course toc", timeout=300)
+        assert cache.get(key) is not None
+        material.save()
+        assert cache.get(key) is None

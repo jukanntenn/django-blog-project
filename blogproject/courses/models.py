@@ -1,6 +1,8 @@
 from core.abstracts import AbstractEntry
 from core.utils import generate_rich_content
 from django.conf import settings
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from django.db import models
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -34,6 +36,11 @@ class Category(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+
+def invalid_toc_cache(course_id):
+    key = make_template_fragment_key("course_toc", [course_id])
+    cache.delete(key)
 
 
 class Course(TimeStampedModel):
@@ -84,6 +91,10 @@ class Course(TimeStampedModel):
     def __str__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        invalid_toc_cache(self.pk)
+
     def get_absolute_url(self):
         return reverse("courses:course_detail", kwargs={"slug": self.slug})
 
@@ -129,6 +140,10 @@ class Material(AbstractEntry):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        invalid_toc_cache(self.course_id)
 
     def get_absolute_url(self):
         return reverse(
