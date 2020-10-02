@@ -28,7 +28,7 @@ pillow = "^7.2.0"
 whoosh = "^2.7.4"
 jieba = "^0.42.1"
 gunicorn = "^20.0.4"
-pymdown-extensions = "^8.0"
+pymdown-extensions = "^8.0.1"
 django-constance = { version = "^2.7.0", extras = ["database"] }
 django-admin-sortable2 = "^0.7.7"
 django-celery-email = "^3.0.0"

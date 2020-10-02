@@ -2,7 +2,6 @@ import re
 from functools import wraps
 
 import markdown
-import pymdownx.superfences
 from bs4 import BeautifulSoup
 from constance import config
 from django.apps import apps
@@ -11,33 +10,26 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import BooleanField, CharField, Count, F, Value
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
-from pymdownx.superfences import SuperFencesBlockPreprocessor, highlight_validator
-
-
-def _highlight_validator(language, options):
-    filename = options.pop("filename", "")
-    okay = highlight_validator(language, options)
-    if filename != "":
-        options["filename"] = filename
-    return okay
+from pymdownx.superfences import SuperFencesBlockPreprocessor
 
 
 def _highlight(method):
     @wraps(method)
-    def wrapper(self, src, language, options, md, classes=None, id_value="", **kwargs):
-        filename = options.get("filename", "")
+    def wrapper(self, src, language, options, md, **kwargs):
         code = method(
             self,
             src,
             language,
             options,
             md,
-            classes=classes,
-            id_value=id_value,
             **kwargs,
         )
+
+        attrs = kwargs["attrs"]
+        filename = attrs.get("filename", "")
         if filename == "":
             return code
+
         return (
             '<div class="literal-block">'
             '<div class="code-block-caption">{}</div>{}'
@@ -48,8 +40,6 @@ def _highlight(method):
 
 
 # Monkey patch pymdownx.superfences for code block caption purpose
-pymdownx.superfences.highlight_validator = _highlight_validator
-
 SuperFencesBlockPreprocessor.highlight = _highlight(
     SuperFencesBlockPreprocessor.highlight
 )
