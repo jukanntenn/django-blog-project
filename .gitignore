@@ -90,13 +90,11 @@ ENV/
 # Rope project settings
 .ropeproject
 
-database/
-blogproject/index/whoosh/
+blogproject/index/
 media/
 .idea/
 *.sqlite3
 node_modules/
 !frontend/dist
 /static/
-_credentials.py
-.envs/
+.envs/.production/

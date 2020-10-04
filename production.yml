@@ -3,6 +3,7 @@ version: '3'
 volumes:
   static:
   media:
+  index:
   letsencrypt:
   production_postgres_data:
   production_postgres_data_backups:
@@ -15,8 +16,7 @@ services:
     image: django_blog_project_production_django
     working_dir: /app
     volumes:
-      - ./blogproject/database/:/app/blogproject/database/
-      - ./blogproject/index/:/app/blogproject/index/
+      - index:/app/blogproject/index/
       - static:/app/static
       - media:/app/blogproject/media
     env_file:
@@ -50,5 +50,5 @@ services:
       - media:/apps/blogproject/media
       - letsencrypt:/etc/letsencrypt
     ports:
-      - "80:80"
-      - "443:443"
+      - "${PORT:-80}:80"
+      - "${SECURE_PORT:-443}:443"
