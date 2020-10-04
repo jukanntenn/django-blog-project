@@ -185,7 +185,7 @@ HAYSTACK_CUSTOM_HIGHLIGHTER = "blog.utils.Highlighter"
 
 ADMINS = getaddresses([env("DJANGO_ADMINS", default="zmrenwu <zmrenwu@163.com>")])
 MANAGERS = ADMINS
-SERVER_EMAIL = env.str("SERVER_EMAIL", default="noreply@djangoblogproject.com")
+SERVER_EMAIL = env.str("DJANGO_SERVER_EMAIL", default="noreply@zmrenwu.com")
 
 WEBPACK_LOADER = {
     "DEFAULT": {

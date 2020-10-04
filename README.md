@@ -30,22 +30,37 @@
    $ git clone https://github.com/zmrenwu/django-blog-project
    ```
 
-3. 创建项目所需的环境变量文件，在项目**根目录**创建名为 .envs 的文件夹，并在 .envs 下创建 .production 文件，写入如下内容
+3. 创建项目所需的环境变量文件，在项目**根目录**创建名为 .envs/.production 文件夹，并在 .production 文件夹下创建 .django 和 .postgres 文件，写入如下内容
+
+   **.django**
 
    ```
-   SECRET_KEY=your-own-secret-key
+   DJANGO_SECRET_KEY=your-own-secret-key
    DJANGO_SETTINGS_MODULE=config.settings.production
-   DJANGO_SENDGRID_API_KEY=your-own-sendgrid-api-key
+   DJANGO_ANYMAIL_SENDGRID_API_KEY=your-own-sendgrid-api-key
    # 设置允许访问的 HOSTS，逗号分隔
    DJANGO_ALLOWED_HOSTS=your-domain.com,www.yourdomain.com
    # 设置管理员邮箱，用于接收邮件通知提醒
    DJANGO_ADMINS=zmrenwu <zmrenwu@163.com>
-   SERVER_EMAIL=noreply@djangoblogproject.com
+   DJANGO_SERVER_EMAIL=noreply@example.com
+   REDIS_URL=redis://redis:6379/0
    ```
 
-   `SECRET_KEY`：项目密钥，推荐使用 [Django Secret Key Generator](https://www.miniwebtool.com/django-secret-key-generator/) 自动生成。
+   `DJANGO_SECRET_KEY`：项目密钥，推荐使用 [Django Secret Key Creator](https://www.zmrenwu.com/webtools/django-secret-key-creator) 自动生成。
 
    `DJANGO_SENDGRID_API_KEY`：[SendGrid](https://sendgrid.com/) 邮件发送密钥，配置后才能发送邮件提醒。
+
+   **.postgres**
+
+   ```
+   POSTGRES_HOST=postgres
+   POSTGRES_PORT=5432
+   # 数据库名，可自行修改
+   POSTGRES_DB=blogproject
+   # 数据库用户和密码
+   POSTGRES_USER=dbuser
+   POSTGRES_PASSWORD=dbpwd
+   ```
 
 4. 复制 compose/production/nginx/conf.d/blogproject.conf-tmpl 到同级目录（即 conf.d 下），重命名为 blogproject.conf，将 blogproject.conf 中的 xxx.com 替换为你自己的域名。
 
@@ -91,13 +106,6 @@
 
    ```shell
    $ docker-compose -f local.yml up --build
-   ```
-
-4. 进入 frontend 目录，启动静态文件服务器
-
-   ```shell
-   $ npm install
-   $ npm run dev
    ```
 
 5. Over~~

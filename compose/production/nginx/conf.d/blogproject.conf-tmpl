@@ -1,5 +1,5 @@
-upstream blogproject  {
-    server blogproject:8000;
+upstream django  {
+    server django:8000;
 }
 
 server {
@@ -18,7 +18,7 @@ server {
 
     location / {
         include /etc/nginx/includes/proxy.conf;
-        proxy_pass http://blogproject;
+        proxy_pass http://django;
     }
 
     listen 80;
