@@ -9,7 +9,7 @@ volumes:
   production_postgres_data_backups:
 
 services:
-  django:
+  django: &django
     build:
       context: .
       dockerfile: compose/production/django/Dockerfile
@@ -39,6 +39,16 @@ services:
 
   redis:
     image: redis:5.0
+
+  celeryworker:
+    <<: *django
+    image: django_blog_project_production_celeryworker
+    command: /start-celeryworker.sh
+
+  celerybeat:
+    <<: *django
+    image: django_blog_project_production_celerybeat
+    command: /start-celerybeat.sh
 
   nginx:
     build:
