@@ -356,6 +356,20 @@ six = "*"
 
 [[package]]
 category = "main"
+description = "Database-backed Periodic Tasks."
+name = "django-celery-beat"
+optional = false
+python-versions = "*"
+version = "2.0.0"
+
+[package.dependencies]
+Django = ">=1.11.17"
+celery = "*"
+django-timezone-field = ">=4.0,<5.0"
+python-crontab = ">=2.3.4"
+
+[[package]]
+category = "main"
 description = "An async Django email backend using celery"
 name = "django-celery-email"
 optional = false
@@ -366,6 +380,17 @@ version = "3.0.0"
 celery = ">=4.0"
 django = ">=2.2"
 django-appconf = "*"
+
+[[package]]
+category = "main"
+description = "Celery result backends for Django."
+name = "django-celery-results"
+optional = false
+python-versions = "*"
+version = "1.2.1"
+
+[package.dependencies]
+celery = ">=4.4,<5.0"
 
 [[package]]
 category = "main"
@@ -394,6 +419,19 @@ version = "1.9.2"
 
 [package.dependencies]
 Django = ">=1.11"
+six = "*"
+
+[[package]]
+category = "main"
+description = "Management commands to help backup and restore a project database and media"
+name = "django-dbbackup"
+optional = false
+python-versions = "*"
+version = "3.3.0"
+
+[package.dependencies]
+Django = ">=1.5"
+pytz = "*"
 six = "*"
 
 [[package]]
@@ -561,6 +599,29 @@ sqlparse = "*"
 
 [[package]]
 category = "main"
+description = "Support for many storage backends in Django"
+name = "django-storages"
+optional = false
+python-versions = ">=3.5"
+version = "1.10.1"
+
+[package.dependencies]
+Django = ">=2.2"
+
+[package.dependencies.dropbox]
+optional = true
+version = ">=7.2.1"
+
+[package.extras]
+azure = ["azure-storage-blob (>=1.3.1,<12.0.0)"]
+boto3 = ["boto3 (>=1.4.4)"]
+dropbox = ["dropbox (>=7.2.1)"]
+google = ["google-cloud-storage (>=1.15.0)"]
+libcloud = ["apache-libcloud"]
+sftp = ["paramiko"]
+
+[[package]]
+category = "main"
 description = "django-taggit is a reusable Django application for simple tagging."
 name = "django-taggit"
 optional = false
@@ -580,6 +641,18 @@ version = "1.4.0"
 
 [[package]]
 category = "main"
+description = "A Django app providing database and form fields for pytz timezone objects."
+name = "django-timezone-field"
+optional = false
+python-versions = ">=3.5"
+version = "4.0"
+
+[package.dependencies]
+django = ">=2.2"
+pytz = "*"
+
+[[package]]
+category = "main"
 description = "Transparently use webpack with django"
 name = "django-webpack-loader"
 optional = false
@@ -596,6 +669,18 @@ version = "3.11.1"
 
 [package.dependencies]
 django = ">=1.11"
+
+[[package]]
+category = "main"
+description = "Official Dropbox API Client"
+name = "dropbox"
+optional = false
+python-versions = "*"
+version = "10.5.0"
+
+[package.dependencies]
+requests = ">=2.16.2"
+six = ">=1.12.0"
 
 [[package]]
 category = "dev"
@@ -1250,7 +1335,22 @@ pytest = ">=2.9"
 termcolor = ">=1.1.0"
 
 [[package]]
-category = "dev"
+category = "main"
+description = "Python Crontab API"
+name = "python-crontab"
+optional = false
+python-versions = "*"
+version = "2.5.1"
+
+[package.dependencies]
+python-dateutil = "*"
+
+[package.extras]
+cron-description = ["cron-descriptor"]
+cron-schedule = ["croniter"]
+
+[[package]]
+category = "main"
 description = "Extensions to the standard Python datetime module"
 name = "python-dateutil"
 optional = false
@@ -1552,7 +1652,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "9b19ef11270ad9697a3d859ea664c20bcd7ccaf235b2e79c9446997fdf6f57de"
+content-hash = "740044d598f916b59265d3e99b62c2d6dcb0e8d8b61770d97e50983ae5a379cb"
 lock-version = "1.0"
 python-versions = ">=3.6, <4"
 
@@ -1750,9 +1850,17 @@ django-braces = [
     {file = "django-braces-1.14.0.tar.gz", hash = "sha256:83705b78948de00804bfacf40c315d001bb39630f35bbdd8588211c2d5b4d43f"},
     {file = "django_braces-1.14.0-py2.py3-none-any.whl", hash = "sha256:a6d9b34cf3e4949635e54884097c30410d7964fc7bec7231445ea7079b8c5722"},
 ]
+django-celery-beat = [
+    {file = "django-celery-beat-2.0.0.tar.gz", hash = "sha256:fdf1255eecfbeb770c6521fe3e69989dfc6373cd5a7f0fe62038d37f80f47e48"},
+    {file = "django_celery_beat-2.0.0-py2.py3-none-any.whl", hash = "sha256:fe0b2a1b31d4a6234fea4b31986ddfd4644a48fab216ce1843f3ed0ddd2e9097"},
+]
 django-celery-email = [
     {file = "django-celery-email-3.0.0.tar.gz", hash = "sha256:5546cbba80952cc3b8a0ffa4206ce90a4a996a7ffd1c385a2bdb65903ca18ece"},
     {file = "django_celery_email-3.0.0-py2.py3-none-any.whl", hash = "sha256:0f72da39cb2ea83c69440566e87f27cd72f68f247f98ce99fb29889fcf329406"},
+]
+django-celery-results = [
+    {file = "django_celery_results-1.2.1-py2.py3-none-any.whl", hash = "sha256:a29ab580f0e38c66c39f51cc426bbdbb2a391b8cc0867df9dea748db2c961db2"},
+    {file = "django_celery_results-1.2.1.tar.gz", hash = "sha256:e390f70cc43bbc2cd7c8e4607dc29ab6211a2ab968f93677583f0160921f670c"},
 ]
 django-constance = [
     {file = "django-constance-2.7.0.tar.gz", hash = "sha256:62bdb1a3aef20d80e18d832b30ffcc6626762c538817a5a3571bcefa5a55c849"},
@@ -1761,6 +1869,9 @@ django-constance = [
 django-contrib-comments = [
     {file = "django-contrib-comments-1.9.2.tar.gz", hash = "sha256:d1232bade3094de07dcc205fc833204384e71ba9d30caadcb5bb2882ce8e8d31"},
     {file = "django_contrib_comments-1.9.2-py2.py3-none-any.whl", hash = "sha256:b83320a86081a76bc0570e6cc0f924c0ced40b46ae9f5dd783ab2c745b449529"},
+]
+django-dbbackup = [
+    {file = "django-dbbackup-3.3.0.tar.gz", hash = "sha256:bb109735cae98b64ad084e5b461b7aca2d7b39992f10c9ed9435e3ebb6fb76c8"},
 ]
 django-debug-toolbar = [
     {file = "django-debug-toolbar-2.2.tar.gz", hash = "sha256:eabbefe89881bbe4ca7c980ff102e3c35c8e8ad6eb725041f538988f2f39a943"},
@@ -1815,12 +1926,20 @@ django-redis = [
 django-silk = [
     {file = "django_silk-4.1.0-py2.py3-none-any.whl", hash = "sha256:a331e55618fa62eaf3cf5a63f31bc1e91205efbeeca5e587c577498b0e251ed8"},
 ]
+django-storages = [
+    {file = "django-storages-1.10.1.tar.gz", hash = "sha256:652275ab7844538c462b62810276c0244866f345878256a9e0e86f5b1283ae18"},
+    {file = "django_storages-1.10.1-py3-none-any.whl", hash = "sha256:12de8fb2605b9b57bfaf54b075280d7cbb3b3ee1ca4bc9b9add147af87fe3a2c"},
+]
 django-taggit = [
     {file = "django-taggit-1.3.0.tar.gz", hash = "sha256:4a833bf71f4c2deddd9745924eee53be1c075d7f0020a06f12e29fa3d752732d"},
     {file = "django_taggit-1.3.0-py3-none-any.whl", hash = "sha256:609b0223d8a652f3fae088b7fd29f294fdadaca2d7931d45c27d6c59b02fdf31"},
 ]
 django-test-plus = [
     {file = "django-test-plus-1.4.0.tar.gz", hash = "sha256:9c3ca75f9ebb0b72d0a16e98b6d80e94b3d0ff007be5fc946d16b423b808bf16"},
+]
+django-timezone-field = [
+    {file = "django-timezone-field-4.0.tar.gz", hash = "sha256:7e3620fe2211c2d372fad54db8f86ff884098d018d56fda4dca5e64929e05ffc"},
+    {file = "django_timezone_field-4.0-py3-none-any.whl", hash = "sha256:758b7d41084e9ea2e89e59eb616e9b6326e6fbbf9d14b6ef062d624fe8cc6246"},
 ]
 django-webpack-loader = [
     {file = "django-webpack-loader-0.7.0.tar.gz", hash = "sha256:7a3c88201aa54481f9399465615cbe7b9aece8081496a6d0287b7cb8e232f447"},
@@ -1829,6 +1948,11 @@ django-webpack-loader = [
 djangorestframework = [
     {file = "djangorestframework-3.11.1-py3-none-any.whl", hash = "sha256:8b1ac62c581dbc5799b03e535854b92fc4053ecfe74bad3f9c05782063d4196b"},
     {file = "djangorestframework-3.11.1.tar.gz", hash = "sha256:6dd02d5a4bd2516fb93f80360673bf540c3b6641fec8766b1da2870a5aa00b32"},
+]
+dropbox = [
+    {file = "dropbox-10.5.0-py2-none-any.whl", hash = "sha256:b8a26058f4c12d304f95aa7ac4e1d69b1d8a6b21070fcaa67e7dbfdd8a51f326"},
+    {file = "dropbox-10.5.0-py3-none-any.whl", hash = "sha256:297d00cd6d2310c49540b6c0acc6f13c82bb89702b11e3f04b5b0a093f10f87d"},
+    {file = "dropbox-10.5.0.tar.gz", hash = "sha256:1a4965c84db5b64cad0c758e71f1a06a37c15fb31249a7ccec2f16298d5112c7"},
 ]
 fabric = [
     {file = "fabric-2.5.0-py2.py3-none-any.whl", hash = "sha256:160331934ea60036604928e792fa8e9f813266b098ef5562aa82b88527740389"},
@@ -2184,6 +2308,9 @@ pytest-django = [
 ]
 pytest-sugar = [
     {file = "pytest-sugar-0.9.4.tar.gz", hash = "sha256:b1b2186b0a72aada6859bea2a5764145e3aaa2c1cfbb23c3a19b5f7b697563d3"},
+]
+python-crontab = [
+    {file = "python-crontab-2.5.1.tar.gz", hash = "sha256:4bbe7e720753a132ca4ca9d4094915f40e9d9dc8a807a4564007651018ce8c31"},
 ]
 python-dateutil = [
     {file = "python-dateutil-2.8.1.tar.gz", hash = "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c"},

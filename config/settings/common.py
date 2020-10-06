@@ -56,6 +56,9 @@ THIRD_PARTY_APPS = [
     "constance",
     "constance.backends.database",
     "djcelery_email",
+    "dbbackup",
+    "django_celery_results",
+    "django_celery_beat",
 ]
 
 LOCAL_APPS = [
@@ -70,6 +73,7 @@ LOCAL_APPS = [
     "webtools.apps.WebtoolsConfig",
     "friendlinks.apps.FriendlinksConfig",
     "tags.apps.TagsConfig",
+    "taskapp.celery.CeleryAppConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -239,3 +243,11 @@ CONSTANCE_CONFIG_FIELDSETS = {
 }
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, "locale")]
+
+# celery
+if USE_TZ:
+    CELERY_TIMEZONE = TIME_ZONE
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
