@@ -42,3 +42,5 @@ DBBACKUP_STORAGE = "storages.backends.dropbox.DropBoxStorage"
 DBBACKUP_STORAGE_OPTIONS = {
     "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
 }
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")

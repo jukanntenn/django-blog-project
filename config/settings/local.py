@@ -47,3 +47,4 @@ CACHES = {
 }
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": "backups"}
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", "redis://redis:6379/0")
