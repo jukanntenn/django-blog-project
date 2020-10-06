@@ -5,7 +5,7 @@ from .models import Category, Post
 
 post_info_dict = {
     "queryset": Post.objects.all(),
-    "date_field": "modified_time",
+    "date_field": "modified",
 }
 
 category_info_dict = {
