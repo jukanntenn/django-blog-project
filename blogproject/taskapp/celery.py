@@ -1,6 +1,6 @@
 import os
 
-from celery import Celery
+from celery import Celery, signals
 from django.apps import AppConfig, apps
 from django.conf import settings
 
@@ -11,8 +11,6 @@ if not settings.configured:
     )  # pragma: no cover
 
 app = Celery("blogproject")
-
-from celery import signals
 
 
 @signals.setup_logging.connect
