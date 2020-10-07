@@ -15,6 +15,9 @@ services:
       dockerfile: compose/production/django/Dockerfile
     image: django_blog_project_production_django
     working_dir: /app
+    depends_on:
+      - postgres
+      - redis
     volumes:
       - index:/app/blogproject/index/
       - static:/app/static
@@ -50,11 +53,20 @@ services:
     image: django_blog_project_production_celerybeat
     command: /start-celerybeat.sh
 
+  statusok:
+    image: gadget1999/statusok
+    depends_on:
+      - nginx
+    volumes:
+      - ./compose/production/statusok/config/config.json:/app/config.json
+
   nginx:
     build:
       context: .
       dockerfile: compose/production/nginx/Dockerfile
     image: django_blog_project_production_nginx
+    depends_on:
+      - django
     volumes:
       - static:/apps/blogproject/static
       - media:/apps/blogproject/media
