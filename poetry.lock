@@ -661,6 +661,17 @@ pytz = "*"
 
 [[package]]
 category = "main"
+description = "django-watchman exposes a status endpoint for your backing services"
+name = "django-watchman"
+optional = false
+python-versions = "*"
+version = "1.2.0"
+
+[package.dependencies]
+django = ">=2.0"
+
+[[package]]
+category = "main"
 description = "Transparently use webpack with django"
 name = "django-webpack-loader"
 optional = false
@@ -1688,7 +1699,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "7e3ebffbf31fd6093e7b2c06d82e5eff771efa5a7655d584b53d8f4e596a774b"
+content-hash = "c95087ddd8a554f260a656e9b7255947817b5fddbb4d73c7d9db16a716cd3170"
 lock-version = "1.0"
 python-versions = ">=3.6, <4"
 
@@ -1979,6 +1990,10 @@ django-test-plus = [
 django-timezone-field = [
     {file = "django-timezone-field-4.0.tar.gz", hash = "sha256:7e3620fe2211c2d372fad54db8f86ff884098d018d56fda4dca5e64929e05ffc"},
     {file = "django_timezone_field-4.0-py3-none-any.whl", hash = "sha256:758b7d41084e9ea2e89e59eb616e9b6326e6fbbf9d14b6ef062d624fe8cc6246"},
+]
+django-watchman = [
+    {file = "django-watchman-1.2.0.tar.gz", hash = "sha256:c38830c58984b8eb29db30a3e332968d1c7e235dee3f5c0a907d8d79a37a3125"},
+    {file = "django_watchman-1.2.0-py2.py3-none-any.whl", hash = "sha256:6c0b8889456ed644fcfe2f7c3294cb4ef8568a85772b7f95842e2d8c9b4bbff5"},
 ]
 django-webpack-loader = [
     {file = "django-webpack-loader-0.7.0.tar.gz", hash = "sha256:7a3c88201aa54481f9399465615cbe7b9aece8081496a6d0287b7cb8e232f447"},
