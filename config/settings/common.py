@@ -193,7 +193,7 @@ ADMINS = getaddresses([env("DJANGO_ADMINS", default="zmrenwu <zmrenwu@163.com>")
 MANAGERS = ADMINS
 SERVER_EMAIL = env.str("DJANGO_SERVER_EMAIL", default="noreply@zmrenwu.com")
 WATCHMAN_EMAIL_SENDER = SERVER_EMAIL
-WATCHMAN_EMAIL_RECIPIENTS = MANAGERS
+WATCHMAN_EMAIL_RECIPIENTS = [a[1] for a in MANAGERS]
 
 WEBPACK_LOADER = {
     "DEFAULT": {
