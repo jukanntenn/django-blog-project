@@ -12,6 +12,7 @@ from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django_comments import get_form, signals
+from ipware import get_client_ip
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
@@ -195,7 +196,7 @@ class CommentViewSet(
             )
 
         site = get_current_site(request)
-        ip_address = request.META.get("REMOTE_ADDR", None) or None
+        ip_address, is_routable = get_client_ip(request)
         comment = form.get_comment_object(site_id=site.id)
         comment.ip_address = ip_address
         comment.user = request.user
