@@ -1,0 +1,55 @@
+{
+  "notifications": {
+    "slack": {
+      "channel": "#test",
+      "username": "statusok",
+      "channelWebhookURL": "https://hooks.slack.com/services/channel/webhook/url"
+    }
+  },
+  "requests": [
+    {
+      "url": "http://example.com/watchman/",
+      "urlParams": {
+        "watchman-token": "watchman-token",
+        "check": "watchman.checks.email"
+      },
+      "requestType": "GET",
+      "checkEvery": 28800,
+      "responseCode": 200,
+      "responseTime": 5000
+    },
+    {
+      "url": "http://example.com/watchman/",
+      "urlParams": {
+        "watchman-token": "watchman-token",
+        "check": "watchman.checks.databases"
+      },
+      "requestType": "GET",
+      "checkEvery": 60,
+      "responseCode": 200,
+      "responseTime": 1000
+    },
+    {
+      "url": "http://example.com/watchman/",
+      "urlParams": {
+        "watchman-token": "watchman-token",
+        "check": "watchman.checks.caches"
+      },
+      "requestType": "GET",
+      "checkEvery": 60,
+      "responseCode": 200,
+      "responseTime": 1000
+    },
+    {
+      "url": "http://example.com/watchman/",
+      "urlParams": {
+        "watchman-token": "watchman-token",
+        "check": "watchman.checks.storage"
+      },
+      "requestType": "GET",
+      "checkEvery": 60,
+      "responseCode": 200,
+      "responseTime": 1000
+    }
+  ]
+}

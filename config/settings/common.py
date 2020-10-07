@@ -13,6 +13,7 @@ import sys
 from email.utils import getaddresses
 
 import environ
+from watchman import constants as watchman_constants
 
 env = environ.Env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -59,6 +60,7 @@ THIRD_PARTY_APPS = [
     "dbbackup",
     "django_celery_results",
     "django_celery_beat",
+    "watchman",
 ]
 
 LOCAL_APPS = [
@@ -251,3 +253,8 @@ CELERY_RESULT_BACKEND = "django-db"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
+
+# https://django-watchman.readthedocs.io/en/latest/readme.html#paid-checks
+# WATCHMAN_ENABLE_PAID_CHECKS = True
+WATCHMAN_CHECKS = watchman_constants.DEFAULT_CHECKS + ("watchman.checks.email",)
+WATCHMAN_TOKENS = "django-watchman-token"

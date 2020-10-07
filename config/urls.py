@@ -37,6 +37,7 @@ urlpatterns = [
     path("favorites/weekly/", include("favorites.urls")),
     path("newsletters/", include("newsletters.urls")),
     path("webtools/", include("webtools.urls")),
+    path("watchman/", include("watchman.urls")),
     path(
         "sitemap.xml",
         sitemap,
