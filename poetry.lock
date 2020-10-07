@@ -492,6 +492,14 @@ async_rq = ["django-rq (>=0.6.0)"]
 
 [[package]]
 category = "main"
+description = "A Django utility application that returns client's real IP address"
+name = "django-ipware"
+optional = false
+python-versions = "*"
+version = "3.0.1"
+
+[[package]]
+category = "main"
 description = "script tag with additional attributes for django.forms.Media"
 name = "django-js-asset"
 optional = false
@@ -1652,7 +1660,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "740044d598f916b59265d3e99b62c2d6dcb0e8d8b61770d97e50983ae5a379cb"
+content-hash = "d9a0feeeb264c4eb7796a934744306e2e82394b6e58943438f81c5f99493d820"
 lock-version = "1.0"
 python-versions = ">=3.6, <4"
 
@@ -1891,6 +1899,9 @@ django-haystack = [
 django-imagekit = [
     {file = "django-imagekit-4.0.2.tar.gz", hash = "sha256:6ec0afb77cdf52cd453c9fc2c10ef350d111edfd6ce53c5977aa8a0e22cee00c"},
     {file = "django_imagekit-4.0.2-py2.py3-none-any.whl", hash = "sha256:304c3379f6a5cac387e47ace11195a603ad3cb01e3e951b45489824d25b00359"},
+]
+django-ipware = [
+    {file = "django-ipware-3.0.1.tar.gz", hash = "sha256:73a640a5bff00aa7503a35e92e462001cfabb07d73d649c262f117423beee953"},
 ]
 django-js-asset = [
     {file = "django-js-asset-1.2.2.tar.gz", hash = "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"},
