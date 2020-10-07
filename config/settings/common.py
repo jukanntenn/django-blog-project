@@ -257,3 +257,5 @@ CELERY_RESULT_SERIALIZER = "json"
 # https://django-watchman.readthedocs.io/en/latest/readme.html#paid-checks
 # WATCHMAN_ENABLE_PAID_CHECKS = True
 WATCHMAN_CHECKS = watchman_constants.DEFAULT_CHECKS + ("watchman.checks.email",)
+# todo: implement admin_required
+WATCHMAN_AUTH_DECORATOR = "django.contrib.admin.views.decorators.staff_member_required"
