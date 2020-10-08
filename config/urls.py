@@ -38,6 +38,7 @@ urlpatterns = [
     path("newsletters/", include("newsletters.urls")),
     path("webtools/", include("webtools.urls")),
     path("watchman/", include("watchman.urls")),
+    path("maintenance-mode/", include("maintenance_mode.urls")),
     path(
         "sitemap.xml",
         sitemap,

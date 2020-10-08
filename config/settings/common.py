@@ -61,6 +61,7 @@ THIRD_PARTY_APPS = [
     "django_celery_results",
     "django_celery_beat",
     "watchman",
+    "maintenance_mode",
 ]
 
 LOCAL_APPS = [
@@ -92,6 +93,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.contrib.redirects.middleware.RedirectFallbackMiddleware",
+    "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -109,6 +111,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "notify.context_processors.notification_count",  # notification
                 "constance.context_processors.config",
+                "maintenance_mode.context_processors.maintenance_mode",
             ],
         },
     },
@@ -152,10 +155,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = (
-    # 不要设置为包含 node_modules 的目录，因为其中会有一些奇怪命名的文件，使得 django 报错
-    os.path.join(BASE_DIR, "frontend", "dist"),
-)
+STATICFILES_DIRS = []
+# 不要设置为包含 node_modules 的目录，因为其中会有一些奇怪命名的文件，使得 django 报错
+if os.path.exists(os.path.join(BASE_DIR, "frontend", "dist")):
+    STATICFILES_DIRS.append(os.path.join(BASE_DIR, "frontend", "dist"))
+
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
@@ -260,3 +264,5 @@ CELERY_RESULT_SERIALIZER = "json"
 # WATCHMAN_ENABLE_PAID_CHECKS = True
 WATCHMAN_CHECKS = watchman_constants.DEFAULT_CHECKS + ("watchman.checks.email",)
 WATCHMAN_TOKENS = "django-watchman-token"
+
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
