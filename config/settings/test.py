@@ -40,3 +40,7 @@ DATABASES = {
 ADMINS = [("admin", "admin@example.com")]
 MANAGERS = ADMINS
 LANGUAGE_CODE = "en-us"
+
+WEBPACK_LOADER["DEFAULT"]["STATS_FILE"] = os.path.join(  # noqa
+    BASE_DIR, "frontend", "webpack-test-stats.json"  # noqa
+)

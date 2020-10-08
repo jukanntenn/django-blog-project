@@ -5,8 +5,6 @@ from rest_framework.authtoken.models import Token
 
 from .models import User
 
-admin.site.unregister(Token)
-
 
 class UserAdmin(AuthUserAdmin):
     fieldsets = (

@@ -1,3 +1,11 @@
+FROM node:14-buster as client-builder
+
+WORKDIR /app/frontend
+COPY ./frontend/package.json /app/frontend
+RUN npm install && npm cache clean --force
+COPY . /app
+RUN npm run build
+
 FROM python:3.8
 
 ENV PYTHONUNBUFFERED 1
@@ -33,5 +41,6 @@ RUN chmod +x /start-celeryworker.sh
 COPY ./compose/production/django/celery/beat/start.sh /start-celerybeat.sh
 RUN sed -i 's/\r$//g' /start-celerybeat.sh
 RUN chmod +x /start-celerybeat.sh
+COPY --from=client-builder /app /app
 
 ENTRYPOINT ["/entrypoint.sh"]

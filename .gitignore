@@ -95,6 +95,9 @@ media/
 .idea/
 *.sqlite3
 node_modules/
-!frontend/dist
 /static/
 .envs/.production/
+/frontend/webpack-stats.json
+*.pid
+/compose/production/nginx/conf.d/blogproject.conf
+/compose/production/statusok/config/config.json
