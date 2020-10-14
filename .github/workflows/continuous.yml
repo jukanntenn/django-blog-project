@@ -1,9 +1,9 @@
-name: CI
+name: CI&CD
 
 on: [ push ]
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -39,3 +39,23 @@ jobs:
 
       - name: Test with pytest
         run: poetry run pytest
+
+  cd:
+    needs: ci
+    runs-on: ubuntu-latest
+#    if: github.ref == 'refs/heads/master' # Running this job only for master branch
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo ${{ secrets.GITHUB_TOKEN }} | docker login -u zmrenwu --password-stdin docker.pkg.github.com
+            cd ~/apps/django-blog-project
+            sudo docker-compose pull
+            sudo docker-compose up -d
