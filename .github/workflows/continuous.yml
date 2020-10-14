@@ -47,6 +47,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # Must set up Docker Buildx, otherwise `push` input in docker/build-push-action@v2 won't work.
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
       - name: Login to GitHub Packages
         uses: docker/login-action@v1
         with:
@@ -60,7 +64,7 @@ jobs:
           context: .
           file: ./compose/production/django/Dockerfile
           push: true
-          tags: zmrenwu/django-blog-project/django-blog-project:latest
+          tags: docker.pkg.github.com/zmrenwu/django-blog-project/django-blog-project:latest
           cache-from: type=registry,ref=docker.pkg.github.com/zmrenwu/django-blog-project/django-blog-project
 
       - name: Image digest
