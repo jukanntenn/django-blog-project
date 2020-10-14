@@ -3,47 +3,47 @@ name: CI&CD
 on: [ push ]
 
 jobs:
-#  ci:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#        with:
-#          fetch-depth: 1
-#
-#      - name: Set up Python 3.8
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: 3.8
-#
-#      - name: Install Poetry
-#        uses: Gr1N/setup-poetry@v3
-#
-#      - name: Cache Poetry virtualenv
-#        uses: actions/cache@v2
-#        id: poetry-cache
-#        with:
-#          path: ~/.cache/pypoetry/virtualenvs
-#          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
-#          restore-keys: |
-#            ${{ runner.os }}-poetry-
-#
-#      - name: Install Dependencies
-#        if: steps.poetry-cache.outputs.cache-hit != 'true'
-#        run: poetry install
-#
-#      - name: Lint with flake8
-#        run: poetry run flake8
-#
-#      - name: Lint with black
-#        run: poetry run black . --check
-#
-#      - name: Test with pytest
-#        run: poetry run pytest
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Poetry
+        uses: Gr1N/setup-poetry@v3
+
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v2
+        id: poetry-cache
+        with:
+          path: ~/.cache/pypoetry/virtualenvs
+          key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install Dependencies
+        if: steps.poetry-cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - name: Lint with flake8
+        run: poetry run flake8
+
+      - name: Lint with black
+        run: poetry run black . --check
+
+      - name: Test with pytest
+        run: poetry run pytest
 
   cd:
-#    needs: ci
+    needs: ci
     runs-on: ubuntu-latest
-#    if: github.ref == 'refs/heads/master' # Running this job only for master branch
+    if: github.ref == 'refs/heads/master' # Running this job only for master branch
     steps:
       - uses: actions/checkout@v2
 
@@ -76,9 +76,9 @@ jobs:
           host: ${{ secrets.HOST }}
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          password: ${{ secrets.PASSWORD }}
           script: |
-            echo ${{ secrets.CR_PAT }} | sudo docker login -u zmrenwu --password-stdin ghcr.io
+            echo ${{ secrets.CR_PAT }} | docker login -u zmrenwu --password-stdin ghcr.io
             cd ~/apps/django-blog-project
-            sudo docker-compose pull
-            sudo docker-compose up -d
+            docker-compose pull
+            docker-compose up -d
