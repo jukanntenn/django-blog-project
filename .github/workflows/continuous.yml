@@ -41,7 +41,7 @@ jobs:
 #        run: poetry run pytest
 
   cd:
-    needs: ci
+#    needs: ci
     runs-on: ubuntu-latest
 #    if: github.ref == 'refs/heads/master' # Running this job only for master branch
     steps:
