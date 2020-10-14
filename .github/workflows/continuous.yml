@@ -70,15 +70,15 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
-#      - name: Deploy to server
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST }}
-#          port: ${{ secrets.PORT }}
-#          username: ${{ secrets.USERNAME }}
-#          key: ${{ secrets.KEY }}
-#          script: |
-#            echo ${{ secrets.TOKEN }} | sudo docker login -u zmrenwu --password-stdin docker.pkg.github.com
-#            cd ~/apps/django-blog-project
-#            sudo docker-compose pull
-#            sudo docker-compose up -d
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          port: ${{ secrets.PORT }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            echo ${{ secrets.CR_PAT }} | sudo docker login -u zmrenwu --password-stdin ghcr.io
+            cd ~/apps/django-blog-project
+            sudo docker-compose pull
+            sudo docker-compose up -d
