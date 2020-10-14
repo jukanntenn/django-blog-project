@@ -47,15 +47,34 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
+      - name: Login to GitHub Packages
+        uses: docker/login-action@v1
         with:
-          host: ${{ secrets.HOST }}
-          port: ${{ secrets.PORT }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          script: |
-            echo ${{ secrets.TOKEN }} | sudo docker login -u zmrenwu --password-stdin docker.pkg.github.com
-            cd ~/apps/django-blog-project
-            sudo docker-compose pull
-            sudo docker-compose up -d
+          registry: docker.pkg.github.com
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push to GitHub Packages
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./compose/production/django/Dockerfile
+          push: true
+          tags: zmrenwu/django-blog-project/django-blog-project:latest
+          cache-from: type=registry,ref=docker.pkg.github.com/zmrenwu/django-blog-project/django-blog-project
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+
+#      - name: Deploy to server
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.HOST }}
+#          port: ${{ secrets.PORT }}
+#          username: ${{ secrets.USERNAME }}
+#          key: ${{ secrets.KEY }}
+#          script: |
+#            echo ${{ secrets.TOKEN }} | sudo docker login -u zmrenwu --password-stdin docker.pkg.github.com
+#            cd ~/apps/django-blog-project
+#            sudo docker-compose pull
+#            sudo docker-compose up -d
