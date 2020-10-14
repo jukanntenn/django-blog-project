@@ -55,7 +55,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            echo ${{ secrets.TOKEN }} | docker login -u zmrenwu --password-stdin docker.pkg.github.com
+            echo ${{ secrets.TOKEN }} | sudo docker login -u zmrenwu --password-stdin docker.pkg.github.com
             cd ~/apps/django-blog-project
             sudo docker-compose pull
             sudo docker-compose up -d
