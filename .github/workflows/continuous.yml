@@ -78,7 +78,7 @@ jobs:
 #          cache-to: type=local,dest=/tmp/.buildx-cache
         run: |
           docker pull ghcr.io/zmrenwu/django-blog-project || true
-          docker build . -t django-blog-project --cache-from=ghcr.io/zmrenwu/django-blog-project
+          docker build . -t django-blog-project --cache-from=ghcr.io/zmrenwu/django-blog-project --file ./compose/production/django/Dockerfile
           docker tag django-blog-project ghcr.io/zmrenwu/django-blog-project
           docker push ghcr.io/zmrenwu/django-blog-project || true
 
