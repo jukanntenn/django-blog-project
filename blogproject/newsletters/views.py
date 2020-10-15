@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.template import loader
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, View
 from favorites.models import Issue
 from ratelimit.decorators import ratelimit
@@ -16,16 +17,13 @@ from .forms import SubscriptionForm
 # 1. 邮件改异步发送
 # 2. 订阅接口限流
 # 3. 邮件推送订阅内容
-# 4. 引入 sortableadmin2，celery，mailhog
+# 4. 引入 sortableadmin2
+@method_decorator(ratelimit(key="ip", rate="3/h", method="POST"), name="post")
 class SubscriptionCreateView(SetHeadlineMixin, FormValidMessageMixin, CreateView):
     form_class = SubscriptionForm
     template_name = "newsletters/subscription.html"
     form_valid_message = "感谢订阅每周精选收藏，确认邮件已发至您的订阅邮箱，请及时前往确认。如长时间没有收到确认邮件，请尝试重新订阅或联系博主。"
     headline = "订阅每周精选收藏"
-
-    @ratelimit(key="ip", rate="3/h", method="POST")
-    def post(self, request, *args, **kwargs):
-        return super().post(request, *args, **kwargs)
 
     def form_valid(self, form):
         response = super().form_valid(form)
