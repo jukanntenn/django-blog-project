@@ -68,7 +68,7 @@ hiredis==1.1.0
 httptools==0.1.1; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy"
 idna==2.10
 importlib-metadata==2.0.0; python_version < "3.8"
-iniconfig==1.0.1
+iniconfig==1.1.1
 invoke==1.4.1
 isort==5.6.0
 jieba==0.42.1
