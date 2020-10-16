@@ -33,7 +33,7 @@ django-dbbackup==3.3.0
 django-debug-toolbar==2.2
 django-environ==0.4.5
 django-extensions==3.0.9
-django-haystack==3.0b2
+django-haystack==3.0
 django-imagekit==4.0.2
 django-ipware==3.0.1
 django-js-asset==1.2.2
