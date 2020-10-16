@@ -132,7 +132,7 @@ typing-extensions==3.7.4.3
 urllib3==1.25.10
 uvicorn==0.11.8
 uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platform_python_implementation != "PyPy"
-vine==1.3.0
+vine==5.0.0
 websockets==8.0.2
 whoosh==2.7.4
 zipp==3.3.0; python_version < "3.8"
