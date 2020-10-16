@@ -1,4 +1,4 @@
-amqp==2.6.1
+amqp==5.0.1
 appdirs==1.4.4
 asgiref==3.2.10
 atomicwrites==1.4.0; sys_platform == "win32"
