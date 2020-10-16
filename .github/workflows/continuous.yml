@@ -83,3 +83,4 @@ jobs:
             cd ~/apps/django-blog-project
             docker-compose pull
             docker-compose up -d
+            docker-compose restart nginx
