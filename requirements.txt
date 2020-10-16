@@ -79,7 +79,7 @@ kombu==4.6.11
 livereload==2.6.3
 lunr==0.5.8
 manuel==1.10.1
-markdown==3.3
+markdown==3.3.1
 markupsafe==1.1.1
 mccabe==0.6.1
 mkdocs==1.1.2
