@@ -90,7 +90,7 @@ packaging==20.4
 paramiko==2.7.2
 pathspec==0.8.0
 pilkit==2.0
-pillow==7.2.0
+pillow==8.0.0
 pluggy==0.13.1
 psycopg2-binary==2.8.6
 py==1.9.0
