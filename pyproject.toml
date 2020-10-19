@@ -44,7 +44,7 @@ django-storages = {version = "^1.10.1", extras = ["dropbox"]}
 django-celery-results = "^1.2.1"
 django-celery-beat = "^2.0.0"
 django-ipware = "^3.0.1"
-sentry-sdk = "^0.18.0"
+sentry-sdk = "^0.19.1"
 django-watchman = "^1.2.0"
 django-maintenance-mode = "^0.15.0"
 
