@@ -24,7 +24,7 @@ django-allauth==0.42.0
 django-anymail==7.2.1
 django-appconf==1.0.4
 django-braces==1.14.0
-django-celery-beat==2.0.0
+django-celery-beat==2.1.0
 django-celery-email==3.0.0
 django-celery-results==1.2.1
 django-constance==2.7.0
