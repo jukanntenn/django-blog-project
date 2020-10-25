@@ -135,4 +135,4 @@ uvloop==0.14.0; sys_platform != "win32" and sys_platform != "cygwin" and platfor
 vine==1.3.0
 websockets==8.0.2
 whoosh==2.7.4
-zipp==3.3.0; python_version < "3.8"
+zipp==3.4.0; python_version < "3.8"
