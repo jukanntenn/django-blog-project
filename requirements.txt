@@ -108,7 +108,7 @@ pytest-sugar==0.9.4
 python-crontab==2.5.1
 python-dateutil==2.8.1
 python3-openid==3.2.0
-pytz==2020.1
+pytz==2020.4
 pyyaml==5.3.1
 redis==3.5.3
 regex==2020.9.27
