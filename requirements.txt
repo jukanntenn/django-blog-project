@@ -2,7 +2,7 @@ amqp==2.6.1
 appdirs==1.4.4
 asgiref==3.2.10
 atomicwrites==1.4.0; sys_platform == "win32"
-attrs==20.2.0
+attrs==20.3.0
 autopep8==1.5.4
 bcrypt==3.2.0
 beautifulsoup4==4.9.3
