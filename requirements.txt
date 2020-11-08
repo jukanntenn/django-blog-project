@@ -88,7 +88,7 @@ nltk==3.5; python_version > "2.7"
 oauthlib==3.1.0
 packaging==20.4
 paramiko==2.7.2
-pathspec==0.8.0
+pathspec==0.8.1
 pilkit==2.0
 pillow==7.2.0
 pluggy==0.13.1
