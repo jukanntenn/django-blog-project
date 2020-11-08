@@ -35,7 +35,7 @@ django-environ==0.4.5
 django-extensions==3.0.9
 django-haystack==3.0b2
 django-imagekit==4.0.2
-django-ipware==3.0.1
+django-ipware==3.0.2
 django-js-asset==1.2.2
 django-maintenance-mode==0.15.0
 django-model-utils==4.0.0
