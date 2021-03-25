@@ -4,6 +4,11 @@ version = "0.3.0"
 description = ""
 authors = ["jukanntenn <jukanntenn@outlook.com>"]
 
+[[tool.poetry.source]]
+name = "douban"
+default = true
+url = "https://pypi.doubanio.com/simple/"
+
 [tool.poetry.dependencies]
 python = ">=3.6, <4"
 django = "^3.1.2"
@@ -24,7 +29,6 @@ django-pure-pagination = "^0.3.0"
 pytz = "^2020.1"
 markdown = "^3.2.2"
 beautifulsoup4 = "^4.9.1"
-pillow = "^7.2.0"
 whoosh = "^2.7.4"
 jieba = "^0.42.1"
 gunicorn = "^20.0.4"
@@ -47,6 +51,7 @@ django-ipware = "^3.0.1"
 sentry-sdk = "^0.18.0"
 django-watchman = "^1.2.0"
 django-maintenance-mode = "^0.15.0"
+pillow = "^8.0.1"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"

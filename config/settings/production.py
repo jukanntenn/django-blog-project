@@ -48,10 +48,12 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # django-dbbackup
 # ------------------------------------------------------------------------------
 # https://django-dbbackup.readthedocs.io/en/master/configuration.html
-DBBACKUP_STORAGE = "storages.backends.dropbox.DropBoxStorage"
-DBBACKUP_STORAGE_OPTIONS = {
-    "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
-}
+# DBBACKUP_STORAGE = "storages.backends.dropbox.DropBoxStorage"
+# DBBACKUP_STORAGE_OPTIONS = {
+#     "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
+# }
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': '/backup/'}
 DBBACKUP_CLEANUP_KEEP = 1
 DBBACKUP_CLEANUP_KEEP_MEDIA = 1
 

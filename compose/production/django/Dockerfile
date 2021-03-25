@@ -1,10 +1,11 @@
-FROM node:14-buster as client-builder
+FROM node:13-buster as client-builder
 
 WORKDIR /app/frontend
 COPY ./frontend/package.json /app/frontend
-RUN npm install && npm cache clean --force
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN cnpm install && cnpm cache clean --force
 COPY . /app
-RUN npm run build
+RUN cnpm run build
 
 FROM python:3.8
 
@@ -17,7 +18,8 @@ RUN apt-get update && apt-get -y install postgresql-client-12
 
 WORKDIR /app
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+COPY get-poetry.py /get-poetry.py
+RUN python /get-poetry.py
 ENV PATH "/root/.poetry/bin:${PATH}"
 RUN poetry config virtualenvs.create false
 COPY poetry.lock pyproject.toml /app/
