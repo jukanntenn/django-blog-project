@@ -2,7 +2,7 @@
 name = "django-blog-project"
 version = "0.3.0"
 description = ""
-authors = ["zmrenwu <zmrenwu@gmail.com>"]
+authors = ["jukanntenn <jukanntenn@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.6, <4"
