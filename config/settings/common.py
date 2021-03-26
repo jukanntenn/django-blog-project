@@ -62,6 +62,7 @@ THIRD_PARTY_APPS = [
     "django_celery_beat",
     "watchman",
     "maintenance_mode",
+    "drf_spectacular",
 ]
 
 LOCAL_APPS = [
@@ -216,6 +217,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 # 分页设置
@@ -266,3 +268,11 @@ WATCHMAN_CHECKS = watchman_constants.DEFAULT_CHECKS + ("watchman.checks.email",)
 WATCHMAN_TOKENS = "django-watchman-token"
 
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = True
+
+# drf-spectacular
+# ------------------------------------------------------------------------------
+SPECTACULAR_SETTINGS = {
+    # path prefix is used for tagging the discovered operations.
+    # use '/api/v[0-9]' for tagging apis like '/api/v1/albums' with ['albums']
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
+}

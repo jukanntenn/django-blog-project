@@ -27,7 +27,7 @@ RUN poetry config virtualenvs.create false
 COPY poetry.lock pyproject.toml /app/
 
 # 将 pypi 源改为豆瓣源
-RUN sed -i '$ a [[tool.poetry.source]]\nname = "douban"\ndefault = true\nurl = "https://pypi.doubanio.com/simple/"\n' pyproject.toml
+#RUN sed -i '$ a [[tool.poetry.source]]\nname = "douban"\ndefault = true\nurl = "https://pypi.doubanio.com/simple/"\n' pyproject.toml
 RUN poetry install --no-root --no-interaction --no-dev
 
 COPY . /app

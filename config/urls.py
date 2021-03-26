@@ -21,14 +21,19 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register("comments", views.CommentViewSet, basename="comment")
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
     path("", include("blog.urls")),
+    path("admin/", admin.site.urls),
     path("courses/", include("courses.urls")),
     path("comments/", include("django_comments.urls")),
     path("notifications/", include("notify.urls")),
@@ -47,6 +52,18 @@ urlpatterns = [
     ),
     path("all/rss/", AllPostsRssFeed()),
     path("api/v1/", include(router.urls)),
+    # API docs
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "swagger/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger",
+    ),
+    path(
+        "redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 ]
 
 if settings.DEBUG:

@@ -12,6 +12,7 @@ from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django_comments import get_form, signals
+from drf_spectacular.utils import extend_schema
 from ipware import get_client_ip
 from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
@@ -101,6 +102,9 @@ class CommentViewSet(
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
+    @extend_schema(
+        summary="Return comments tree",
+    )
     @inject_comment_target
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
@@ -174,6 +178,10 @@ class CommentViewSet(
         )
         return root_comments
 
+    @extend_schema(
+        summary="Create a comment",
+        responses={200: CommentSerializer},
+    )
     @inject_comment_target
     def create(self, request, *args, **kwargs):
         target = self.kwargs.pop("target")
@@ -226,6 +234,10 @@ class CommentViewSet(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
 
+    @extend_schema(
+        summary="Get security data",
+        responses={200: {"pong": "timestamp in milliseconds."}},
+    )
     @inject_comment_target
     @action(methods=["get"], detail=False, url_path="security-data")
     def security_data(self, request, *args, **kwargs):
