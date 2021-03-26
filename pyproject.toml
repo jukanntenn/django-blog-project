@@ -46,7 +46,7 @@ django-ipware = "^3.0.1"
 sentry-sdk = "^0.18.0"
 django-watchman = "^1.2.0"
 django-maintenance-mode = "^0.15.0"
-pillow = "^8.0.1"
+pillow = "^8.1.1"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"
