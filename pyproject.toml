@@ -6,7 +6,7 @@ authors = ["jukanntenn <jukanntenn@outlook.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.6, <4"
-django = "^3.1.2"
+django = "^3.1.6"
 django-allauth = "^0.42.0"
 django-contrib-comments = "^1.9.2"
 django-mptt = "^0.11.0"
