@@ -2,10 +2,9 @@ FROM node:13-buster as client-builder
 
 WORKDIR /app/frontend
 COPY ./frontend/package.json /app/frontend
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-RUN cnpm install && cnpm cache clean --force
+RUN npm install && npm cache clean --force
 COPY . /app
-RUN cnpm run build
+RUN npm run build
 
 FROM python:3.8
 

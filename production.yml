@@ -53,12 +53,12 @@ services:
     image: django_blog_project_production_celerybeat
     command: /start-celerybeat.sh
 
-#  statusok:
-#    image: gadget1999/statusok
-#    depends_on:
-#      - nginx
-#    volumes:
-#      - ./compose/production/statusok/config/config.json:/app/config.json
+  statusok:
+    image: gadget1999/statusok
+    depends_on:
+      - nginx
+    volumes:
+      - ./compose/production/statusok/config/config.json:/app/config.json
 
   nginx:
     build:
