@@ -41,6 +41,7 @@ ADMINS = [("admin", "admin@example.com")]
 MANAGERS = ADMINS
 LANGUAGE_CODE = "en-us"
 
-WEBPACK_LOADER["DEFAULT"]["STATS_FILE"] = os.path.join(  # noqa
-    BASE_DIR, "frontend", "webpack-test-stats.json"  # noqa
+# todo: more elegant way to generate manifest file for test
+WEBPACK_LOADER["MANIFEST_FILE"] = os.path.join(  # noqa
+    BASE_DIR, "frontend", "manifest-test.json"  # noqa
 )
