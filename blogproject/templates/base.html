@@ -1,6 +1,4 @@
-{% load static %}
-{% load blog_extras %}
-{% load render_bundle from webpack_loader %}
+{% load static webpack_loader blog_extras %}
 
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -22,7 +20,7 @@
   {#  <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css" rel="stylesheet">#}
   <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>
   <link rel="stylesheet" href="https://rawgit.com/richleland/pygments-css/master/friendly.css"/>
-  {% render_bundle 'main' 'css' %}
+  {% stylesheet_pack 'main' %}
   {% block extra_links %}{% endblock extra_links %}
   <style>
     [data-linenos]:before {
@@ -74,7 +72,7 @@
         $('table').addClass('table')
     })
 </script>
-{% render_bundle 'main' 'js' %}
+{% javascript_pack 'main' attrs='charset="UTF-8"' %}
 {% block extra_scripts %}{% endblock extra_scripts %}
 </body>
 </html>
