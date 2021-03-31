@@ -41,7 +41,7 @@ uvicorn = "^0.11.8"
 psycopg2-binary = "^2.8.6"
 hiredis = "^1.1.0"
 django-redis = "^4.12.1"
-pygments = "^2.7.1"
+pygments = "^2.7.4"
 django-dbbackup = "^3.3.0"
 django-storages = {version = "^1.10.1", extras = ["dropbox"]}
 django-celery-results = "^1.2.1"
