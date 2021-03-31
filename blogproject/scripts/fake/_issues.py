@@ -1,6 +1,6 @@
-import factory
-from blog.tests.factories import TagFactory
-from favorites.tests.factories import IssueFactory
+# import factory
+# from blog.tests.factories import TagFactory
+# from favorites.tests.factories import IssueFactory
 
 
 def run():

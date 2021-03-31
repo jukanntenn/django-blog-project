@@ -4,7 +4,6 @@ from blog.models import Post
 from comments.tests.factories import BlogCommentFactory
 from courses.models import Material
 from django.contrib.sites.models import Site
-from users.models import User
 
 
 def run():

@@ -9,7 +9,6 @@ from django.contrib.auth import get_user_model
 from favorites.models import Favorite, Issue
 from friendlinks.models import FriendLink
 from newsletters.models import Subscription
-from users.models import User
 
 User = get_user_model()
 
@@ -29,6 +28,8 @@ def run():
             return
 
     User.objects.all().delete()
+    Alert.objects.all().delete()
+    BlogComment.objects.all().delete()
     PostCategory.objects.all().delete()
     Post.objects.all().delete()
     CourseCategory.objects.all().delete()
