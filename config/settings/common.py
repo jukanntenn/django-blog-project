@@ -156,10 +156,11 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = []
 # 不要设置为包含 node_modules 的目录，因为其中会有一些奇怪命名的文件，使得 django 报错
-if os.path.exists(os.path.join(BASE_DIR, "frontend", "dist")):
-    STATICFILES_DIRS.append(os.path.join(BASE_DIR, "frontend", "dist"))
+# todo: use pathlib
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/build"),
+]
 
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -200,15 +201,10 @@ SERVER_EMAIL = env.str("DJANGO_SERVER_EMAIL", default="noreply@zmrenwu.com")
 WATCHMAN_EMAIL_SENDER = SERVER_EMAIL
 WATCHMAN_EMAIL_RECIPIENTS = [a[1] for a in MANAGERS]
 
+# python-webpack-boilerplate
+# https://python-webpack-boilerplate.readthedocs.io/en/latest/setup_with_django/
 WEBPACK_LOADER = {
-    "DEFAULT": {
-        "CACHE": False,
-        "BUNDLE_DIR_NAME": "",  # must end with slash
-        "STATS_FILE": os.path.join(BASE_DIR, "frontend", "webpack-stats.json"),
-        "POLL_INTERVAL": 0.1,
-        "TIMEOUT": None,
-        "IGNORE": [r".+\.hot-update.js", r".+\.map"],
-    }
+    "MANIFEST_FILE": os.path.join(BASE_DIR, "frontend/build/manifest.json"),
 }
 
 REST_FRAMEWORK = {
