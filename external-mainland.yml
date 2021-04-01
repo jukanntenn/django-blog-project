@@ -1,5 +1,9 @@
 version: '3'
 
+volumes:
+  external_postgres_data:
+  external_postgres_data_backups:
+
 services:
   mailhog:
     image: mailhog/mailhog:v1.0.0
@@ -51,3 +55,17 @@ services:
     depends_on:
       - redis
     command: /start-celerybeat.sh
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: django_blog_project_production_postgres
+    container_name: django_blog_project_external_postgres
+    volumes:
+      - external_postgres_data:/var/lib/postgresql/data
+      - external_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5432:5432"

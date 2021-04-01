@@ -7,6 +7,7 @@ from .models import User
 
 
 class UserAdmin(AuthUserAdmin):
+    list_display = ["pk"] + list(AuthUserAdmin.list_display)
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         (

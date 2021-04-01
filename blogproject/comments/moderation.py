@@ -42,7 +42,8 @@ class BlogCommentModerator(CommentModerator):
 
         for data in notification_data:
             notify.send(sender=comment.user, **data)
-            if data["recipient"] == author or not data["recipient"].email_bound:
+            recipient = data["recipient"]
+            if recipient == author or not recipient.email_bound:
                 continue
 
             t = loader.get_template("comments/reply_notification_email.html")
@@ -62,14 +63,10 @@ class BlogCommentModerator(CommentModerator):
                 "fail_silently": True,
                 "html_message": message,
             }
-            threading.Thread(
-                target=data["recipient"].email_user, kwargs=email_data
-            ).start()
+            recipient.email_user(**email_data)
 
         if comment.user != author:
-            threading.Thread(
-                target=self.email, args=[comment, content_object, request]
-            ).start()
+            self.email(comment, content_object, request)
 
 
 moderator = BlogModerator()
