@@ -14,6 +14,7 @@ import mavonEditor from 'mavon-editor'
 
 Vue.use(mavonEditor)
 
+
 new Vue({
     el: '#comments_app',
     render: h => h(App, {

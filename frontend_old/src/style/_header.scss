@@ -1,0 +1,18 @@
+@import "variables";
+
+.blog-header {
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  border-bottom: $width-border solid $color-border;
+  background-color: $color-background;
+  height: $size-base * 5;
+
+  .blog-header-container {
+    padding: 0 $width-gap;
+  }
+}
+
+.blog-header-placeholder {
+  height: $size-base * 5;
+}

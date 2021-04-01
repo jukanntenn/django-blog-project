@@ -1,0 +1,42 @@
+@import "variables";
+
+.widget {
+  a {
+    text-decoration: none;
+  }
+}
+
+.widget-title {
+  margin-top: 0;
+  font-weight: normal;
+}
+
+.widget-body {
+  padding: 1rem 0;
+}
+
+.widget-friend-link {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-top: 0.5rem;
+  }
+}
+
+.widget-medium {
+  dl {
+    margin: 0;
+  }
+
+  dt:not(:nth-of-type(1)) {
+    margin-top: 0.5rem;
+  }
+
+  dd {
+    padding: 0.1rem 0;
+  }
+}

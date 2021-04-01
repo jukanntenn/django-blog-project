@@ -1,0 +1,71 @@
+@import "variables";
+
+.toc-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.toc-wrapper:hover::-webkit-scrollbar {
+  display: initial;
+  width: 4px;
+  transition: background .2s linear;
+}
+
+.toc-wrapper:hover::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, .16);
+  border-radius: 2px;
+}
+
+.toc {
+  padding-right: $width-gap;
+
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li:not(:last-child) {
+      margin-bottom: $width-gap-half / 2;
+    }
+  }
+}
+
+.toc, .toc-mobile {
+  //font-size: $font-size-small;
+
+  > ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    > li:not(:last-child) {
+      margin-bottom: $width-gap-half;
+    }
+  }
+
+  a {
+    color: $color-text-muted;
+
+    &:hover {
+      color: darken($color-text-muted, 100%);
+    }
+  }
+
+  .toc-title {
+    margin: $width-gap-half 0;
+  }
+
+  .toc-item-icon {
+    display: inline-block;
+    color: $color-text-muted;
+    min-width: $width-gap;
+    width: $width-gap;
+  }
+
+  .material-toc {
+    list-style: none;
+    font-size: $font-size-small;
+    padding-left: 3rem;
+    margin-top: $width-gap-half / 2;
+    display: none;
+  }
+}

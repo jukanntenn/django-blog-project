@@ -1,0 +1,8 @@
+.task-list .task-list-item {
+  list-style-type: none !important;
+}
+
+.task-list .task-list-item input[type="checkbox"] {
+  margin: 0 4px 0.25em -20px;
+  vertical-align: middle;
+}

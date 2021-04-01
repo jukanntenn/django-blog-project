@@ -1,0 +1,85 @@
+// 复制于 https://github.com/mobi-css/mobi-theme-base
+// 最新版本 mobi.css 已使用 css 语法重写，此文件为了兼容 sass 版本
+
+// All variables need to be named as ${rule}-${element}-${modifier}
+
+//
+//
+// Colors
+//
+
+// Add !default so _custom.scss can override it
+$color-background: white !default;
+$color-text: #333 !default;
+$color-text-muted: #777 !default;
+$color-border: #ddd !default;
+
+$color-primary: hsl(210, 70%, 50%) !default;
+$color-danger: hsl(0, 65%, 60%) !default;
+$color-success: hsl(120, 40%, 55%) !default;
+$color-warning: hsl(35, 85%, 60%) !default;
+$color-info: hsl(200, 50%, 45%) !default;
+
+$color-primary-faded: scale-color($color-primary, $red: 80%, $green: 80%, $blue: 80%) !default;
+$color-success-faded: scale-color($color-success, $red: 80%, $green: 80%, $blue: 80%) !default;
+$color-warning-faded: scale-color($color-warning, $red: 80%, $green: 80%, $blue: 80%) !default;
+$color-danger-faded: scale-color($color-danger, $red: 80%, $green: 80%, $blue: 80%) !default;
+$color-info-faded: scale-color($color-info, $red: 80%, $green: 80%, $blue: 80%) !default;
+
+$color-background-faded: darken($color-background, 5%) !default;
+
+//
+//
+// Layout
+//
+
+$max-width-container: 800px !default;
+$max-width-container-wider: 1200px !default;
+
+$width-breakpoint: 768px !default;
+
+//
+//
+// Spacing
+//
+
+// The base size, all other size are based on it
+$size-base: 10px !default;
+
+$width-gap: $size-base * 1.5 !default;
+$width-gap-double: $width-gap * 2 !default;
+$width-gap-half: $width-gap * 0.5 !default;
+
+$width-padding-input: $size-base * 0.5 !default;
+
+$width-border-radius: $size-base * 0.3 !default;
+
+$width-border: 1px !default;
+
+$padding-code: 0.2em 0.3em !default;
+
+//
+//
+// Typography
+//
+
+$font-size: $size-base * 1.6 !default;
+
+$font-size-h1: $size-base * 3.2 !default;
+$font-size-h2: $size-base * 2.6 !default;
+$font-size-h3: $size-base * 2.2 !default;
+$font-size-h4: $size-base * 2 !default;
+$font-size-h5: $size-base * 1.8 !default;
+$font-size-h6: $size-base * 1.6 !default;
+
+$font-size-pre: $size-base * 1.3 !default;
+
+$font-size-small: 85% !default;
+
+$line-height: 1.5 !default;
+
+$line-height-input: 1.25 !default;
+// line-height need to be set to pre, not code
+$line-height-pre: 1.2 !default;
+
+$font-weight-bold: 600 !default;
