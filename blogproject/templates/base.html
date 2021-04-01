@@ -16,9 +16,9 @@
   <title>{% block title %}{{ headline }}_{{ config.LOGO }}{% endblock title %}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">
+{#  <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">#}
   {#  <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css" rel="stylesheet">#}
-  <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>
+{#  <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>#}
   <link rel="stylesheet" href="https://rawgit.com/richleland/pygments-css/master/friendly.css"/>
   {% stylesheet_pack 'main' %}
   {% block extra_links %}{% endblock extra_links %}
@@ -60,8 +60,9 @@
 {% include 'inclusions/_footer.html' %}
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
-<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/core-js/3.9.1/minified.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/3.0.7/vue.global.prod.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
 {#<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>#}
 {#<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>#}
 <script>
