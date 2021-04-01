@@ -8,6 +8,7 @@ INSTALLED_APPS += [  # noqa
     "core.tests",
 ]
 
+
 # CACHES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
@@ -18,15 +19,18 @@ CACHES = {
     }
 }
 
+
 # PASSWORDS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
+
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+
 
 # DATABASE
 DATABASES = {
@@ -42,6 +46,6 @@ MANAGERS = ADMINS
 LANGUAGE_CODE = "en-us"
 
 # todo: more elegant way to generate manifest file for test
-WEBPACK_LOADER["MANIFEST_FILE"] = os.path.join(  # noqa
-    BASE_DIR, "frontend", "manifest-test.json"  # noqa
+WEBPACK_LOADER["MANIFEST_FILE"] = str(  # noqa F405
+    ROOT_DIR / "frontend" / "manifest-test.json"  # noqa F405
 )

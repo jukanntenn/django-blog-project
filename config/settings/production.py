@@ -6,9 +6,9 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 
 from .common import *  # noqa
-from .common import env, os
+from .common import env
 
-SECRET_KEY = env("DJANGO_SECRET_KEY")
+SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 DEBUG = False
 
@@ -23,7 +23,7 @@ DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # no
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": env("REDIS_URL"),
+        "LOCATION": env.str("REDIS_URL"),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # Mimicing memcache behavior.
@@ -33,17 +33,19 @@ CACHES = {
     }
 }
 
+
 # django anymail
 ANYMAIL = {
-    "SENDGRID_API_KEY": os.environ.get("DJANGO_ANYMAIL_SENDGRID_API_KEY"),
+    "SENDGRID_API_KEY": env.str("DJANGO_ANYMAIL_SENDGRID_API_KEY"),
 }
-EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
-CELERY_EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
+CELERY_EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 DEFAULT_FROM_EMAIL = "admin@zmrenwu.com"
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 
 # django-dbbackup
 # ------------------------------------------------------------------------------
@@ -57,7 +59,7 @@ DBBACKUP_STORAGE_OPTIONS = {"location": "/backup/"}
 DBBACKUP_CLEANUP_KEEP = 1
 DBBACKUP_CLEANUP_KEEP_MEDIA = 1
 
-CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
 
 # LOGGING
 # ------------------------------------------------------------------------------

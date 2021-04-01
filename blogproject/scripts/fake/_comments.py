@@ -8,7 +8,7 @@ from django.contrib.sites.models import Site
 
 def run():
     first_post = Post.index.all().order_by("-pinned", "-pub_date").first()
-    site = Site.objects.get(name="example")
+    site = Site.objects.get(name="example.com")
     for _ in range(30):
         root_comment = BlogCommentFactory(
             is_public=True, is_removed=False, site=site, content_object=first_post

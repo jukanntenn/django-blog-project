@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: django_blog_project_external_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  redis:
+    image: redis:5.0
+    container_name: django_blog_project_external_redis
+    ports:
+      - "6379:6379"
+
+  celeryworker:
+    build:
+      context: .
+      dockerfile: compose/external/django/DockerfileMainland
+    image: django_blog_project_external_celeryworker
+    container_name: django_blog_project_external_celeryworker
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - READ_ENV_FILE=yes
+      - USE_DOCKER=yes
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - DJANGO_EMAIL_HOST=mailhog
+    depends_on:
+      - redis
+    command: /start-celeryworker.sh
+
+  celerybeat:
+    build:
+      context: .
+      dockerfile: compose/external/django/DockerfileMainland
+    image: django_blog_project_external_celerybeat
+    container_name: django_blog_project_external_celerybeat
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.local
+      - READ_ENV_FILE=yes
+      - USE_DOCKER=yes
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - DJANGO_EMAIL_HOST=mailhog
+    depends_on:
+      - redis
+    command: /start-celerybeat.sh
