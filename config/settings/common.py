@@ -93,6 +93,8 @@ THIRD_PARTY_APPS = [
     "watchman",
     "maintenance_mode",
     "drf_spectacular",
+    "taggit",
+    "taggit_selectize",
 ]
 LOCAL_APPS = [
     "blog.apps.BlogConfig",
@@ -395,3 +397,10 @@ SOCIALACCOUNT_ADAPTER = "users.adapter.SocialAccountAdapter"
 # -----------------------------------------------------------------------
 # https://django-contrib-comments.readthedocs.io/en/latest/settings.html
 COMMENTS_APP = "comments"
+
+
+# taggit-selectize
+# -----------------------------------------------------------------------
+# https://github.com/chhantyal/taggit-selectize
+TAGGIT_TAGS_FROM_STRING = "taggit_selectize.utils.parse_tags"
+TAGGIT_STRING_FROM_TAGS = "taggit_selectize.utils.join_tags"

@@ -35,6 +35,7 @@ router.register("comments", views.CommentViewSet, basename="comment")
 urlpatterns = [
     path("", include("blog.urls")),
     path("admin/", admin.site.urls),
+    path("tagiit/", include("taggit_selectize.urls")),
     path("courses/", include("courses.urls")),
     path("comments/", include("django_comments.urls")),
     path("notifications/", include("notify.urls")),
