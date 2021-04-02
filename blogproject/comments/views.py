@@ -2,6 +2,7 @@ import functools
 from collections import deque
 
 from allauth.socialaccount.models import SocialAccount
+from core.decrators import field_whitelist
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.sites.shortcuts import get_current_site
@@ -12,17 +13,30 @@ from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django_comments import get_form, signals
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, inline_serializer
 from ipware import get_client_ip
-from rest_framework import mixins, status, viewsets
+from rest_framework import mixins, serializers, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 
 from .models import BlogComment
 from .serializers import CommentSerializer, TreeCommentSerializer
+
+
+class IsModerator(IsAdminUser):
+    def has_object_permission(self, request, view, obj):
+        return self.has_permission(request, view)
+
+
+class IsCreator(IsAuthenticated):
+    def has_object_permission(self, request, view, obj):
+        return request.user == obj.user
+
+
+IsModeratorOrCreator = IsModerator | IsCreator
 
 
 def inject_comment_target(func):
@@ -91,11 +105,22 @@ def inject_comment_target(func):
     return wrapper
 
 
+@method_decorator(
+    name="destroy",
+    decorator=extend_schema(
+        summary="Remove comment",
+    ),
+)
 class CommentViewSet(
-    mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    viewsets.GenericViewSet,
 ):
     serializer_class = TreeCommentSerializer
     pagination_class = LimitOffsetPagination
+    queryset = BlogComment.objects.visible()
     permission_classes = [AllowAny]
 
     @method_decorator(csrf_exempt)
@@ -112,6 +137,10 @@ class CommentViewSet(
     def get_permissions(self):
         if self.action == "create":
             return [IsAuthenticated()]
+        if self.action == "destroy":
+            return [IsAuthenticated(), IsModerator()]
+        if self.action in {"update", "partial_update"}:
+            return [IsAuthenticated(), IsModeratorOrCreator()]
         return super().get_permissions()
 
     def get_serializer_class(self):
@@ -120,6 +149,9 @@ class CommentViewSet(
         return CommentSerializer
 
     def filter_queryset(self, queryset):
+        if self.action not in {"list"}:
+            return super().filter_queryset(queryset)
+
         root_comments = super().filter_queryset(queryset)
         qs = (
             BlogComment.objects.get_queryset_descendants(
@@ -163,6 +195,9 @@ class CommentViewSet(
         return root_comments
 
     def get_queryset(self):
+        if self.action not in {"list"}:
+            return super().get_queryset()
+
         target = self.kwargs.pop("target")
         target_ct = self.kwargs.pop("target_ct")
         root_comments = (
@@ -233,6 +268,25 @@ class CommentViewSet(
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
+
+    def perform_destroy(self, instance):
+        instance.is_removed = True
+        instance.save(update_fields=["is_removed"])
+
+    @extend_schema(exclude=True)
+    @field_whitelist(fields=["comment"], raise_exception=True)
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @extend_schema(
+        summary="Edit comment",
+        request=inline_serializer(
+            "UpdateCommentSerializer", fields={"comment": serializers.CharField()}
+        ),
+        responses={200: CommentSerializer},
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
 
     @extend_schema(
         summary="Get security data",
