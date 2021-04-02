@@ -13,9 +13,9 @@ from django.utils.html import escape
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from django_comments import get_form, signals
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema, inline_serializer
 from ipware import get_client_ip
-from rest_framework import mixins, status, viewsets
+from rest_framework import mixins, serializers, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import LimitOffsetPagination
@@ -105,6 +105,12 @@ def inject_comment_target(func):
     return wrapper
 
 
+@method_decorator(
+    name="destroy",
+    decorator=extend_schema(
+        summary="Remove comment",
+    ),
+)
 class CommentViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
@@ -267,9 +273,20 @@ class CommentViewSet(
         instance.is_removed = True
         instance.save(update_fields=["is_removed"])
 
+    @extend_schema(exclude=True)
     @field_whitelist(fields=["comment"], raise_exception=True)
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
+
+    @extend_schema(
+        summary="Edit comment",
+        request=inline_serializer(
+            "UpdateCommentSerializer", fields={"comment": serializers.CharField()}
+        ),
+        responses={200: CommentSerializer},
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
 
     @extend_schema(
         summary="Get security data",
