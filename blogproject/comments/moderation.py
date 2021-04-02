@@ -1,6 +1,7 @@
 from constance import config
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
 from django.template import loader
 from django_comments.moderation import CommentModerator, Moderator
 from notifications.signals import notify
@@ -44,7 +45,8 @@ class BlogCommentModerator(CommentModerator):
             if recipient == author or not recipient.email_bound:
                 continue
 
-            t = loader.get_template("comments/reply_notification_email.html")
+            tmpl_html = loader.get_template("comments/email/reply.html")
+            tmpl_txt = loader.get_template("comments/email/reply.txt")
             c = {
                 "comment": comment,
                 "content_object": content_object,
@@ -53,18 +55,44 @@ class BlogCommentModerator(CommentModerator):
                 + "#c"
                 + str(comment.pk),
             }
-            message = t.render(c)
+            msg_txt = tmpl_txt.render(c)
+            msg_html = tmpl_html.render(c)
             email_data = {
                 "subject": config.REPLY_EMAIL_SUBJECT,
-                "message": message,
+                "message": msg_txt,
                 "from_email": settings.DEFAULT_FROM_EMAIL,
                 "fail_silently": True,
-                "html_message": message,
+                "html_message": msg_html,
             }
             recipient.email_user(**email_data)
 
         if comment.user != author:
             self.email(comment, content_object, request)
+
+    def email(self, comment, content_object, request):
+        if not self.email_notification:
+            return
+        recipient_list = [manager_tuple[1] for manager_tuple in settings.MANAGERS]
+        tmpl_txt = loader.get_template("comments/email/comment.txt")
+        tmpl_html = loader.get_template("comments/email/comment.html")
+        c = {
+            "comment": comment,
+            "content_object": content_object,
+            "site": get_current_site(request),
+            "link": request.build_absolute_uri(content_object.get_absolute_url())
+            + "#c"
+            + str(comment.pk),
+        }
+        msg_txt = tmpl_txt.render(c)
+        msg_html = tmpl_html.render(c)
+        send_mail(
+            subject=config.COMMENT_EMAIL_SUBJECT,
+            message=msg_txt,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=recipient_list,
+            fail_silently=True,
+            html_message=msg_html,
+        )
 
 
 moderator = BlogModerator()

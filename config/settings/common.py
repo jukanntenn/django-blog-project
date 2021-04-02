@@ -301,8 +301,8 @@ DJANGO_NOTIFICATIONS_CONFIG = {
 CONSTANCE_BACKEND = "constance.backends.database.DatabaseBackend"
 CONSTANCE_DATABASE_PREFIX = "constance:djangoblogproject:"
 CONSTANCE_CONFIG = {
-    "COMMENT_EMAIL_SUBJECT": ("", "", str),
     "NEWSLETTERS_SUBSCRIPTION_CONFIRMATION_SUBJECT": ("每日收藏精选订阅确认", "", str),
+    "COMMENT_EMAIL_SUBJECT": ("新的文章评论", "", str),
     "REPLY_EMAIL_SUBJECT": ("评论有了新回复", "", str),
     "LOGO": ("追梦人物的博客", "博客 Logo", str),
     "EMAIL_CONFIRMATION_EXPIRE_DAYS": (3, "验证邮件有效天数", int),

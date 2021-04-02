@@ -1,0 +1,9 @@
+{{ comment.user.name }} 在 {{ content_object.title }} 中发布了评论：
+
+{{ comment.comment_html | safe }}
+
+请复制以下链接到浏览器打开：
+{{ link }}
+
+-----------------------
+发自：{{ site.name }}
