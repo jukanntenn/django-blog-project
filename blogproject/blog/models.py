@@ -8,7 +8,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from model_utils import Choices
 from model_utils.models import TimeStampedModel
-from taggit.managers import TaggableManager
+from taggit_selectize.managers import TaggableManager
 from tags.models import TaggedItem
 
 from .managers import IndexPostManager, PostManager

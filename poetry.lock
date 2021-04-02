@@ -2311,6 +2311,19 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
+name = "taggit-selectize"
+version = "2.10.0"
+description = "django-taggit + selectize.js"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.source]
+type = "legacy"
+url = "https://pypi.doubanio.com/simple"
+reference = "douban"
+
+[[package]]
 name = "termcolor"
 version = "1.1.0"
 description = "ANSII Color formatting for output in terminal."
@@ -2567,7 +2580,7 @@ reference = "douban"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6, <4"
-content-hash = "d40c08ae0e224d9c5b23e51f462708de0dd07d14583751fd69f099d7e51c464c"
+content-hash = "c54b24f963654ab80936fb2b413ec40b5ecdb69d8110a47ef72dc21bec064580"
 
 [metadata.files]
 amqp = [
@@ -3401,6 +3414,10 @@ stone = [
 swapper = [
     {file = "swapper-1.1.2.post1-py3-none-any.whl", hash = "sha256:f3bc7b77b76daf46fcbd41fda9b2f599974ac8c564e129f2a9bae73871c4116e"},
     {file = "swapper-1.1.2.post1.tar.gz", hash = "sha256:51651018fb027354dd27ff38d5eb47a225d3e642c99b04cff878ae65b1872f64"},
+]
+taggit-selectize = [
+    {file = "taggit-selectize-2.10.0.tar.gz", hash = "sha256:4a7d2e7c629a6d258ddc6dee0f153f082b635aa3dfff7d1ce41c256799a9a823"},
+    {file = "taggit_selectize-2.10.0-py2.py3-none-any.whl", hash = "sha256:8f29980a55a15f81a0f72dbe4bd6e7a2ba07856d780187c5653350d0faf460d7"},
 ]
 termcolor = [
     {file = "termcolor-1.1.0.tar.gz", hash = "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"},
