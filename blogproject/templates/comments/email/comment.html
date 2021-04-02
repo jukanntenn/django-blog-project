@@ -1,0 +1,13 @@
+{% extends 'comments/email/base.html' %}
+{% block content %}
+  <p class="comment-translatable">
+    <strong>{{ comment.user.name }}</strong> 在 {{ content_object.title }} 中发布了评论：
+  </p>
+  <p>{{ comment.comment_html | safe }}</p>
+  <p><a href="{{ link }}" target="_blank">点击查看</a></p>
+  <p class="comment-translatable">如果点击无效，请复制以下链接到浏览器打开：<br/>{{ link }}</p>
+  <hr/>
+  <p class="comment-translatable">
+    发自：<a href="{{ site.domain }}">{{ site.name }}</a>
+  </p>
+{% endblock content %}
