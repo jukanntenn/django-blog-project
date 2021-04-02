@@ -1,5 +1,6 @@
 import pytest
 from blog.tests.factories import PostFactory
+from comments.models import BlogComment
 from django.contrib.sites.models import Site
 from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
@@ -12,11 +13,14 @@ from .factories import BlogCommentFactory
 @pytest.mark.django_db
 class TestCommentViewSet:
     def setup_method(self):
-        self.user = User.objects.create_superuser(
+        self.admin_user = User.objects.create_superuser(
             username="test", email="test@blogproject.test", password="12345678"
         )
+        self.normal_user = User.objects.create_user(
+            username="normal", email="normal@blogproject.test", password="12345678"
+        )
         site = Site.objects.get(name="example.com")
-        post = PostFactory(author=self.user, body="正文")
+        post = PostFactory(author=self.admin_user, body="正文")
         self.ct = str(post._meta)
         self.object_pk = post.pk
         self.client = APIClient()
@@ -183,11 +187,81 @@ class TestCommentViewSet:
         assert response.status_code == 201
         assert response.json()["comment_html"] == "<p>test comment</p>"
 
+    def test_remove_comment_permission(self):
+        url = reverse("comment-detail", kwargs={"pk": self.root_comment_a.pk})
+        # anonymous
+        response = self.client.delete(url)
+        assert response.status_code == 401
+
+        # normal user
+        token = Token.objects.get(user=self.normal_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.delete(url)
+        assert response.status_code == 403
+
+        # moderator
+        token = Token.objects.get(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.delete(url)
+        assert response.status_code == 204
+
     def test_remove_comment(self):
-        pass
+        url = reverse("comment-detail", kwargs={"pk": self.root_comment_a.pk})
+        token = Token.objects.get(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.delete(url)
+        assert response.status_code == 204
+        assert BlogComment.objects.get(pk=self.root_comment_a.pk).is_removed
+
+    def test_edit_comment_permission(self):
+        url = reverse("comment-detail", kwargs={"pk": self.root_comment_a.pk})
+        # anonymous
+        response = self.client.patch(url, data={"comment": "New comment content."})
+        assert response.status_code == 401
+
+        # normal user
+        token = Token.objects.get(user=self.normal_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.patch(url, data={"comment": "New comment content."})
+        assert response.status_code == 403
+
+        # moderator
+        token = Token.objects.get(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.patch(
+            url, data={"comment": "New comment content by moderator."}
+        )
+        assert response.status_code == 200
+        c = BlogComment.objects.get(pk=self.root_comment_a.pk)
+        assert c.comment == "New comment content by moderator."
+
+        # creator
+        token = Token.objects.get(user=self.root_comment_a.user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.patch(
+            url, data={"comment": "New comment content by creator."}
+        )
+        assert response.status_code == 200
+        c = BlogComment.objects.get(pk=self.root_comment_a.pk)
+        assert c.comment == "New comment content by creator."
+
+    def test_edit_comment_field_not_in_white_list(self):
+        url = reverse("comment-detail", kwargs={"pk": self.root_comment_a.pk})
+        token = Token.objects.get(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.patch(
+            url, data={"comment": "New comment content.", "is_removed": True}
+        )
+        assert response.status_code == 400
 
     def test_edit_comment(self):
-        pass
+        url = reverse("comment-detail", kwargs={"pk": self.root_comment_a.pk})
+        token = Token.objects.get(user=self.admin_user)
+        self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
+        response = self.client.patch(url, data={"comment": "New comment content."})
+        assert response.status_code == 200
+        c = BlogComment.objects.get(pk=self.root_comment_a.pk)
+        assert c.comment == "New comment content."
 
     def test_highlight_comment(self):
         pass
