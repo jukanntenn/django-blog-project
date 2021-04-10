@@ -65,6 +65,9 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
 {#<script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>#}
 {#<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>#}
+
+{% javascript_pack 'main' attrs='charset="UTF-8"' %}
+{% block extra_scripts %}{% endblock extra_scripts %}
 <script>
     {#hljs.initHighlightingOnLoad();#}
     {#hljs.initLineNumbersOnLoad();#}
@@ -72,8 +75,11 @@
     $(function () {
         $('table').addClass('table')
     })
+
+    const element = document.querySelector('.back-top')
+    console.log(element)
+    new blogComponents.default.BackTop(element)
+    {#console.log(blogComponents.default.BackTopClass)#}
 </script>
-{% javascript_pack 'main' attrs='charset="UTF-8"' %}
-{% block extra_scripts %}{% endblock extra_scripts %}
 </body>
 </html>

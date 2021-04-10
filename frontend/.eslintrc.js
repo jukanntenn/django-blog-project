@@ -27,5 +27,7 @@ module.exports = {
                 printWidth: 120,
             },
         ],
+        '@typescript-eslint/ban-ts-ignore': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
     },
 };
