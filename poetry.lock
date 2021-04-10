@@ -423,7 +423,7 @@ reference = "douban"
 
 [[package]]
 name = "django"
-version = "3.1.4"
+version = "3.1.8"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
@@ -2580,7 +2580,7 @@ reference = "douban"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.6, <4"
-content-hash = "c54b24f963654ab80936fb2b413ec40b5ecdb69d8110a47ef72dc21bec064580"
+content-hash = "2597057cecd6bc97521a58b7713456b330a3d804bb3e403ebd8a4079327482f6"
 
 [metadata.files]
 amqp = [
@@ -2759,8 +2759,8 @@ defusedxml = [
     {file = "defusedxml-0.6.0.tar.gz", hash = "sha256:f684034d135af4c6cbb949b8a4d2ed61634515257a67299e5f940fbaa34377f5"},
 ]
 django = [
-    {file = "Django-3.1.4-py3-none-any.whl", hash = "sha256:5c866205f15e7a7123f1eec6ab939d22d5bde1416635cab259684af66d8e48a2"},
-    {file = "Django-3.1.4.tar.gz", hash = "sha256:edb10b5c45e7e9c0fb1dc00b76ec7449aca258a39ffd613dbd078c51d19c9f03"},
+    {file = "Django-3.1.8-py3-none-any.whl", hash = "sha256:c348b3ddc452bf4b62361f0752f71a339140c777ebea3cdaaaa8fdb7f417a862"},
+    {file = "Django-3.1.8.tar.gz", hash = "sha256:f8393103e15ec2d2d313ccbb95a3f1da092f9f58d74ac1c61ca2ac0436ae1eac"},
 ]
 django-admin-sortable2 = [
     {file = "django-admin-sortable2-0.7.7.tar.gz", hash = "sha256:65c8a02300e178b4a02c904b6f4dce6e528c58f5ecab3907dfba3540da51b862"},
