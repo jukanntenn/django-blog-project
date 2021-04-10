@@ -13,11 +13,6 @@ from ratelimit.decorators import ratelimit
 from .forms import SubscriptionForm
 
 
-# Todo
-# 1. 邮件改异步发送
-# 2. 订阅接口限流
-# 3. 邮件推送订阅内容
-# 4. 引入 sortableadmin2
 @method_decorator(ratelimit(key="ip", rate="3/h", method="POST"), name="post")
 class SubscriptionCreateView(SetHeadlineMixin, FormValidMessageMixin, CreateView):
     form_class = SubscriptionForm
@@ -40,7 +35,6 @@ class SubscriptionCreateView(SetHeadlineMixin, FormValidMessageMixin, CreateView
                 ),
             },
         )
-        # Todo: 异步任务发送
         send_mail(
             subject=subject,
             message=html_message,

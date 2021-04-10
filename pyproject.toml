@@ -53,6 +53,7 @@ django-maintenance-mode = "^0.15.0"
 pillow = "^8.0.1"
 drf-spectacular = "^0.14.0"
 python-webpack-boilerplate = "^0.0.2"
+taggit-selectize = "^2.10.0"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"

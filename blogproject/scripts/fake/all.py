@@ -10,7 +10,6 @@ from . import (
     _materials,
     _post_categories,
     _posts,
-    _site,
     _superuser,
 )
 
@@ -18,7 +17,6 @@ from . import (
 def run():
     with transaction.atomic():
         _clean_db.run()
-        _site.run()
         _superuser.run()
         _post_categories.run()
         _posts.run()

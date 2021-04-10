@@ -97,8 +97,8 @@ media/
 node_modules/
 /static/
 .envs/.production/
-/frontend/webpack-stats.json
 *.pid
 /compose/production/nginx/conf.d/blogproject.conf
 /compose/production/statusok/config/config.json
 /config/settings/maintenance_mode_state.txt
+*.env

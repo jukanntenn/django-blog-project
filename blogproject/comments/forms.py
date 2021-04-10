@@ -25,5 +25,6 @@ class BlogCommentForm(CommentForm):
 
     def get_comment_create_data(self, **kwargs):
         d = super().get_comment_create_data()
+        # todo: validate parent
         d["parent_id"] = self.cleaned_data["parent"]
         return d

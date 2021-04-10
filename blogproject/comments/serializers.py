@@ -16,11 +16,15 @@ class CommentSerializer(serializers.ModelSerializer):
             "user",
             "parent",
             "parent_user",
+            "comment",
             "comment_html",
             "submit_date",
         ]
 
-        extra_kwargs = {"submit_date": {"format": "%Y-%m-%d %H:%M:%S"}}
+        extra_kwargs = {
+            "submit_date": {"format": "%Y-%m-%d %H:%M:%S"},
+            "comment": {"write_only": True},
+        }
 
     def get_parent_user(self, obj):
         if obj.parent:

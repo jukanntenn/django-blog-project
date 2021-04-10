@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import core.views
 from blog.feeds import AllPostsRssFeed
 from blog.sitemaps import sitemaps
 from comments import views
@@ -34,6 +35,7 @@ router.register("comments", views.CommentViewSet, basename="comment")
 urlpatterns = [
     path("", include("blog.urls")),
     path("admin/", admin.site.urls),
+    path("tagiit/", include("taggit_selectize.urls")),
     path("courses/", include("courses.urls")),
     path("comments/", include("django_comments.urls")),
     path("notifications/", include("notify.urls")),
@@ -72,4 +74,7 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += [
         path("__debug__", include(debug_toolbar.urls)),
+        # email debug
+        path("_debug/email/single/", core.views.SingleEmailDebugView.as_view()),
+        path("_debug/email/mass/", core.views.MassEmailDebugView.as_view()),
     ]
