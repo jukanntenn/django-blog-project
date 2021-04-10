@@ -2,10 +2,10 @@ import 'mobi.css';
 import './styles.scss';
 
 import BackTop from './scripts/backtop';
-import SideBar from "@/scripts/sidebar";
+import Offcanvas from "@/scripts/offcanvas";
 import Comment from './Comment.vue';
-import { createApp } from 'vue';
+import {createApp} from 'vue';
 
 createApp(Comment).mount('#comments_app');
 
-export default { BackTop, SideBar };
+export default {BackTop, Offcanvas};

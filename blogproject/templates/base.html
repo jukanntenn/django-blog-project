@@ -16,16 +16,16 @@
   <title>{% block title %}{{ headline }}_{{ config.LOGO }}{% endblock title %}</title>
 
   <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
-{#  <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">#}
+  {#  <link rel="stylesheet" href="https://unpkg.com/mavon-editor@2.7.5/dist/css/index.css">#}
   {#  <link href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css" rel="stylesheet">#}
-{#  <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>#}
-{#  <link rel="stylesheet" href="https://rawgit.com/richleland/pygments-css/master/friendly.css"/>#}
+  {#  <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css"/>#}
+  {#  <link rel="stylesheet" href="https://rawgit.com/richleland/pygments-css/master/friendly.css"/>#}
   {% stylesheet_pack 'main' %}
   {% block extra_links %}{% endblock extra_links %}
   <style>
-    [data-linenos]:before {
-      content: attr(data-linenos);
-    }
+      [data-linenos]:before {
+          content: attr(data-linenos);
+      }
   </style>
   {% block extra_styles %}{% endblock extra_styles %}
   <script>
@@ -77,11 +77,11 @@
     console.log(element)
     new blogComponents.default.BackTop(element)
 
-  const wrapper = document.querySelector(".blog-aside-mobile-wrapper");
-  const trigger = document.querySelector(".blog-aside-trigger");
-  console.log(wrapper);
-  console.log(trigger);
-  new blogComponents.default.SideBar(trigger, wrapper);
+    const wrapper = document.querySelector(".blog-aside-mobile-wrapper");
+    const trigger = document.querySelector(".blog-aside-trigger");
+    console.log(wrapper);
+    console.log(trigger);
+    new blogComponents.default.Offcanvas(wrapper, trigger);
 </script>
 </script>
 </body>
