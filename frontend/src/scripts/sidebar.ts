@@ -26,13 +26,14 @@ class SideBar {
         this._trigger = trigger;
         this._layer = document.body;
         this._wrapper = wrapper;
-        this.toggle = this.toggle.bind(this);
         this._init();
+        this.toggle = this.toggle.bind(this);
+
     }
 
     _init(): void {
-        this._trigger.addEventListener('click', this.show.bind(this));
-        this._layer.addEventListener('click', this.hidden.bind(this));
+        this._trigger && this._trigger.addEventListener('click', this.show.bind(this),false);
+       // this._layer.addEventListener('click', this.hidden.bind(this));
     }
 
     toggle(): void {
