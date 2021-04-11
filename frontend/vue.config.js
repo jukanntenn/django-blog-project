@@ -1,7 +1,6 @@
 const path = require('path');
 const WebpackAssetsManifest = require('webpack-assets-manifest');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-// const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     outputDir: path.resolve(__dirname, './build'),

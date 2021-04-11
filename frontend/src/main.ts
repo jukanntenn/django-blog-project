@@ -1,11 +1,25 @@
-import 'mobi.css';
+// Must import the processed file from dist instead of src
+import 'mobi.css/dist/mobi.css';
+import './style/colorful.css';
 import './styles.scss';
 
 import BackTop from './scripts/backtop';
-import Offcanvas from "@/scripts/offcanvas";
-import Comment from './Comment.vue';
-import {createApp} from 'vue';
+import Offcanvas from '@/scripts/offcanvas';
+import './scripts/search';
+import './scripts/toc';
+import Comment from './CommentApp.vue';
+import { createApp } from 'vue';
 
-createApp(Comment).mount('#comments_app');
+// @ts-ignore
+const {contentType, objectPk, token,numComments, numCommentParticipants} = jscontext
 
-export default {BackTop, Offcanvas};
+createApp(Comment, {
+    contentType,
+    objectPk,
+    token,
+    numComments,
+    numCommentParticipants,
+}).mount('#comment_app');
+
+
+export default { BackTop, Offcanvas };

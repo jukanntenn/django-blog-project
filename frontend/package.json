@@ -1,13 +1,13 @@
 {
-  "name": "blog-comment",
+  "name": "django-blog-project-frontend",
   "version": "0.1.0",
-  "private": false,
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
-  "main": "build/comment.js",
+  "main": "src/main.ts",
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",

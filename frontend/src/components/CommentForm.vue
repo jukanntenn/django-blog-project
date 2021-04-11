@@ -1,14 +1,11 @@
 <template>
     <div class="flex-center comment-form">
-        <div class="unit-1">
-            <mavon-editor
+        <div class="unit-1 form">
+            <textarea
                 v-model="value"
-                :boxShadow="false"
-                :subfield="true"
-                placeholder="评论..."
-                :autofocus="false"
-                :toolbars="this.toolbars"
-            />
+                placeholder="评论（支持 Markdown 语法）..."
+                rows="5"
+            ></textarea>
             <button class="btn btn-default float-right" @click="submitComment">
                 <i class="ri-send-plane-fill" aria-hidden="true"></i> 发布
             </button>
@@ -31,18 +28,6 @@ export default {
     data() {
         return {
             value: '',
-            toolbars: {
-                bold: true, // 粗体
-                italic: true, // 斜体
-                strikethrough: true, // 中划线
-                quote: true, // 引用
-                ol: true, // 有序列表
-                ul: true, // 无序列表
-                link: true, // 链接
-                // imagelink: true, // 图片链接
-                code: true, // code
-                preview: true, // 预览
-            },
             security_data: null,
         };
     },
