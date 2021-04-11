@@ -1,51 +1,62 @@
-@import "variables";
+@import 'variables';
 
 .blog-aside-trigger {
-  cursor: pointer;
-  margin-right: $width-gap-double;
+    cursor: pointer;
+    margin-right: $width-gap-double;
 }
 
 .blog-aside-mobile-wrapper {
-  display: block;
-  background-color: $color-background;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 70%;
-  max-width: 70%;
-  margin-left: -100%;
-  transition: margin-left 500ms;
-  z-index: 900;
-
-
-  .sidebar-header {
-    height: $size-base * 5;
-    border-bottom: $width-border solid $color-border;
-    padding: 0 $width-gap;
-
-    .sidebar-title {
-      color: $color-text;
-      font-size: $font-size-h5;
+    display: block;
+    background-color: $color-background;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 70%;
+    max-width: 70%;
+    margin-left: -100%;
+    transition: margin-left 500ms;
+    z-index: 900;
+    &.show {
+        margin-left: 0;
     }
-  }
 
-  .sidebar-body {
-    padding: $width-gap;
-  }
+    .sidebar-header {
+        height: $size-base * 5;
+        border-bottom: $width-border solid $color-border;
+        padding: 0 $width-gap;
+
+        .sidebar-title {
+            color: $color-text;
+            font-size: $font-size-h5;
+        }
+    }
+
+    .sidebar-body {
+        padding: $width-gap;
+    }
 }
 
-.overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: $color-background-faded;
-  opacity: 0;
-  transition: opacity 500ms;
-  z-index: 800;
+// .overlay {
+//     display: none;
+//     position: fixed;
+//     top: 0;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     background-color: $color-background-faded;
+//     opacity: 0;
+//     transition: opacity 500ms;
+//     z-index: 800;
+// }
+body.dropback::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 800;
+    width: 100vw;
+    height: 100vh;
+    content: "";
+    background-color: rgba(0,0,0,.5);
 }
-

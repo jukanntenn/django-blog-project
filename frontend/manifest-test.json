@@ -1,18 +1,16 @@
 {
-  ".gitkeep": "http://localhost:9091/vendors/images/.gitkeep",
   "entrypoints": {
     "main": {
       "assets": {
+        "css": [
+          "/static/css/main.css"
+        ],
         "js": [
-          "http://localhost:9091/js/runtime.js",
-          "http://localhost:9091/runtime.b4a55a83abd4865204a4.hot-update.js"
+          "/static/js/main.js"
         ]
       }
     }
   },
-  "js/runtime.js": "http://localhost:9091/js/runtime.js",
-  "runtime.b4a55a83abd4865204a4.hot-update.json": "http://localhost:9091/runtime.b4a55a83abd4865204a4.hot-update.json",
-  "runtime.js": "http://localhost:9091/runtime.b4a55a83abd4865204a4.hot-update.js",
-  "vendors/images/sample.jpg": "http://localhost:9091/vendors/images/sample.jpg",
-  "webpack.png": "http://localhost:9091/vendors/images/webpack.png"
+  "main.css": "/static/css/main.css",
+  "main.js": "/static/js/main.js"
 }
