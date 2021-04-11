@@ -1,8 +1,15 @@
+{% load static %}
+
 <footer class="bg-white py-5 mt-5 text-small text-muted">
   <div class="flex-center">
     <div>&copy; 2018-2021 {{ config.LOGO }}</div>
   </div>
   <div class="flex-center">
     <div><a href="https://beian.miit.gov.cn/" target="_blank">浙ICP备2020042435号-1</a></div>
+  </div>
+  <div class="flex-center">
+    <div>本网站由<a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img
+        src="{% static 'blog/images/upyun_logo.png' %}" alt="又拍云 logo" style="height: 32px"></a>提供 CDN 加速/云存储服务
+    </div>
   </div>
 </footer>
