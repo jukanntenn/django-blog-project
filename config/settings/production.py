@@ -54,7 +54,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # DBBACKUP_STORAGE_OPTIONS = {
 #     "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
 # }
-DBBACKUP_STORAGE = "django_storage_qcloud.storage.QcloudStorage"
+DBBACKUP_STORAGE = "core.storage.QcloudStorage"
 DBBACKUP_CLEANUP_KEEP = 2
 DBBACKUP_CLEANUP_KEEP_MEDIA = 2
 
