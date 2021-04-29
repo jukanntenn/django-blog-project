@@ -39,7 +39,7 @@ class TencentCOSStorage(Storage):
 
     def __init__(self, options=None):
         if options is None:
-            options = settings.TECENT_COS_OPTIONS
+            options = settings.TENCENT_COS_OPTIONS
 
         self.bucket = options["BUCKET"]
         self.root_path = options.get("ROOT_PATH", "/")

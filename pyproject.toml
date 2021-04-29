@@ -54,7 +54,6 @@ pillow = "^8.0.1"
 drf-spectacular = "^0.14.0"
 python-webpack-boilerplate = "^0.0.2"
 taggit-selectize = "^2.10.0"
-django-storage-qcloud = "^0.2.1"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"

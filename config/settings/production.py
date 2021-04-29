@@ -54,7 +54,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # DBBACKUP_STORAGE_OPTIONS = {
 #     "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
 # }
-DBBACKUP_STORAGE = "core.storage.QcloudStorage"
+DBBACKUP_STORAGE = "core.storage.TencentCOSStorage"
 DBBACKUP_CLEANUP_KEEP = 2
 DBBACKUP_CLEANUP_KEEP_MEDIA = 2
 
@@ -124,9 +124,9 @@ WATCHMAN_TOKENS = env.str("DJANGO_WATCHMAN_TOKENS")
 # django-storage-qcloud
 # ------------------------------------------------------------------------------
 # https://github.com/fordguo/django-storage-qcloud
-QCLOUD_STORAGE_OPTION = {
-    "SecretId": env.str("QCLOUD_STORAGE_OPTION_SECRET_ID"),
-    "SecretKey": env.str("QCLOUD_STORAGE_OPTION_SECRET_KEY"),
-    "Region": env.str("QCLOUD_STORAGE_OPTION_REGION"),
-    "Bucket": env.str("QCLOUD_STORAGE_OPTION_BUCKET"),
+TENCENT_COS_OPTIONS = {
+    "SECRETID": env.str("TENCENT_COS_OPTIONS_SECRETID"),
+    "SECRETKEY": env.str("TENCENT_COS_OPTIONS_SECRETKEY"),
+    "REGION": env.str("TENCENT_COS_OPTIONS_REGION"),
+    "BUCKET": env.str("TENCENT_COS_OPTIONS_BUCKET"),
 }
