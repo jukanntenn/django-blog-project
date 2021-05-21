@@ -119,7 +119,11 @@ class TencentCOSStorage(Storage):
 
     def _save(self, name, content):
         self.client.upload_file_from_buffer(
-            Bucket=self.bucket, Key=self._full_path(name), Body=content
+            Bucket=self.bucket,
+            Key=self._full_path(name),
+            Body=content,
+            PartSize=5,
+            MAXThread=10,
         )
         return name
 
