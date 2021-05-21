@@ -49,6 +49,7 @@ class TencentCOSStorage(Storage):
             SecretId=options["SECRETID"],
             SecretKey=options["SECRETKEY"],
             Token=options.get("TOKEN"),
+            Timeout=120,
         )
         self.client = CosS3Client(config)
 
