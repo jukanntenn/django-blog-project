@@ -1,8 +1,9 @@
 import re
+import warnings
 from functools import wraps
+from html.parser import HTMLParser
 
 import markdown
-from bs4 import BeautifulSoup
 from constance import config
 from django.apps import apps
 from django.core import signing
@@ -45,6 +46,37 @@ SuperFencesBlockPreprocessor.highlight = _highlight(
 )
 
 
+class TOCHTMLParser(HTMLParser):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._ul_cnt = 0
+        self._ul_start_line = None
+        self._ul_start_pos = None
+        self._ul_end_line = None
+        self._ul_end_pos = None
+        self.html = ""
+
+    def error(self, message):
+        warnings.warn(message)
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "ul":
+            if self._ul_cnt == 0:
+                self._ul_start_line, self._ul_start_pos = self.getpos()
+            self._ul_cnt += 1
+
+    def handle_endtag(self, tag):
+        if tag == "ul":
+            self._ul_cnt -= 1
+            if self._ul_cnt == 0:
+                self._ul_end_line, self._ul_end_pos = self.getpos()
+                lines = self.rawdata.split("\n")
+                lines = lines[self._ul_start_line - 1 : self._ul_end_line]
+                lines[-1] = lines[-1][: self._ul_end_pos]
+                lines[0] = lines[0][self._ul_start_pos + 4 :]
+                self.html = "".join(lines)
+
+
 def generate_rich_content(value, *, toc_depth=2, toc_url=""):
     md = markdown.Markdown(
         extensions=[
@@ -66,10 +98,9 @@ def generate_rich_content(value, *, toc_depth=2, toc_url=""):
     content = md.convert(value)
     toc = md.toc
 
-    soup = BeautifulSoup(toc, "html.parser")
-    # must use contents, not children
-    # if soup.ul.contents:
-    toc = "".join(map(str, soup.ul.contents)).strip()
+    parser = TOCHTMLParser()
+    parser.feed(toc)
+    toc = parser.html
 
     if toc_url:
 
