@@ -10,7 +10,7 @@ default = true
 url = "https://pypi.doubanio.com/simple/"
 
 [tool.poetry.dependencies]
-python = ">=3.6, <4"
+python = ">=3.7, <4"
 django = "^3.1.8"
 django-allauth = "^0.42.0"
 django-contrib-comments = "^1.9.2"
@@ -43,7 +43,6 @@ hiredis = "^1.1.0"
 django-redis = "^4.12.1"
 pygments = "^2.8.1"
 django-dbbackup = "^3.3.0"
-django-storages = {version = "^1.10.1", extras = ["dropbox"]}
 django-celery-results = "^1.2.1"
 django-celery-beat = "^2.0.0"
 django-ipware = "^3.0.1"
@@ -54,7 +53,7 @@ pillow = "^8.0.1"
 drf-spectacular = "^0.14.0"
 python-webpack-boilerplate = "^0.0.2"
 taggit-selectize = "^2.10.0"
-cos-python-sdk-v5 = "^1.9.4"
+django-tencentcos-storage = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"

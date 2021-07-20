@@ -45,11 +45,28 @@ DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#caches
 CACHES = {"default": env.cache("REDIS_URL", default="locmemcache://")}
 
-
-DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
-DBBACKUP_STORAGE_OPTIONS = {"location": "backups"}
-
 # Celery
 # ------------------------------------------------------------------------------
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#task-eager-propagates
 CELERY_TASK_EAGER_PROPAGATES = True
+
+# django-dbbackup
+# ------------------------------------------------------------------------------
+# https://django-dbbackup.readthedocs.io/en/master/configuration.html
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": "backups"}
+# DBBACKUP_STORAGE = "tencentcos_storage.TencentCOSStorage"
+# DBBACKUP_CLEANUP_KEEP = 2
+# DBBACKUP_CLEANUP_KEEP_MEDIA = 2
+
+# django-tencentcos-storage
+# ------------------------------------------------------------------------------
+# https://github.com/jukanntenn/django-tencentcos-storage
+# TENCENTCOS_STORAGE = {
+#     "BUCKET": env.str("TENCENTCOS_STORAGE_BUCKET"),
+#     "CONFIG": {
+#         "Region": env.str("TENCENTCOS_STORAGE_CONFIG_Region"),
+#         "SecretId": env.str("TENCENTCOS_STORAGE_CONFIG_SecretId"),
+#         "SecretKey": env.str("TENCENTCOS_STORAGE_CONFIG_SecretKey"),
+#     },
+# }

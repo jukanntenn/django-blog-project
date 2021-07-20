@@ -50,11 +50,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # django-dbbackup
 # ------------------------------------------------------------------------------
 # https://django-dbbackup.readthedocs.io/en/master/configuration.html
-# DBBACKUP_STORAGE = "storages.backends.dropbox.DropBoxStorage"
-# DBBACKUP_STORAGE_OPTIONS = {
-#     "oauth2_access_token": env.str("DJANGO_DBBACKUP_DROPBOX_OAUTH2_ACCESS_TOKEN"),
-# }
-DBBACKUP_STORAGE = "core.storage.TencentCOSStorage"
+DBBACKUP_STORAGE = "tencentcos_storage.TencentCOSStorage"
 DBBACKUP_CLEANUP_KEEP = 2
 DBBACKUP_CLEANUP_KEEP_MEDIA = 2
 
@@ -121,12 +117,15 @@ if SENTRY_DSN != "":
 WATCHMAN_TOKENS = env.str("DJANGO_WATCHMAN_TOKENS")
 
 
-# django-storage-qcloud
+# django-tencentcos-storage
 # ------------------------------------------------------------------------------
-# https://github.com/fordguo/django-storage-qcloud
-TENCENT_COS_OPTIONS = {
-    "SECRETID": env.str("TENCENT_COS_OPTIONS_SECRETID"),
-    "SECRETKEY": env.str("TENCENT_COS_OPTIONS_SECRETKEY"),
-    "REGION": env.str("TENCENT_COS_OPTIONS_REGION"),
-    "BUCKET": env.str("TENCENT_COS_OPTIONS_BUCKET"),
+# https://github.com/jukanntenn/django-tencentcos-storage
+TENCENTCOS_STORAGE = {
+    "BUCKET": env.str("TENCENTCOS_STORAGE_BUCKET"),
+    "CONFIG": {
+        "Region": env.str("TENCENTCOS_STORAGE_CONFIG_Region"),
+        "SecretId": env.str("TENCENTCOS_STORAGE_CONFIG_SecretId"),
+        "SecretKey": env.str("TENCENTCOS_STORAGE_CONFIG_SecretKey"),
+        "Timeout": env.int("TENCENTCOS_STORAGE_CONFIG_Timeout", 300),
+    },
 }

@@ -193,7 +193,6 @@ python-versions = ">=3.6"
 [package.dependencies]
 appdirs = "*"
 click = ">=7.1.2"
-dataclasses = {version = ">=0.6", markers = "python_version < \"3.7\""}
 mypy_extensions = ">=0.4.3"
 pathspec = ">=0.6,<1"
 regex = ">=2020.1.8"
@@ -357,7 +356,7 @@ reference = "douban"
 
 [[package]]
 name = "cos-python-sdk-v5"
-version = "1.9.4"
+version = "1.9.7"
 description = "cos-python-sdk-v5"
 category = "main"
 optional = false
@@ -425,19 +424,6 @@ pep8test = ["black", "flake8", "flake8-import-order", "pep8-naming"]
 sdist = ["setuptools-rust (>=0.11.4)"]
 ssh = ["bcrypt (>=3.1.5)"]
 test = ["pytest (>=6.0)", "pytest-cov", "pytest-subtests", "pytest-xdist", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,!=3.79.2)"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
-name = "dataclasses"
-version = "0.8"
-description = "A backport of the dataclasses module for Python 3.6"
-category = "dev"
-optional = false
-python-versions = ">=3.6, <3.7"
 
 [package.source]
 type = "legacy"
@@ -953,31 +939,6 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
-name = "django-storages"
-version = "1.11.1"
-description = "Support for many storage backends in Django"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-
-[package.dependencies]
-Django = ">=2.2"
-dropbox = {version = ">=7.2.1", optional = true, markers = "extra == \"dropbox\""}
-
-[package.extras]
-azure = ["azure-storage-blob (>=1.3.1,<12.0.0)"]
-boto3 = ["boto3 (>=1.4.4)"]
-dropbox = ["dropbox (>=7.2.1)"]
-google = ["google-cloud-storage (>=1.15.0)"]
-libcloud = ["apache-libcloud"]
-sftp = ["paramiko"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
 name = "django-taggit"
 version = "1.3.0"
 description = "django-taggit is a reusable Django application for simple tagging."
@@ -987,6 +948,22 @@ python-versions = ">=3.5"
 
 [package.dependencies]
 Django = ">=1.11"
+
+[package.source]
+type = "legacy"
+url = "https://pypi.doubanio.com/simple"
+reference = "douban"
+
+[[package]]
+name = "django-tencentcos-storage"
+version = "0.1.0"
+description = "A django app for Tencent Cloud Object Storage. 腾讯云对象存储（COS）服务 for Django。"
+category = "main"
+optional = false
+python-versions = ">=3.7,<4.0"
+
+[package.dependencies]
+cos-python-sdk-v5 = ">=1.9.4,<2.0.0"
 
 [package.source]
 type = "legacy"
@@ -1073,24 +1050,6 @@ inflection = ">=0.3.1"
 jsonschema = ">=2.6.0"
 PyYAML = ">=5.1"
 uritemplate = ">=2.0.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
-name = "dropbox"
-version = "11.6.0"
-description = "Official Dropbox API Client"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-requests = ">=2.16.2"
-six = ">=1.12.0"
-stone = ">=2"
 
 [package.source]
 type = "legacy"
@@ -1821,19 +1780,6 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
-name = "ply"
-version = "3.11"
-description = "Python Lex & Yacc"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
 name = "poyo"
 version = "0.5.0"
 description = "A lightweight YAML Parser for Python. 🐓"
@@ -2363,23 +2309,6 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
-name = "stone"
-version = "3.2.1"
-description = "Stone is an interface description language (IDL) for APIs."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-ply = ">=3.4"
-six = ">=1.3.0"
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
 name = "swapper"
 version = "1.1.2.post1"
 description = "The unofficial Django swappable models API."
@@ -2668,8 +2597,8 @@ reference = "douban"
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">=3.6, <4"
-content-hash = "b91eca505d6b65afdec32194879c879642ebc6ea725fc1d7ed9bbf89eeb10838"
+python-versions = ">=3.7, <4"
+content-hash = "32fbccf2ed23cc262a17f2b828614bcdbe059604eeee894833f90330f393cb05"
 
 [metadata.files]
 amqp = [
@@ -2789,8 +2718,8 @@ cookiecutter = [
     {file = "cookiecutter-1.7.2.tar.gz", hash = "sha256:efb6b2d4780feda8908a873e38f0e61778c23f6a2ea58215723bcceb5b515dac"},
 ]
 cos-python-sdk-v5 = [
-    {file = "cos-python-sdk-v5-1.9.4.tar.gz", hash = "sha256:36791495c085db0bc93a97f4ac5bf3c618261f0ee330adafb7ce58fdc6418f94"},
-    {file = "cos_python_sdk_v5-1.9.4-py3-none-any.whl", hash = "sha256:232a39fa0c13824baa0cedbf353ab85181a7f2a83bd77e1283e2a3e7b81a688d"},
+    {file = "cos-python-sdk-v5-1.9.7.tar.gz", hash = "sha256:e198b94933f767de70037091f04c9fa2aefa4c066f878d40610133601ff9f239"},
+    {file = "cos_python_sdk_v5-1.9.7-py3-none-any.whl", hash = "sha256:fc3fb9ec87e8b9a41cc47a2d985e61e6d8afc31f0f5eadd518728b8ac12b3386"},
 ]
 coverage = [
     {file = "coverage-5.5-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:b6d534e4b2ab35c9f93f46229363e17f63c53ad01330df9f2d6bd1187e5eaacf"},
@@ -2862,10 +2791,6 @@ cryptography = [
     {file = "cryptography-3.4.7-pp37-pypy37_pp73-manylinux2010_x86_64.whl", hash = "sha256:7ec5d3b029f5fa2b179325908b9cd93db28ab7b85bb6c1db56b10e0b54235177"},
     {file = "cryptography-3.4.7-pp37-pypy37_pp73-manylinux2014_x86_64.whl", hash = "sha256:ee77aa129f481be46f8d92a1a7db57269a2f23052d5f2433b4621bb457081cc9"},
     {file = "cryptography-3.4.7.tar.gz", hash = "sha256:3d10de8116d25649631977cb37da6cbdd2d6fa0e0281d014a5b7d337255ca713"},
-]
-dataclasses = [
-    {file = "dataclasses-0.8-py3-none-any.whl", hash = "sha256:0201d89fa866f68c8ebd9d08ee6ff50c0b255f8ec63a71c16fda7af82bb887bf"},
-    {file = "dataclasses-0.8.tar.gz", hash = "sha256:8479067f342acf957dc82ec415d355ab5edb7e7646b90dc6e2fd1d96ad084c97"},
 ]
 defusedxml = [
     {file = "defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"},
@@ -2980,13 +2905,13 @@ django-redis = [
 django-silk = [
     {file = "django_silk-4.1.0-py2.py3-none-any.whl", hash = "sha256:a331e55618fa62eaf3cf5a63f31bc1e91205efbeeca5e587c577498b0e251ed8"},
 ]
-django-storages = [
-    {file = "django-storages-1.11.1.tar.gz", hash = "sha256:c823dbf56c9e35b0999a13d7e05062b837bae36c518a40255d522fbe3750fbb4"},
-    {file = "django_storages-1.11.1-py3-none-any.whl", hash = "sha256:f28765826d507a0309cfaa849bd084894bc71d81bf0d09479168d44785396f80"},
-]
 django-taggit = [
     {file = "django-taggit-1.3.0.tar.gz", hash = "sha256:4a833bf71f4c2deddd9745924eee53be1c075d7f0020a06f12e29fa3d752732d"},
     {file = "django_taggit-1.3.0-py3-none-any.whl", hash = "sha256:609b0223d8a652f3fae088b7fd29f294fdadaca2d7931d45c27d6c59b02fdf31"},
+]
+django-tencentcos-storage = [
+    {file = "django-tencentcos-storage-0.1.0.tar.gz", hash = "sha256:d8506403dd3e75b7c3384ff1e748a1b9aa65eb57534f832edff93b20f8723944"},
+    {file = "django_tencentcos_storage-0.1.0-py3-none-any.whl", hash = "sha256:c1e324d68420f7f9b0057b5ab9401a4b79dfcc19eaf680d98f8f08c35f85eddb"},
 ]
 django-test-plus = [
     {file = "django-test-plus-1.4.0.tar.gz", hash = "sha256:9c3ca75f9ebb0b72d0a16e98b6d80e94b3d0ff007be5fc946d16b423b808bf16"},
@@ -3006,11 +2931,6 @@ djangorestframework = [
 drf-spectacular = [
     {file = "drf-spectacular-0.14.0.tar.gz", hash = "sha256:df3d5a124b7e2f797af23af2c7975815f86dba25d4251432997cc2f7ba87ce41"},
     {file = "drf_spectacular-0.14.0-py2.py3-none-any.whl", hash = "sha256:f757586d1a202e8f7c767cb1327c79cfffa3ba53b8c5dff1dd586e8dcb9c8f21"},
-]
-dropbox = [
-    {file = "dropbox-11.6.0-py2-none-any.whl", hash = "sha256:8af6491becef689af00739526f5d90c68c784914fce4e5dcf32b32d2c905338d"},
-    {file = "dropbox-11.6.0-py3-none-any.whl", hash = "sha256:a4b5c02c9d4ede0df4205fc2db305457f3d6936c3577554f9016b9fa554cacad"},
-    {file = "dropbox-11.6.0.tar.gz", hash = "sha256:0552b10915bc54711cde41461fb4166735a422d4fe1d45a20cf100b2cb7b5dec"},
 ]
 fabric = [
     {file = "fabric-2.6.0-py2.py3-none-any.whl", hash = "sha256:7a71714b8b8f28cf828eceb155196f43ebac1bd4c849b7161ed5993d1cbcaa40"},
@@ -3309,10 +3229,6 @@ pluggy = [
     {file = "pluggy-0.13.1-py2.py3-none-any.whl", hash = "sha256:966c145cd83c96502c3c3868f50408687b38434af77734af1e9ca461a4081d2d"},
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
-ply = [
-    {file = "ply-3.11-py2.py3-none-any.whl", hash = "sha256:096f9b8350b65ebd2fd1346b12452efe5b9607f7482813ffca50c22722a807ce"},
-    {file = "ply-3.11.tar.gz", hash = "sha256:00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3"},
-]
 poyo = [
     {file = "poyo-0.5.0-py2.py3-none-any.whl", hash = "sha256:3e2ca8e33fdc3c411cd101ca395668395dd5dc7ac775b8e809e3def9f9fe041a"},
     {file = "poyo-0.5.0.tar.gz", hash = "sha256:e26956aa780c45f011ca9886f044590e2d8fd8b61db7b1c1cf4e0869f48ed4dd"},
@@ -3579,11 +3495,6 @@ soupsieve = [
 sqlparse = [
     {file = "sqlparse-0.4.1-py3-none-any.whl", hash = "sha256:017cde379adbd6a1f15a61873f43e8274179378e95ef3fede90b5aa64d304ed0"},
     {file = "sqlparse-0.4.1.tar.gz", hash = "sha256:0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"},
-]
-stone = [
-    {file = "stone-3.2.1-py2-none-any.whl", hash = "sha256:2a50866528f60cc7cedd010def733e8ae9d581d17f967278a08059bffaea3c57"},
-    {file = "stone-3.2.1-py3-none-any.whl", hash = "sha256:76235137c09ee88aa53e8c1e666819f6c20ac8064c4ac6c4ee4194eac0e3b7af"},
-    {file = "stone-3.2.1.tar.gz", hash = "sha256:9bc78b40143b4ef33bf569e515408c2996ffebefbb1a897616ebe8aa6f2d7e75"},
 ]
 swapper = [
     {file = "swapper-1.1.2.post1-py3-none-any.whl", hash = "sha256:f3bc7b77b76daf46fcbd41fda9b2f599974ac8c564e129f2a9bae73871c4116e"},

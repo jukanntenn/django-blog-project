@@ -1,7 +1,7 @@
 from django import template
+from friendlinks.models import FriendLink
 
 from ..models import Medium, Recommendation
-from friendlinks.models import FriendLink
 
 register = template.Library()
 
