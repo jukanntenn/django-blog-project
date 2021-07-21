@@ -1,3 +1,4 @@
+from alerts.models import Alert
 from comments.models import BlogComment
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
@@ -25,6 +26,11 @@ class AbstractEntry(TimeStampedModel):
     comment_enabled = models.BooleanField(_("comment enabled"), default=True)
     comments = GenericRelation(
         BlogComment, object_id_field="object_pk", content_type_field="content_type"
+    )
+    alerts = GenericRelation(
+        Alert,
+        content_type_field="content_type",
+        object_id_field="object_id",
     )
 
     class Meta:

@@ -17,7 +17,7 @@
           <main class="unit-3-4 unit-1-on-mobile">
             {% block alerts %}
               <div class="top-gap">
-                {% for alert in course.alert_set.all %}
+                {% for alert in course.alerts.all %}
                   <div class="blog-alert blog-alert-warning">{{ alert.text|safe }}</div>
                 {% endfor %}
               </div>

@@ -4,4 +4,4 @@ from django.utils.translation import gettext_lazy as _
 
 class AlertsConfig(AppConfig):
     name = "alerts"
-    verbose_name = _("alerts")
+    verbose_name = _("Alerts")

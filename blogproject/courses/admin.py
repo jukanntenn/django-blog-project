@@ -1,7 +1,16 @@
+from alerts.admin import AlertInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
 from .models import Category, Course, Material
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    inlines = [
+        AlertInline,
+    ]
+    list_display = ["id", "title", "slug"]
 
 
 @admin.register(Material)
@@ -49,5 +58,4 @@ class MaterialAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 
-admin.site.register(Course)
 admin.site.register(Category)

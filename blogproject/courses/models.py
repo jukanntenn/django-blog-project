@@ -1,6 +1,8 @@
+from alerts.models import Alert
 from core.abstracts import AbstractEntry
 from core.utils import generate_rich_content
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericRelation
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db import models
@@ -81,6 +83,11 @@ class Course(TimeStampedModel):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
+    )
+    alerts = GenericRelation(
+        Alert,
+        content_type_field="content_type",
+        object_id_field="object_id",
     )
 
     class Meta:
