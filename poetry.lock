@@ -1502,25 +1502,6 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
-name = "manuel"
-version = "1.10.1"
-description = "Manuel lets you build tested documentation."
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-six = "*"
-
-[package.extras]
-tests = ["zope.testing"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
 name = "markdown"
 version = "3.3.4"
 description = "Python implementation of Markdown."
@@ -2346,25 +2327,6 @@ url = "https://pypi.doubanio.com/simple"
 reference = "douban"
 
 [[package]]
-name = "tl.testing"
-version = "0.5"
-description = "Utilities for writing tests: sandbox directories, mock external programs, graphical doc-tests for cairo surfaces."
-category = "dev"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-manuel = ">=1.0.0b3"
-
-[package.extras]
-test = ["mock (>=0.8dev)", "zope.testing"]
-
-[package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
-
-[[package]]
 name = "toml"
 version = "0.10.2"
 description = "Python Library for Tom's Obvious, Minimal Language"
@@ -2565,7 +2527,7 @@ reference = "douban"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7, <4"
-content-hash = "15fdc0ae40c7bcae1b9739138d685932544879b0cb9743b3366cc4234f80bdf5"
+content-hash = "4ae23817a918f33e5e8089da752ae5ce745aafe6d48d4279edf5595a0d447c43"
 
 [metadata.files]
 amqp = [
@@ -3052,9 +3014,6 @@ lunr = [
     {file = "lunr-0.5.8-py2.py3-none-any.whl", hash = "sha256:aab3f489c4d4fab4c1294a257a30fec397db56f0a50273218ccc3efdbf01d6ca"},
     {file = "lunr-0.5.8.tar.gz", hash = "sha256:c4fb063b98eff775dd638b3df380008ae85e6cb1d1a24d1cd81a10ef6391c26e"},
 ]
-manuel = [
-    {file = "manuel-1.10.1.tar.gz", hash = "sha256:fee65086422cf8ccb31182db6e3bcd59f6bc1c8a6d71e35df1d481238f57bfad"},
-]
 markdown = [
     {file = "Markdown-3.3.4-py3-none-any.whl", hash = "sha256:96c3ba1261de2f7547b46a00ea8463832c921d3f9d6aba3f255a6f71386db20c"},
     {file = "Markdown-3.3.4.tar.gz", hash = "sha256:31b5b491868dcc87d6c24b7e3d19a0d730d59d3e46f4eea6430a321bed387a49"},
@@ -3472,9 +3431,6 @@ testfixtures = [
 text-unidecode = [
     {file = "text-unidecode-1.3.tar.gz", hash = "sha256:bad6603bb14d279193107714b288be206cac565dfa49aa5b105294dd5c4aab93"},
     {file = "text_unidecode-1.3-py2.py3-none-any.whl", hash = "sha256:1311f10e8b895935241623731c2ba64f4c455287888b18189350b67134a822e8"},
-]
-"tl.testing" = [
-    {file = "tl.testing-0.5.tar.gz", hash = "sha256:36d2529b12d942a1f907c22b933a7e3de96cba9f3dd507cfe322d3bcd164cdf8"},
 ]
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},

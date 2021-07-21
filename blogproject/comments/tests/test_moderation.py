@@ -7,7 +7,6 @@ from notifications.models import Notification
 from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.test import APIClient
-from tl.testing.thread import ThreadJoiner
 from users.models import User
 
 from .factories import BlogCommentFactory
@@ -93,8 +92,7 @@ class TestNotification:
         data["parent"] = self.user_comment.pk
         token = Token.objects.get(user__username="moderator")
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
-        with ThreadJoiner(5):
-            response = self.client.post(self.url, data=data)
+        response = self.client.post(self.url, data=data)
         assert response.status_code == 201
         assert Notification.objects.count() == 1
         assert Notification.objects.all().get().recipient == self.user
@@ -113,8 +111,7 @@ class TestNotification:
         data = dict(**security_data, comment="test_user_comment")
         token = Token.objects.get(user__username="test")
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
-        with ThreadJoiner(5):
-            response = self.client.post(self.url, data=data)
+        response = self.client.post(self.url, data=data)
         assert response.status_code == 201
         assert Notification.objects.count() == 1
         assert Notification.objects.all().get().recipient == self.moderator
@@ -150,8 +147,7 @@ class TestNotification:
         data["parent"] = self.user_comment.pk
         token = Token.objects.get(user__username="test")
         self.client.credentials(HTTP_AUTHORIZATION="Token " + token.key)
-        with ThreadJoiner(5):
-            response = self.client.post(self.url, data=data)
+        response = self.client.post(self.url, data=data)
         assert response.status_code == 201
         assert Notification.objects.count() == 1
         assert Notification.objects.all().get().recipient == self.moderator
