@@ -8,10 +8,10 @@ server {
     charset utf-8;
     client_max_body_size 10M;
     location /static {
-        alias {{ project_path }}/static;
+        alias /var/www/django-blog-project/static;
     }
     location /media {
-        alias {{ project_path }}/blogproject/media;
+        alias /home/ubuntu/apps/django-blog-project/blogproject/media;
     }
     location / {
         include /etc/nginx/includes/proxy.conf;
