@@ -1,0 +1,10 @@
+[program:django-blog-project]
+directory=/home/ubuntu/apps/django-blog-project
+command=/home/ubuntu/.local/bin/poetry run gunicorn config.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 127.0.0.1:8000 --chdir=/home/ubuntu/apps/django-blog-project
+autostart=true
+startsecs=1
+startretries=3
+autorestart=unexpected
+stopasgroup=true
+killasgroup=true
+user=ubuntu

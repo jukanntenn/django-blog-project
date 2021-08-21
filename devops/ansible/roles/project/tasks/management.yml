@@ -1,0 +1,10 @@
+---
+- name: Run django management commands
+  ansible.builtin.shell:
+    cmd: ". ~/.profile && poetry run python manage.py {{ item }} --settings=config.settings.production"
+    chdir: ~/apps/django-blog-project/
+  loop:
+#    - collectstatic --noinput
+    - compilemessages
+    - migrate
+    - setup_periodic_tasks

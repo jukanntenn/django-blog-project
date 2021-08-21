@@ -1,0 +1,20 @@
+upstream blogproject  {
+    server 127.0.0.1:8000;
+}
+
+server {
+    listen 80;
+    server_name _;
+    charset utf-8;
+    client_max_body_size 10M;
+    location /static {
+        alias {{ project_path }}/static;
+    }
+    location /media {
+        alias {{ project_path }}/blogproject/media;
+    }
+    location / {
+        include /etc/nginx/includes/proxy.conf;
+        proxy_pass http://blogproject;
+    }
+}

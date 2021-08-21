@@ -1,0 +1,10 @@
+---
+- import_tasks: repo.yml
+- import_tasks: deps.yml
+- import_tasks: envfile.yml
+- import_tasks: db.yml
+- import_tasks: management.yml
+- import_tasks: supervisor.yml
+- import_tasks: nginx.yml
+  become: yes
+  become_method: sudo

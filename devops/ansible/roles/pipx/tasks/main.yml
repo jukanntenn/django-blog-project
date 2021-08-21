@@ -1,0 +1,15 @@
+---
+- name: Which pip excuteable
+  ansible.builtin.shell:
+    cmd: ". ~/.profile && which pip3"
+  register: which_pip_result
+
+- name: Install
+  ansible.builtin.pip:
+    executable: "{{ which_pip_result.stdout }}"
+    name: pipx
+    state: present
+
+- name: Ensurepath
+  ansible.builtin.shell:
+    cmd: ". ~/.profile && pipx ensurepath"

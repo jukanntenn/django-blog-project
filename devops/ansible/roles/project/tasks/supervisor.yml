@@ -1,0 +1,23 @@
+- name: Copy program conf
+  template:
+    src: "supervisor/{{ item }}.j2"
+    dest: "/etc/supervisor/conf.d/{{ item }}"
+  loop:
+    - blogproject.conf
+    - blogproject-celery-beat.conf
+    - blogproject-celery-worker.conf
+  notify: Restart program
+  become: yes
+  become_method: sudo
+
+- name: Add program
+  community.general.supervisorctl:
+    config: /etc/supervisor/supervisord.conf
+    name: "{{ item }}"
+    state: present
+  loop:
+    - django-blog-project-celery-worker
+    - django-blog-project-celery-beat
+    - django-blog-project
+  become: yes
+  become_method: sudo

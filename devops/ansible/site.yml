@@ -1,0 +1,29 @@
+---
+- name: Site deployment
+  hosts: all
+  remote_user: ubuntu
+  roles:
+    - role: pyenv
+      tags: "pyenv"
+    - role: pipx
+      tags: "pipx"
+    - role: poetry
+      tags: "poetry"
+    - role: postgresql
+      become: true
+      become_method: sudo
+      tags: "postgresql"
+    - role: redis
+      become: true
+      become_method: sudo
+      tags: "redis"
+    - role: nginx
+      become: true
+      become_method: sudo
+      tags: "nginx"
+    - role: supervisor
+      become: true
+      become_method: sudo
+      tags: "supervisor"
+    - role: project
+      tags: "project"
