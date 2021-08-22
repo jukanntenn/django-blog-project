@@ -175,7 +175,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(ROOT_DIR / "static")
+STATIC_ROOT = env.str("DJANGO_STATIC_ROOT", str(ROOT_DIR / "static"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
@@ -191,7 +191,7 @@ STATICFILES_FINDERS = [
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR / "media")
+MEDIA_ROOT = env.str("DJANGO_MEDIA_ROOT", str(APPS_DIR / "media"))
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 

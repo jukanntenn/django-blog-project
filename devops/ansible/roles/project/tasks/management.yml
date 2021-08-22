@@ -1,4 +1,9 @@
 ---
+- name: Ensure static and media directory
+  ansible.builtin.file:
+    path: /var/www/django-blog-project/blogproject
+    state: directory
+
 - name: Run django management commands
   ansible.builtin.shell:
     cmd: ". ~/.profile && poetry run python manage.py {{ item }} --settings=config.settings.production"
