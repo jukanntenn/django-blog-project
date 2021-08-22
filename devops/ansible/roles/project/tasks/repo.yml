@@ -8,7 +8,7 @@
   ansible.builtin.git:
     repo: git@github.com:jukanntenn/django-blog-project.git
     dest: "{{ project_path }}"
-    version: devops
+    version: master
     accept_hostkey: yes
   notify:
     Restart program

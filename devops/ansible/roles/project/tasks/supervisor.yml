@@ -7,8 +7,6 @@
     - blogproject-celery-beat.conf
     - blogproject-celery-worker.conf
   notify: Restart program
-  become: yes
-  become_method: sudo
 
 - name: Add program
   community.general.supervisorctl:
@@ -19,5 +17,3 @@
     - django-blog-project-celery-worker
     - django-blog-project-celery-beat
     - django-blog-project
-  become: yes
-  become_method: sudo

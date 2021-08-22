@@ -1,5 +1,5 @@
 ---
-- name: Which python
+- name: Which python3
   ansible.builtin.shell:
     cmd: ". ~/.profile && which python3"
   register: which_python_result

@@ -3,6 +3,8 @@
   ansible.builtin.file:
     path: /var/www/django-blog-project/blogproject
     state: directory
+  become: yes
+  become_method: sudo
 
 - name: Run django management commands
   ansible.builtin.shell:
