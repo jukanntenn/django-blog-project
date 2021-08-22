@@ -1,0 +1,7 @@
+---
+- name: Copy envfile
+  ansible.builtin.template:
+    src: blogproject.env.j2
+    dest: "{{ project_path }}/blogproject.env"
+  notify:
+    Restart program

@@ -11,7 +11,6 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
 dist/
 downloads/
@@ -102,3 +101,4 @@ node_modules/
 /compose/production/statusok/config/config.json
 /config/settings/maintenance_mode_state.txt
 *.env
+*.env.j2

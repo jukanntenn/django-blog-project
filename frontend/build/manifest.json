@@ -1,0 +1,23 @@
+{
+  "entrypoints": {
+    "main": {
+      "assets": {
+        "css": [
+          "/static/css/main.0620af7d.css"
+        ],
+        "js": [
+          "/static/js/main.61a9c678.js"
+        ]
+      }
+    }
+  },
+  "favicon.ico": "/static/favicon.ico",
+  "img/alert-fill.svg": "/static/img/alert-fill.bbcee1b1.svg",
+  "img/error-warning-fill.svg": "/static/img/error-warning-fill.027f8c93.svg",
+  "img/information-fill.svg": "/static/img/information-fill.dfcc3b8f.svg",
+  "img/lightbulb-line.svg": "/static/img/lightbulb-line.a44c3828.svg",
+  "index.html": "/static/index.html",
+  "js/main.61a9c678.js.map": "/static/js/main.61a9c678.js.map",
+  "main.css": "/static/css/main.0620af7d.css",
+  "main.js": "/static/js/main.61a9c678.js"
+}

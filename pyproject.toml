@@ -52,7 +52,7 @@ pillow = "^8.0.1"
 drf-spectacular = "^0.14.0"
 python-webpack-boilerplate = "^0.0.2"
 taggit-selectize = "^2.10.0"
-django-tencentcos-storage = "^0.1.0"
+django-tencentcos-storage = {git = "https://github.com/jukanntenn/django-tencentcos-storage.git", rev = "main"}
 
 [tool.poetry.dev-dependencies]
 django-debug-toolbar = "^2.2"

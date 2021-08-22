@@ -1,0 +1,14 @@
+---
+- name: Ensupre project directory
+  ansible.builtin.file:
+    path: "{{ project_path }}"
+    state: directory
+
+- name: Checkout repository
+  ansible.builtin.git:
+    repo: git@github.com:jukanntenn/django-blog-project.git
+    dest: "{{ project_path }}"
+    version: master
+    accept_hostkey: yes
+  notify:
+    Restart program

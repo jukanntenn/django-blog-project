@@ -1,0 +1,4 @@
+- name: Install dependencies
+  ansible.builtin.shell:
+    chdir: "{{ project_path }}"
+    cmd: ". ~/.profile && poetry install"

@@ -1,0 +1,19 @@
+---
+- name: Copy proxy conf
+  template:
+    src: nginx/proxy.conf.j2
+    dest: /etc/nginx/includes/proxy.conf
+  notify: Restart nginx
+
+- name: Copy site conf
+  template:
+    src: nginx/blogproject.conf.j2
+    dest: /etc/nginx/sites-available/blogproject.conf
+  notify: Restart nginx
+
+- name: Enable new site
+  file:
+    src: /etc/nginx/sites-available/blogproject.conf
+    dest: /etc/nginx/sites-enabled/blogproject.conf
+    state: link
+  notify: Restart nginx

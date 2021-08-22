@@ -336,7 +336,7 @@ reference = "douban"
 
 [[package]]
 name = "cos-python-sdk-v5"
-version = "1.9.7"
+version = "1.9.8"
 description = "cos-python-sdk-v5"
 category = "main"
 optional = false
@@ -936,19 +936,21 @@ reference = "douban"
 
 [[package]]
 name = "django-tencentcos-storage"
-version = "0.1.0"
+version = "0.2.0"
 description = "A django app for Tencent Cloud Object Storage. 腾讯云对象存储（COS）服务 for Django。"
 category = "main"
 optional = false
 python-versions = ">=3.7,<4.0"
+develop = false
 
 [package.dependencies]
-cos-python-sdk-v5 = ">=1.9.4,<2.0.0"
+cos-python-sdk-v5 = "^1.9.4"
 
 [package.source]
-type = "legacy"
-url = "https://pypi.doubanio.com/simple"
-reference = "douban"
+type = "git"
+url = "https://github.com/jukanntenn/django-tencentcos-storage.git"
+reference = "main"
+resolved_reference = "e97e28d06dc3c6a8f7bc932f1e59a37594ea7910"
 
 [[package]]
 name = "django-test-plus"
@@ -2511,7 +2513,7 @@ reference = "douban"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7, <4"
-content-hash = "566f283c6fb9c996b779d549b3bf64f71bc76b53f69aa179bd88e8c08e47f40e"
+content-hash = "377949e6f5010fcc546b594f629beb74add6e3e9a636d724e4a78844db57668e"
 
 [metadata.files]
 amqp = [
@@ -2626,8 +2628,7 @@ cookiecutter = [
     {file = "cookiecutter-1.7.2.tar.gz", hash = "sha256:efb6b2d4780feda8908a873e38f0e61778c23f6a2ea58215723bcceb5b515dac"},
 ]
 cos-python-sdk-v5 = [
-    {file = "cos-python-sdk-v5-1.9.7.tar.gz", hash = "sha256:e198b94933f767de70037091f04c9fa2aefa4c066f878d40610133601ff9f239"},
-    {file = "cos_python_sdk_v5-1.9.7-py3-none-any.whl", hash = "sha256:fc3fb9ec87e8b9a41cc47a2d985e61e6d8afc31f0f5eadd518728b8ac12b3386"},
+    {file = "cos-python-sdk-v5-1.9.8.tar.gz", hash = "sha256:7629293fb510e5b18bf9b4fa45a210b5c66288c2b32dbb7a4cbdb6977373e7e2"},
 ]
 coverage = [
     {file = "coverage-5.5-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:b6d534e4b2ab35c9f93f46229363e17f63c53ad01330df9f2d6bd1187e5eaacf"},
@@ -2817,10 +2818,7 @@ django-taggit = [
     {file = "django-taggit-1.3.0.tar.gz", hash = "sha256:4a833bf71f4c2deddd9745924eee53be1c075d7f0020a06f12e29fa3d752732d"},
     {file = "django_taggit-1.3.0-py3-none-any.whl", hash = "sha256:609b0223d8a652f3fae088b7fd29f294fdadaca2d7931d45c27d6c59b02fdf31"},
 ]
-django-tencentcos-storage = [
-    {file = "django-tencentcos-storage-0.1.0.tar.gz", hash = "sha256:d8506403dd3e75b7c3384ff1e748a1b9aa65eb57534f832edff93b20f8723944"},
-    {file = "django_tencentcos_storage-0.1.0-py3-none-any.whl", hash = "sha256:c1e324d68420f7f9b0057b5ab9401a4b79dfcc19eaf680d98f8f08c35f85eddb"},
-]
+django-tencentcos-storage = []
 django-test-plus = [
     {file = "django-test-plus-1.4.0.tar.gz", hash = "sha256:9c3ca75f9ebb0b72d0a16e98b6d80e94b3d0ff007be5fc946d16b423b808bf16"},
 ]

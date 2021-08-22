@@ -1,0 +1,5 @@
+---
+- name: Ensure Supervisor is installed
+  ansible.builtin.package:
+    name: supervisor
+    state: present

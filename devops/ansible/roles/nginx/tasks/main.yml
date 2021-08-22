@@ -1,0 +1,11 @@
+---
+- name: Ensure Nginx is installed
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Remove default conf
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  notify: Restart nginx

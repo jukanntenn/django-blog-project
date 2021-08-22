@@ -1,0 +1,10 @@
+[program:django-blog-project-celery-worker]
+directory=/home/ubuntu/apps/django-blog-project
+command=/home/ubuntu/.local/bin/poetry run celery -A blogproject.taskapp worker -l INFO
+autostart=true
+startsecs=1
+startretries=3
+autorestart=unexpected
+stopasgroup=true
+killasgroup=true
+user=ubuntu

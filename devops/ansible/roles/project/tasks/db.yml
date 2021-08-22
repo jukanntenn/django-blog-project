@@ -1,0 +1,33 @@
+---
+- name: Update
+  ansible.builtin.command:
+    cmd: apt-get update -y
+  become: true
+  become_method: sudo
+
+- name: Install dependencies
+  ansible.builtin.package:
+    name:
+      - libpq-dev
+      - python3-psycopg2
+    state: present
+  become: true
+  become_method: sudo
+
+- name: Create database
+  # must use root, there is an error from ubuntu become to postgres
+  remote_user: root
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: "{{ db_name }}"
+
+- name: Create user
+  remote_user: root
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_user:
+    db: "{{ db_name }}"
+    name: "{{ db_user }}"
+    password: "{{ db_pwd }}"
+    priv: "ALL"
