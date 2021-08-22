@@ -11,7 +11,7 @@ server {
         alias /var/www/django-blog-project/static;
     }
     location /media {
-        alias /home/ubuntu/apps/django-blog-project/blogproject/media;
+        alias /var/www/apps/django-blog-project/blogproject/media;
     }
     location / {
         include /etc/nginx/includes/proxy.conf;
