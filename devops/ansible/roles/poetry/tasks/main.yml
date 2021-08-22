@@ -6,4 +6,4 @@
 
 - name: Install
   ansible.builtin.shell:
-    cmd: ". ~/.profile && pipx install poetry --python {{ which_python_result.stdout }}"
+    cmd: ". ~/.profile && pipx install poetry --python {{ which_python_result.stdout }} --index-url https://pypi.doubanio.com/simple/"

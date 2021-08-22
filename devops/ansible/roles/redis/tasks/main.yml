@@ -2,4 +2,4 @@
 - name: Ensure Redis is installed
   ansible.builtin.package:
     name: redis
-    state: present
+    state: latest

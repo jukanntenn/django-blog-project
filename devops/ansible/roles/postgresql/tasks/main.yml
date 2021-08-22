@@ -1,5 +1,5 @@
 ---
 - name: Ensure PostgreSQL is installed
   ansible.builtin.package:
-    name: postgresql
+    name: postgresql-12
     state: present

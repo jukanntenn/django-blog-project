@@ -4,14 +4,14 @@ upstream blogproject  {
 
 server {
     listen 80;
-    server_name _;
+    server_name www.zmrenwu.com zmrenwu.com;
     charset utf-8;
     client_max_body_size 10M;
     location /static {
         alias /var/www/django-blog-project/static;
     }
     location /media {
-        alias /var/www/apps/django-blog-project/blogproject/media;
+        alias /var/www/django-blog-project/blogproject/media;
     }
     location / {
         include /etc/nginx/includes/proxy.conf;

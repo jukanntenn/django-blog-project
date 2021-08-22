@@ -1,4 +1,11 @@
 ---
+- name: Ensure includes directory
+  ansible.builtin.file:
+    path: /etc/nginx/includes
+    state: directory
+  become: yes
+  become_method: sudo
+
 - name: Copy proxy conf
   template:
     src: nginx/proxy.conf.j2
