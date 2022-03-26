@@ -1,6 +1,6 @@
 [program:django-blog-project]
 directory=/home/alice/apps/django-blog-project
-command=/home/alice/.local/bin/poetry run gunicorn config.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 127.0.0.1:8000 --chdir=/home/alice/apps/django-blog-project
+command=/home/alice/.local/bin/poetry run gunicorn config.asgi:application -w 2 -k uvicorn.workers.UvicornWorker -b 127.0.0.1:8000 --chdir=/home/alice/apps/django-blog-project
 autostart=true
 startsecs=1
 startretries=3

@@ -3,12 +3,12 @@
   hosts: all
   remote_user: alice
   roles:
-    - role: pyenv
-      tags: "pyenv"
-    - role: pipx
-      tags: "pipx"
-    - role: poetry
-      tags: "poetry"
+#    - role: pyenv
+#      tags: "pyenv"
+#    - role: pipx
+#      tags: "pipx"
+#    - role: poetry
+#      tags: "poetry"
     - role: postgresql
       become: true
       become_method: sudo
