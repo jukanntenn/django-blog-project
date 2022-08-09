@@ -18,6 +18,9 @@ class AllPostsRssFeed(Feed):
 
     def item_description(self, item):
         return item.body
+ 
+    def item_pubdate(self, item):
+        return item.pub_date
 
 
 class AllPostsAtomFeed(AllPostsRssFeed):
